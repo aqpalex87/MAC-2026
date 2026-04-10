@@ -1,0 +1,47 @@
+  :host ::ng-deep .p-panel-content {
+      padding: .3rem 1rem !important;
+  }
+
+  :host ::ng-deep .p-panel .p-panel-header {
+      padding: 0.4rem !important;
+  }
+
+  table,
+  th,
+  td {
+      border: 1px solid #dee2e6;
+      line-height: 20px;
+  }
+
+  table {
+      margin: 10px;
+  }
+
+  :host ::ng-deep .no-border-right {
+      border-right: 0px !important;
+  }
+
+  td {
+      padding: 0px !important;
+  }
+
+  table tr td p {
+      padding: 0px;
+      margin: 0px;
+      margin-left: 3px;
+  }
+
+  :host ::ng-deep button {
+      padding: 2px !important;
+      /* width: 0px; */
+  }
+
+  .p-button.p-button-icon-only {
+      width: 25px;
+  }
+
+  :host ::ng-deep .p-inputtext {
+      height: auto !important;
+      margin-bottom: 3px !important;
+      text-align: center;
+  }

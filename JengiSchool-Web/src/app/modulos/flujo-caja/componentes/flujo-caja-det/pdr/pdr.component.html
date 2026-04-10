@@ -1,0 +1,47 @@
+<label class="caja-titulo">Plan Desembolso (Referencial)</label>
+
+<p-panel [showHeader]="false">
+    <div class="flex justify-content-end" *ngIf="isEditableFC">
+        <button (click)="onClickAddItem()" pButton type="button" icon="pi pi-plus" class="p-button-outlined"></button>
+    </div>
+    <table aria-describedby="table-pdr">
+        <thead>
+            <tr>
+                <th class="text-center text-xs">Número<br>Desembolso</th>
+                <th class="text-center text-xs">Mes<br>Desembolso</th>
+                <th class="text-center text-xs">%<br>Desembolso</th>
+                <th class="text-center text-xs" *ngIf="isEditableFC"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of pdr; index as i">
+                <td class="text-center">{{i+1}}</td>
+                <td class="text-center">
+                    <ng-container *ngIf="isEditableFC; else NoEditableMes">
+                        <p-inputNumber class="table-cell-editable" [(ngModel)]="p.mes" [min]="0"
+                            (ngModelChange)="onModelChange(p)" placeholder="0"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditableMes>
+                        {{p.mes}}
+                    </ng-template>
+                </td>
+                <td class="text-center">
+                    <ng-container *ngIf="isEditableFC; else NoEditablePorcentaje">
+                        <p-inputNumber class="table-cell-editable" [(ngModel)]="p.porcentaje" [min]="1" [max]="100"
+                            (ngModelChange)="onModelChange(p)" placeholder="0"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditablePorcentaje>
+                        {{p.porcentaje}}
+                    </ng-template>
+                </td>
+                <td *ngIf="isEditableFC && i>0">
+                    <button pButton (click)="deleteItem(p)" type="button" icon="pi pi-trash"
+                        class="p-button-text"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <label class="caja-titulo-complemento">* minimo 1 desemsolso</label>
+</p-panel>
+
+<p-toast position="top-center"></p-toast>

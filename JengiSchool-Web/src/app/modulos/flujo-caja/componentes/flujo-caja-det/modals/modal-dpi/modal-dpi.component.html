@@ -1,0 +1,39 @@
+<p-panel header="Deuda Potencial Indirectas">
+    <p-panel [showHeader]="false">
+        <ng-container *ngFor="let p of parametrosDPI">
+            <div class="grid">
+                <div class="col mt-3">{{ p.tipoAval }}</div>
+                <div class="col mt-3" appendTo="body">
+                    <p-dropdown class="p-inputtext-sm" (ngModelChange)="onModelChange()" [(ngModel)]="p.calificacion"
+                        (onChange)="onSelectChange($event, p)" [options]="listaClasificaciones"
+                        optionValue="calificacion" optionLabel="calificacion"
+                        placeholder="Seleccionar Calificación"></p-dropdown>
+                </div>
+                <div class="col">
+                    <p-inputNumber class="table-cell-editable text-right" [(ngModel)]="p.valor" (ngModelChange)="onModelChange()"
+                        (keydown.enter)="onModelChange()" mode="decimal" locale="en-US"  [min]="0"
+                        [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.00"></p-inputNumber>
+                </div>
+            </div>
+        </ng-container>
+        <div class="grid" style="text-align: right;">
+            <div class="col mt-4 font-semibold">Deuda Potencial Indirecta</div>
+            <div class="col">
+                <p-inputNumber class="table-cell-bold" [(ngModel)]="cuotaPotencialIndirecta" mode="decimal" locale="en-US" 
+                    [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2" [disabled]="true" placeholder="0.00"></p-inputNumber>
+            </div>
+        </div>
+    </p-panel>
+    <ng-template pTemplate="footer">
+        <div class="grid">
+            <div class="col-6 mt-0 p-0" style="text-align: center;">
+                <button pButton type="button" style="text-align:center" class="btn-mdl"
+                    (click)="agregarDPI()">Agregar</button>
+            </div>
+            <div class="col-6 mt-0 p-0" style="text-align: center;">
+                <button pButton type="button" style="text-align:center" class="btn-mdl"
+                    (click)="cerrarMdl()">Cancelar</button>
+            </div>
+        </div>
+    </ng-template>
+</p-panel>

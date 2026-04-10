@@ -1,0 +1,73 @@
+<label class="caja-titulo">Sensibilizaciones:</label>
+<p-panel [showHeader]="false">
+    <div class="grid">
+        <div class="col-2 grid mr-2 fix-div">
+            <label class="col-6 p-0 mt-4 font-semibold">VAR RENDIMIENTO:</label>
+            <ng-container *ngIf="isEditableFC; else NoEditableSvRendimiento">
+                <div class="col-6 p-0 text-right">
+                    <p-inputNumber class="table-cell-editable" [(ngModel)]="sensibilizaciones.svRendimiento" [min]="-50"
+                        [max]="50" suffix="%" (ngModelChange)="onModelChangeSvRendimiento()"
+                        placeholder="0"></p-inputNumber>
+                </div>
+            </ng-container>
+            <ng-template #NoEditableSvRendimiento>
+                <span class="fsize mt-4">{{sensibilizaciones.svRendimiento}}</span>
+            </ng-template>
+        </div>
+        <div class="col-2 grid mr-2 fix-div">
+            <label class="col-6 p-0 mt-4 font-semibold">VAR PRECIO:</label>
+            <ng-container *ngIf="isEditableFC; else NoEditableSvPrecio">
+                <div class="col-6 p-0 text-right">
+                    <p-inputNumber class="table-cell-editable" [(ngModel)]="sensibilizaciones.svPrecio" [min]="-50"
+                        [max]="50" suffix="%" (ngModelChange)="onModelChangeSvPrecio()" placeholder="0"></p-inputNumber>
+                </div>
+            </ng-container>
+            <ng-template #NoEditableSvPrecio>
+                <span class="fsize mt-4">{{sensibilizaciones.svPrecio}}</span>
+            </ng-template>
+        </div>
+        <div class="col-2 grid mr-2 fix-div">
+            <label class="col-6 p-0 mt-4 font-semibold">VAR COSTO:</label>
+            <ng-container *ngIf="isEditableFC; else NoEditableSvCosto">
+                <div class="col-6 p-0 text-right">
+                    <p-inputNumber class="table-cell-editable" [(ngModel)]="sensibilizaciones.svCosto" [min]="-50"
+                        [max]="50" suffix="%" (ngModelChange)="onModelChangeSvCosto()" placeholder="0"></p-inputNumber>
+                </div>
+            </ng-container>
+            <ng-template #NoEditableSvCosto>
+                <span class="fsize mt-4">{{sensibilizaciones.svCosto}}</span>
+            </ng-template>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col-2 grid mr-2 fix-div">
+            <label class="col-6 p-0 mt-4 font-semibold">PRECIO PROMEDIO:</label>
+            <ng-container *ngIf="isEditableFC; else NoEditablePrecioPromedio">
+                <div class="col-6 p-0 text-right">
+                    <p-inputNumber class="table-cell-editable" [(ngModel)]="sensibilizaciones.precioPromedio"
+                        mode="decimal" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                        (ngModelChange)="onModelChangePrecioPromedio()" placeholder="0.00"
+                        [max]="999999999999.99"></p-inputNumber>
+                </div>
+            </ng-container>
+            <ng-template #NoEditablePrecioPromedio>
+                <span class="fsize mt-4">{{sensibilizaciones.precioPromedio}}</span>
+            </ng-template>
+        </div>
+        <div class="col-2 grid mr-2 fix-div">
+            <label class="col-6 p-0 mt-4 font-semibold">RENDIMIENTO PROMEDIO:</label>
+            <ng-container *ngIf="isEditableFC; else NoEditableRendimientoPromedio">
+                <div class="col-4 p-0 text-right">
+                    <p-inputNumber class="table-cell-editable" [(ngModel)]="sensibilizaciones.rendimientoPromedio"
+                        mode="decimal" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                        (ngModelChange)="onModelChangeRendimientoPromedio()" placeholder="0.00"
+                        [max]="999999999999.99"></p-inputNumber>
+                </div>
+            </ng-container>
+            <ng-template #NoEditableRendimientoPromedio>
+                <span class="fsize mt-4">{{sensibilizaciones.rendimientoPromedio}}</span>
+            </ng-template>
+        </div>
+    </div>
+    <p class="font-blue-bold">Estos datos son obligatorios</p>
+</p-panel>

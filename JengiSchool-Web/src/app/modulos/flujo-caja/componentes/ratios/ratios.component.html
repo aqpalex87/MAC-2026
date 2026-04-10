@@ -1,0 +1,32 @@
+<p-panel header="Ratios">
+  <div class="grid">
+    <table aria-describedby="table-pdr">
+      <thead>
+        <tr>
+          <th class="text-center text-xs">Ratio</th>
+          <th class="text-center text-xs">Regla</th>
+          <th class="text-center text-xs">Parametro</th>
+          <th class="text-center text-xs">Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ratio of ratios; index as i">
+          <td>
+            <p class="col font-semibold fsize">{{ratio.nombre}}</p>
+          </td>
+          <td>
+            <p class="col font-semibold fsize">{{ratio.regla}}</p>
+          </td>
+          <td>
+            <p class="col font-semibold fsize">{{ratio.valorParametro}}</p>
+          </td>
+          <td>
+            <p class="col font-semibold fsize" [style.color]="analizarRatio(ratio)">{{ isNumber(ratio.resultado) ?
+              (ratio.resultado|number: '1.2-2') : '-'}}
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</p-panel>

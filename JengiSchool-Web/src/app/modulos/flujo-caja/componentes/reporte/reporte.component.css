@@ -1,0 +1,17 @@
+button {
+    font-family: "Ubuntu";
+    margin-top: 15px;
+    font-weight: 600;
+    background-color: #00694f;
+    color: #ffd204;
+    padding-right: 30px;
+    padding-left: 30px;
+    width: 120px;
+    text-align: center;
+    min-height: 60px;
+  }
+  
+  .icon-calendar{
+    font-size: 1.5rem;
+  }
+  

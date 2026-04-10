@@ -1,0 +1,121 @@
+<div class="p-4">
+  <div class="title-web mb-4">Consulta de Flujo de Caja</div>
+  <p-card styleClass="mb-4">
+    <p-messages [(value)]="mensajes"></p-messages>
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-2 custom-label-input">
+        <label for="idFlujoCaja" class="font-semibold">Id FC:</label>
+      </div>
+      <div class="field col-12 md:col-3">
+        <input pInputText maxlength="8" id="idFlujoCaja" class="p-inputtext-sm w-10" [(ngModel)]="filtro.idFlujoCaja"
+          [pKeyFilter]="'int'" />
+      </div>
+      <div class="field col-12 md:col-2 custom-label-input">
+        <label for="numeroDocumento" class="font-semibold">Número de Documento:</label>
+      </div>
+      <div class="field col-12 md:col-3">
+        <input pInputText maxlength="15" id="numeroDocumento" class="p-inputtext-sm w-10"
+          [(ngModel)]="filtro.numeroDocumento" />
+      </div>
+      <div class="field col-12 md:col-2">
+        <button pButton pRipple (click)="buscar()" id="btnBuscar" label="Buscar" class="bg-green-500"></button>
+      </div>
+
+      <div class="field col-12 md:col-2 custom-label-input">
+        <label for="numeroSolicitud" class="font-semibold">Número de Solicitud o Cadena:</label>
+      </div>
+      <div class="field col-12 md:col-3">
+        <input pInputText maxlength="12" id="numeroSolicitud" class="p-inputtext-sm w-10"
+          [(ngModel)]="filtro.numeroSolicitud" [pKeyFilter]="'int'" />
+      </div>
+      <div class="field col-12 md:col-2 custom-label-input">
+        <label for="nombres" class="font-semibold">Nombres:</label>
+      </div>
+      <div class="field col-12 md:col-3">
+        <input pInputText maxlength="153" id="nombres" class="p-inputtext-sm w-10" [(ngModel)]="filtro.nombres" />
+      </div>
+
+      <div class="field col-12 md:col-2">
+
+      </div>
+
+      <div class="field col-12 md:col-2 custom-label-input">
+        <label for="numeroCredito" class="font-semibold">Número Crédito:</label>
+      </div>
+      <div class="field col-12 md:col-3">
+        <input pInputText maxlength="12" id="numeroCredito" class="p-inputtext-sm w-10"
+          [(ngModel)]="filtro.numeroCredito" [pKeyFilter]="'int'" />
+      </div>
+
+    </div>
+  </p-card>
+
+  <p-card *ngIf="flagRefresh">
+    <div class="mb-3 font-bold">Lista de Clientes con sus respectivos Flujo de Caja</div>
+    <p-table [value]="data" styleClass="p-datatable-sm" [rows]="10" [showCurrentPageReport]="true" [loading]="loading"
+      [paginator]="true"
+      currentPageReportTemplate="Mostrando de {first} a {last} de un total de {totalRecords} registros">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">Número Solicitud</th>
+          <th class="text-center">Id FC</th>
+          <th class="text-center">Tipo de Documento</th>
+          <th class="text-center">Nro. Documento</th>
+          <th class="text-center">Nombres</th>
+          <th class="text-center">Estado FC</th>
+          <th class="text-center">Estado Propuesta</th>
+          <th class="text-center">Oficial de Negocio</th>
+          <th class="text-center">Agencia</th>
+          <th class="text-center">Número Credito</th>
+          <th class="text-center">Ver Detalle</th>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-solicitudCredito let-i="rowIndex">
+        <tr>
+          <td>
+            {{ solicitudCredito.numeroSolicitud }}
+          </td>
+          <td>
+            {{ solicitudCredito.idFlujoCaja }}
+          </td>
+          <td>
+            {{ solicitudCredito.tipoDocumento }}
+          </td>
+          <td>
+            {{ solicitudCredito.numeroDocumento }}
+          </td>
+          <td>
+            {{ solicitudCredito.nombres }}
+          </td>
+          <td>
+            {{ obtenerDescripcionEstadoFlujoCaja(solicitudCredito.estadoFlujoCaja) }}
+          </td>
+          <td>
+            {{ solicitudCredito.estadoCredito }}
+          </td>
+          <td>
+            {{ solicitudCredito.funcionario }}
+          </td>
+          <td>
+            {{ solicitudCredito.agencia }}
+          </td>
+          <td>
+            {{ solicitudCredito.numeroCredito }}
+          </td>
+          <td class="text-center">
+            <i *ngIf="verificarBotonVerDetalle(solicitudCredito)" class="pi pi-eye"
+              (click)="navegarDetalleFc(solicitudCredito)" style="font-size: 1.5rem; cursor: pointer">
+            </i>
+          </td>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="10">No se han encontrado resultados.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

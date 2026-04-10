@@ -1,0 +1,12 @@
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\bin\Release\net5.0\Agrobanco.MAC.DTO.deps.json
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\bin\Release\net5.0\Agrobanco.MAC.DTO.dll
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\bin\Release\net5.0\ref\Agrobanco.MAC.DTO.dll
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\bin\Release\net5.0\Agrobanco.MAC.DTO.pdb
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\Agrobanco.MAC.DTO.csproj.AssemblyReference.cache
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\Agrobanco.MAC.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\Agrobanco.MAC.DTO.AssemblyInfoInputs.cache
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\Agrobanco.MAC.DTO.AssemblyInfo.cs
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\Agrobanco.MAC.DTO.csproj.CoreCompileInputs.cache
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\Agrobanco.MAC.DTO.dll
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\ref\Agrobanco.MAC.DTO.dll
+C:\Users\boeni\Documentos\WORKSPACE-CANVIA\REQ011\2024\Fuentes\Analisis-cuantitativo-011\Agrobanco.MAC\Agrobanco.MAC.DTO\obj\Release\net5.0\Agrobanco.MAC.DTO.pdb

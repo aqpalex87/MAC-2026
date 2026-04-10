@@ -1,0 +1,17 @@
+<p-panel header="Datos del Cliente">
+
+  <div class="grid">
+    <label class="col-6 p-0 font-semibold">Número de Documento:</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.numeroDocumento}}</span>
+    </div>
+    <label class="col-6 p-0 font-semibold">Nombres:</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.nombres | titlecase}}</span>
+    </div>
+    <label class="col-6 p-0 font-semibold">Tipo Cliente:</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.tipoCliente}}</span>
+    </div>
+  </div>
+</p-panel>

@@ -1,0 +1,48 @@
+<mat-card class="mat-elevation-z4 m-4">
+  <h1>Deuda Potencial Directa</h1>
+  <div class="d-flex">
+    <mat-card class="flex-grow-1 m-2">
+      <h2>Tarjeta y Líneas de Crédito</h2>
+    </mat-card>
+    <mat-card class="flex-grow-1 m-2">
+      <form>
+        <mat-form-field>
+          <mat-label>Consumo con Uso</mat-label>
+          <p-inputNumber matInput [ngModelOptions]="{ standalone: true }" [(ngModel)]="deudaEditando.consumoCon"
+            name="consumoCon" type="number" (keydown.enter)="realizarCalculoConUso()" mode="decimal" locale="en-US" [min]="0"
+            [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+            (change)="realizarCalculoConUso()" placeholder="0.00"></p-inputNumber>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Consumo sin Uso</mat-label>
+          <p-inputNumber matInput [(ngModel)]="deudaEditando.consumoSin" name="consumoSin" type="number" mode="decimal" locale="en-US" [min]="0"
+          [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+            (keydown.enter)="realizarCalculoConSinUso()" (change)="realizarCalculoConSinUso()" placeholder="0.00" ></p-inputNumber>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Micro Empresa</mat-label>
+          <p-inputNumber matInput [(ngModel)]="deudaEditando.microEmpresa" name="microEmpresa" type="number" mode="decimal" locale="en-US" [min]="0"
+          [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+            (keydown.enter)="realizaCalculoMicroEmp()" (change)="realizaCalculoMicroEmp()" placeholder="0.00" ></p-inputNumber>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Pequeña Empresa</mat-label>
+          <p-inputNumber matInput [(ngModel)]="deudaEditando.pequeEmpresa" name="pequeEmpresa" type="number" mode="decimal" locale="en-US" [min]="0"
+          [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+            (keydown.enter)="realizarCalculoPequeEmp()" (change)="realizarCalculoPequeEmp()" placeholder="0.00" ></p-inputNumber>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Cuota Potencial Directa</mat-label>
+          <p-inputNumber class="colorcalculo" matInput [(ngModel)]="deudaEditando.cuotaPotencialDirecta" mode="decimal" locale="en-US" [min]="0"
+          [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+            [ngStyle]="{ 'border-color': borderColor }" name="cuotaPotencialDirecta" type="number" ></p-inputNumber><!--disabled-->
+        </mat-form-field>
+
+      </form>
+    </mat-card>
+  </div>
+  <div class="d-flex justify-content-center mt-4">
+    <button mat-raised-button class="modern-button blue" (click)="guardarEdicion()">Agregar</button>
+    <button mat-button mat-dialog-close class="modern-button gray">Cancelar</button>
+  </div>
+</mat-card>

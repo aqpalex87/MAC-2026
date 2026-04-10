@@ -1,0 +1,66 @@
+#table-container-guf {
+  max-width: 500px !important;
+}
+
+.table-cell-editable {
+  background-color: #ffff80;
+}
+
+.max-w-input-number {
+  max-width: 100px;
+}
+
+:host ::ng-deep input {
+  height: 20px !important;
+}
+
+/*==============================================*/
+:host ::ng-deep .p-datatable-table {
+  width: auto !important;
+}
+
+.first-column {
+  width: 450px;
+}
+
+.cell-monto {
+  width: 120px;
+}
+
+:host ::ng-deep .p-datatable-table tr {
+  border: none;
+}
+
+:host ::ng-deep .p-datatable-table tr>td {
+  border: none;
+}
+
+:host ::ng-deep .p-datatable-table tr>th {
+  border: none;
+}
+
+:host ::ng-deep .active-borders {
+  border: 1px solid #000 !important;
+  font-weight: bold !important;
+}
+
+:host ::ng-deep .active-solid-border {
+  border-right: 1px solid #000 !important;
+}
+
+:host ::ng-deep .active-dashed-border {
+  border-right: 1px dashed #000 !important;
+}
+
+:host ::ng-deep .p-datatable-tbody {
+  border: 1px solid #000;
+}
+
+td {
+  margin: 2px !important;
+  padding: 2px !important;
+}
+
+::ng-deep .mat-input-placeholder { 
+  color: red !important; /* Any color */
+}

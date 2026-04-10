@@ -1,0 +1,38 @@
+<p-panel>
+    <ng-template pTemplate="header"> <span class="title-web">FLUJO CAJA</span></ng-template>
+    <div class="grid">
+        <div class="col-3">
+            <app-hoja-producto></app-hoja-producto>
+        </div>
+        <div class="col-3">
+            <app-datos-financiar></app-datos-financiar>
+        </div>
+        <div class="col-3">
+            <app-otros-cargos></app-otros-cargos>
+        </div>
+        <div class="col-3">
+            <app-pdr></app-pdr>
+        </div>
+    </div>
+    <div class="col-12 p-0">
+        <app-sensibilizaciones></app-sensibilizaciones>
+    </div>
+    <div class="col-12">
+        <app-tabla></app-tabla>
+    </div>
+    <div>
+        <label for="comentario" class="font-bold block mb-1 mt-5"> Comentarios </label>
+        <ng-container *ngIf="isEditableFC; else NoEditableComentarioFC">
+            <textarea [(ngModel)]="comentarioFcd" (change)="onModelChangeComentario()" rows="5" cols="30" minlength="2"
+                maxlength="255" pInputTextarea style="width: 100%; height: 10rem;"></textarea>
+        </ng-container>
+        <ng-template #NoEditableComentarioFC>
+            <br>
+            {{comentarioFcd}}
+            <br>
+        </ng-template>
+    </div>
+    <br>
+
+    <app-alertas></app-alertas>
+</p-panel>

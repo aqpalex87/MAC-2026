@@ -1,0 +1,57 @@
+<div class="p-4">
+
+  <div class="grid">
+    <div class="col-3">
+      <app-datos-cliente></app-datos-cliente>
+    </div>
+    <div class="col-3">
+      <app-solicitud-credito></app-solicitud-credito>
+    </div>
+    <div class="col-3">
+      <div class="grid">
+        <div class="col-6">
+          <button pButton type="button" (click)="openModal()" id="btnObservar"  class="btn-fc-obs">Observar</button>
+        </div>
+        <div class="col-6">
+          <button pButton type="button" (click)="Cerrar()" id="btnCerrar" class="btn-fc">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-container *ngIf="solicitud?.codDestino === destinoCredito.SOSTENIMIENTO">
+  <div class="grid">
+    <div class="col-6">
+      <app-ratios></app-ratios>
+    </div>
+  </div>
+
+  <p-tabView>
+    <p-tabPanel header="GUF">
+      <app-guf></app-guf>
+    </p-tabPanel>
+    <p-tabPanel header="ESFA">
+      <app-esfa></app-esfa>
+    </p-tabPanel>
+    <p-tabPanel header="ERA">
+      <app-era></app-era>
+    </p-tabPanel>
+    <p-tabPanel header="FLUJO CAJA">
+      <app-flujo-caja-det></app-flujo-caja-det>
+    </p-tabPanel>
+    <p-tabPanel header="RSE">
+      <app-rse></app-rse>
+    </p-tabPanel>
+    <p-tabPanel header="HOJA DE TRABAJO">
+      <app-hoja-trabajo [commonData]="commonData"></app-hoja-trabajo>
+    </p-tabPanel>
+  </p-tabView>
+
+</ng-container>
+
+<ng-container *ngIf="solicitud?.codDestino != destinoCredito.SOSTENIMIENTO">
+  <div>
+    <app-hoja-trabajo [commonData]="commonData"></app-hoja-trabajo>
+  </div>
+</ng-container>

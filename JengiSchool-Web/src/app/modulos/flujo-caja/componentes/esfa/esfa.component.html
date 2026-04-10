@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col s12 m12 l9">
+    <p-panel>
+      <ng-template pTemplate="header"> <span class="title-web">ESTADO DE SITUACIÓN FINANCIERA
+          AGROPECUARIO</span></ng-template>
+      <p-treeTable [value]="data" [scrollable]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <td style="background-color: white;" class="first-column"></td>
+            <td class="text-center font-bold mb-2 cell-monto-cabecera" style="background-color: white;">{{mesActual}}
+            </td>
+            <td class="text-center font-bold mb-2 cell-monto-cabecera" style="background-color: white;">
+              {{mesDesembolsoAnterior}}
+            </td>
+            <td class="text-center font-bold mb-2 cell-monto-cabecera" style="background-color: white;">A. Vertical</td>
+            <td class="text-center font-bold mb-2 cell-monto-cabecera" style="background-color: white;">A. Horizontal
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+          <tr [ttRow]="rowNode" [ngClass]="{'active-borders': rowNode.level === 0 || rowNode.level === 1}">
+            
+            <td *ngIf="rowData.codItem" class="first-column"
+              [ngClass]="{'active-solid-border': rowNode.level === 0 || rowNode.level === 1, 'active-dashed-border': rowNode.level > 1}">
+              <!-- <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler> -->
+              <ng-container *ngIf="verificarEntidadBancaria(rowData.descripcion) === true; else EntidadBancaria">
+                {{ rowData.descripcion }}
+              </ng-container>
+              <ng-template #EntidadBancaria>
+                <div style="display: flex; flex-direction: row; gap:4px; justify-content: start;">
+                  <div *ngIf="editable && isEditableFC" style="text-align: center;font-size: 14px !important;">
+                    <p-dropdown [options]="entidadesBancarias" [(ngModel)]="rowData.selectEntidadBancaria"
+                      optionLabel="descripcionTemp" optionValue="descripcion" [filter]="true" filterBy="descripcionTemp"
+                      placeholder="Selecciona Entidad" (ngModelChange)="editarElemento(rowData)">
+                    </p-dropdown>
+                  </div>
+                  <div *ngIf="!isEditableFC" style="text-align: center;font-size: 14px !important;">
+                    {{rowData.descripcionTemp}}
+                  </div>
+                  <div>
+                    <span *ngIf="verificarCeldaDinamica(rowData.codItemPadre) && editable && isEditableFC">
+                      <i class="pi pi-times icon-remove" (click)="deleteElement(rowData)"></i>
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
+              <span *ngIf="verificarCeldaDinamica(rowData.codItem) && editable && isEditableFC">
+                <i class="pi pi-plus icon-add" (click)="agregarFila(rowData)"></i>
+              </span>
+            </td>
+            <td *ngIf="verificarCeldaEditable(rowData.codItem)  && isEditableFC" ttEditableColumn
+              class="cell-monto text-right table-cell-editable"
+              [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0 || rowNode.level === 1, 'active-dashed-border': rowNode.level > 1}">
+              <ng-container *ngIf="isEditableFC; else NoEditable">
+                <p-inputNumber [inputStyle]="{'text-align': 'right'}"
+                  class="p-inputtext-sm text-right table-cell-editable" [(ngModel)]="rowData.montoActual" mode="decimal"
+                  locale="en-US" [minFractionDigits]="2" [maxFractionDigits]="2" [min]="0"
+                  (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+              </ng-container>
+              <ng-template #NoEditable>
+                {{ rowData.montoActual | number : '1.2-2'}}
+              </ng-template>
+            </td>
+            <td *ngIf="!verificarCeldaEditable(rowData.codItem)" class="cell-monto text-right"
+              [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0 || rowNode.level === 1, 'active-dashed-border': rowNode.level > 1}">
+              {{ rowData.montoActual |
+              number : '1.2-2' }}</td>
+            <td *ngIf="verificarCeldaEditable(rowData.codItem) && !isEditableFC" class="cell-monto text-right"
+              [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0 || rowNode.level === 1, 'active-dashed-border': rowNode.level > 1}">
+              {{ rowData.montoActual |
+              number : '1.2-2' }}</td>
+
+            <td class="cell-monto text-right"
+              [ngClass]="{'disabled-number': rowData.montoAnterior === 0,'active-solid-border': rowNode.level === 0 || rowNode.level === 1, 'active-dashed-border': rowNode.level > 1}">
+              {{ rowData.montoAnterior | number : '1.2-2' }}</td>
+            <td class="cell-monto text-right"
+              [ngClass]="{'disabled-number': rowData.porcentajeAV === 0,'active-solid-border': rowNode.level === 0 || rowNode.level === 1, 'active-dashed-border': rowNode.level > 1}">
+              {{ rowData.porcentajeAV | number : '1.2-2'}} %</td>
+            <td class="cell-monto text-right"
+              [ngClass]="{'disabled-number': rowData.porcentajeAH === 0,'active-solid-border': rowNode.level === 0 || rowNode.level === 1, 'active-dashed-border': rowNode.level > 1}">
+              {{ rowData.porcentajeAH | number : '1.2-2'}} %</td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+      <div>
+        <label for="comentario" class="font-bold block mb-1 mt-5"> Comentarios </label>
+        <ng-container *ngIf="isEditableFC; else NoEditableComentarioESFA">
+          <textarea [(ngModel)]="comentarioEsfa" (change)="onModelChangeComentario()" rows="5" cols="30" minlength="2"
+            maxlength="255" pInputTextarea style="width: 100%; height: 10rem;"></textarea>
+        </ng-container>
+        <ng-template #NoEditableComentarioESFA>
+          <br>
+          {{comentarioEsfa}}
+          <br>
+        </ng-template>
+      </div>
+      <div>
+        <app-alertas></app-alertas>
+      </div>
+    </p-panel>
+  </div>
+</div>

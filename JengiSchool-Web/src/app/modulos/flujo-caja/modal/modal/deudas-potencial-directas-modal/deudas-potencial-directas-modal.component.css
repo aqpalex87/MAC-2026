@@ -1,0 +1,37 @@
+.d-flex {
+    display: flex; /* Utilizar Flexbox */
+    justify-content: space-between; /* Espacio entre los elementos */
+  }
+.modern-button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+  }
+  
+  .blue {
+    background-color: #2196f3; /* Azul */
+    color: white;
+  }
+  
+  .gray {
+    background-color: #ccc; /* Gris */
+    color: #444;
+  }
+  
+  /* Efecto de hover */
+  .modern-button:hover {
+    background-color: #1976d2; /* Azul más oscuro */
+    color: white;
+  }
+
+  .colorcalculo {
+    background-color: rgb(206, 207, 209);
+    padding: 10px;
+    font-size: 16px; /* Tamaño de fuente más grande */
+    font-weight: bold; /* Texto en negrita */
+    color: white;
+  }

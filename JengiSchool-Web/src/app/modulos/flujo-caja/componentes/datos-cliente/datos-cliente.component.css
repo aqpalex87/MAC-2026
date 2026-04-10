@@ -1,0 +1,8 @@
+.fsize {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+:host ::ng-deep .p-panel .p-panel-header {
+  padding: 0.4rem !important;
+}

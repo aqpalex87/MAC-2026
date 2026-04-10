@@ -1,0 +1,18 @@
+<p-panel header="Establecer Valor">
+    <p-panel [showHeader]="false">
+        <div class="grid">
+            <div class="col">
+                <p-inputNumber [(ngModel)]="valor" mode="decimal" locale="en-US" [max]="999999999999.99"
+                    [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.00"></p-inputNumber>
+            </div>
+        </div>
+    </p-panel>
+    <ng-template pTemplate="footer">
+        <div class="grid">
+            <div class="col-6 mt-0 p-0" style="text-align: center;">
+                <button pButton type="button" style="text-align:center" class="btn-mdl"
+                    (click)="establecerValor()">Establecer</button>
+            </div>
+        </div>
+    </ng-template>
+</p-panel>

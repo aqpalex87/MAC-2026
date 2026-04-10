@@ -1,0 +1,184 @@
+.fsize {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+input[type=text] {
+  text-align: right
+}
+
+.table-cell-editable {
+  background-color: #ffff80;
+  text-align: right !important;
+}
+.table-cell-editable-exceded
+{
+  background-color: red;
+  text-align: right !important;
+  color: white;
+}
+
+.max-w-input-number {
+  max-width: 100px;
+}
+
+:host ::ng-deep .p-treetable.p-treetable-sm .p-treetable-tbody>tr>td {
+  padding: 5px 0px 0px 10px;
+}
+
+:host ::ng-deep .p-dropdown {
+  width: 100% !important;
+  margin-top: -5px;
+  padding: 0px !important;
+  width: 24px;
+  height: 35px;
+  background-color: #ffff80;
+  border: 1px solid #00694f;
+  color: #00694f;
+}
+
+:host ::ng-deep input {
+  height: 20px !important;
+}
+
+.icon-add {
+  margin-right: 12px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #00694f;
+  font-weight: bold;
+  border: 2px solid #00694f;
+  border-radius: 4px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.icon-remove {
+  margin-right: 12px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #a11d1d;
+  font-weight: bold;
+  border: 2px solid #00694f;
+  border-radius: 4px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.icon-pencil {
+  margin-right: 6px;
+  margin-left: 3px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #868608;
+  font-weight: bold;
+  border: 2px solid #00694f;
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.icon-money {
+  margin-right: 6px;
+  margin-left: 3px;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #868608;
+  font-weight: bold;
+  border: 2px solid #00694f;
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.bg-low {
+  background-color: yellow;
+  padding: 7px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.bg-normal {
+  background-color: #00694f;
+  color: white;
+  padding: 7px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.bg-high {
+  background-color: red;
+  color: white;
+  padding: 7px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+/********************************************************/
+:host ::ng-deep .ng-star-inserted table tbody{
+  border: 1px solid #000!important;
+}
+
+:host ::ng-deep .p-treetable-scrollable-body{
+  overflow-y: hidden;
+  padding: 3px 0px 10px 0px;
+}
+
+:host ::ng-deep .ng-star-inserted tr{
+  border: none;
+}
+:host ::ng-deep .ng-star-inserted .p-treetable-tbody tr > td{
+  border-bottom: none;
+}
+
+:host ::ng-deep .active-borders{
+  border: 1px solid #000!important;
+  font-weight: bold!important;
+}
+
+:host ::ng-deep .active-solid-border{
+  border-right: 1px solid #000!important;
+}
+
+:host ::ng-deep .active-dashed-border{
+  border-right: 1px dashed #000!important;
+}
+
+:host ::ng-deep .class-entidades{
+  border-top: solid 1px #000!important;
+}
+
+.disabled-number{
+  color: rgb(200, 200, 200);
+}
+
+body .ui-table .ui-table-tbody > tr > td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 50px;
+}
+
+body .ui-table .ui-table-tbody > tr>td:hover {
+  overflow: auto;
+  text-overflow: initial;
+}
+
+/* :host ::ng-deep .p-treetable table {
+  min-width: auto!important;
+  width: auto;
+}
+
+.first-column{
+  width: 450px;
+} */
+
+/*
+.cell-monto {
+  width: 120px;
+}
+
+.cell-monto-cabecera {
+  width: 120px!important;
+} */
+

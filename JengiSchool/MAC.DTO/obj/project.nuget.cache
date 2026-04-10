@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "LBG0HpDUX+k6KpRj79bWBzMv3lRQfJAj+9e9bHtk7XU4YRAZCI71+RbTDBI3K/Y+z9/NhjWP6SS+46WmoeMnrw==",
+  "success": true,
+  "projectFilePath": "C:\\Alex\\Alex\\Colegio\\JengiSchool\\MAC.DTO\\MAC.DTO.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\sonaranalyzer.csharp\\9.4.0.72892\\sonaranalyzer.csharp.9.4.0.72892.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,79 @@
+<div class="grid">
+    <div class="col-6 ptb0">
+        <label class="caja-titulo">Hoja de Producto</label>
+    </div>
+    <div class="col-6 text-right" *ngIf="!enableEditHP">
+        <label class="caja-titulo-complemento">Cod. HP: {{ (solicitud.codHP==null?"--":solicitud.codHP) }}</label>
+    </div>
+</div>
+<p-panel [showHeader]="false">
+    <label class="font-semibold text-xs">Datos por Unidad de Producción</label>
+    <div class="grid mt-1" *ngFor="let fcHP of flujoCajaHP; let index = index">
+        <label class="col-6 label-columns" *ngIf="fcHP.codItem == 'HPCOST'">COSTO:</label>
+        <label class="col-6 label-columns" *ngIf="fcHP.codItem == 'HPPREC'">PRECIO:</label>
+        <label class="col-6 label-columns" *ngIf="fcHP.codItem == 'HPREND'">RENDIMIENTO:</label>
+        <!-- <div class="col-6 p-0 text-right cell-border">
+            <ng-container *ngIf="enableEditHP; else hpCosto">
+                <p-inputNumber class="p-inputtext-sm text-right table-cell-editable" [(ngModel)]="fcHP.monto"
+                    mode="decimal" locale="en-US" [min]="0" [minFractionDigits]="2"
+                    [maxFractionDigits]="2" placeholder="0.00" (ngModelChange)="onModelChange(fcHP)"></p-inputNumber>
+            </ng-container>
+            <ng-template #hpCosto>
+                <span class="fsize" *ngIf="fcHP.codItem == 'HPCOST'">S/. {{!enableEditHP ? solicitud.hpCosto
+                    :fcHP?.monto| number: '.2'}}</span>
+                <span class="fsize" *ngIf="fcHP.codItem == 'HPPREC'">S/. {{!enableEditHP ? solicitud.hpPrecio
+                    :fcHP?.monto| number: '.2'}}</span>
+                <span class="fsize" *ngIf="fcHP.codItem == 'HPREND'">{{!enableEditHP ?
+                    solicitud.hpRendimiento:fcHP?.monto | number: '.2'}}</span>
+            </ng-template>
+        </div> -->
+
+        <ng-container *ngIf="!isEditableFC; else noeditable">
+            <div class="col-6 p-0 text-right cell-border">
+                    <span class="fsize" *ngIf="fcHP.codItem == 'HPCOST'">S/. {{solicitud.hpCosto | number: '.2'}}</span>
+                    <span class="fsize" *ngIf="fcHP.codItem == 'HPPREC'">S/. {{solicitud.hpPrecio | number: '.2'}}</span>
+                    <span class="fsize" *ngIf="fcHP.codItem == 'HPREND'">{{solicitud.hpRendimiento | number: '.2'}}</span>
+            </div>
+        </ng-container>
+        <ng-template #noeditable>
+           
+            <div class="col-6 p-0 text-right cell-border" *ngIf="enableEditHP ">
+            
+                <p-inputNumber class="p-inputtext-sm text-right table-cell-editable" [(ngModel)]="fcHP.monto"
+                    mode="decimal" locale="en-US" [min]="0" [minFractionDigits]="2"
+                    [maxFractionDigits]="2" placeholder="0.00" (ngModelChange)="onModelChange(fcHP)"></p-inputNumber>
+            
+            </div>
+
+            <div class="col-6 p-0 text-right cell-border" *ngIf="!enableEditHP ">
+                    <span class="fsize" *ngIf="fcHP.codItem == 'HPCOST'">S/. {{solicitud.hpCosto | number: '.2'}}</span>
+                    <span class="fsize" *ngIf="fcHP.codItem == 'HPPREC'">S/. {{solicitud.hpPrecio | number: '.2'}}</span>
+                    <span class="fsize" *ngIf="fcHP.codItem == 'HPREND'">{{solicitud.hpRendimiento | number: '.2'}}</span>
+            </div>
+        </ng-template>
+
+
+        <!--<label class="col-6 label-columns">PRECIO:</label>
+        <div class="col-6 p-0 text-right cell-border">
+            <ng-container *ngIf="enableEditHP; else hpPrecio">
+                <p-inputNumber class="p-inputtext-sm text-right table-cell-editable" [(ngModel)]="solicitud.hpPrecio"
+                    mode="decimal" locale="en-US" [useGrouping]="false" [min]="0" [minFractionDigits]="2"
+                    [maxFractionDigits]="2" placeholder="0.00"></p-inputNumber>
+            </ng-container>
+            <ng-template #hpPrecio>
+                <span class="fsize">S/. {{solicitud?.hpPrecio | number: '.2'}}</span>
+            </ng-template>
+        </div>
+        <label class="col-6 label-columns">RENDIMIENTO:</label>
+        <div class="col-6 p-0 text-right cell-border">
+            <ng-container *ngIf="enableEditHP; else hpRendimiento">
+                <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                    [(ngModel)]="solicitud.hpRendimiento" mode="decimal" locale="en-US" [useGrouping]="false" [min]="0"
+                    [minFractionDigits]="2" [maxFractionDigits]="2" placeholder="0.00"></p-inputNumber>
+            </ng-container>
+            <ng-template #hpRendimiento>
+                <span class="fsize">{{solicitud?.hpRendimiento | number: '.2'}}</span>
+            </ng-template>
+        </div>-->
+    </div>
+</p-panel>

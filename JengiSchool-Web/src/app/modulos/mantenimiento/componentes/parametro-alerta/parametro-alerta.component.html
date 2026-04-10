@@ -1,0 +1,140 @@
+<div class="mt-4">
+    <h4>Parámetro de Alertas</h4>
+</div>
+<div [formGroup]="parametroVersion">
+    <ng-container formArrayName="parametrosAlerta">
+        <p-table #tableAlerta [value]="parametrosAlerta.controls" styleClass="p-datatable-sm"
+            dataKey="value.idParametroAlerta" [paginator]="false" editMode="row">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width : 5% ;">ID</th>
+                    <th style="width : 10% ;">Alerta</th>
+                    <th style="width : 10% ;">Cálculo</th>
+                    <th style="width : 10% ;">Reglas</th>
+                    <th style="width : 10% ;">Parámetro</th>
+                    <th style="width : 20% ;">Comentarios</th>
+                    <th style="width : 10% ;">Estado</th>
+                    <th style="width : 5% ;">Activar</th>
+                    <th style="width : 20% ;" *ngIf="activo">Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-controls let-editing="editing" let-i="rowIndex">
+                <tr [pEditableRow]="controls" [formGroupName]="i">
+                    <td>
+                        {{ controls.controls.idParametroAlerta.value }}
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <textarea rows="3" cols="50" style="width: 100%" [maxlength]="120" pInputTextarea
+                                    formControlName="nombreAlerta"></textarea>
+                                <span *ngIf="activo && controls.controls.nombreAlerta.invalid" class="error-message">
+                                    Alerta es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.nombreAlerta.value }}
+                                <span *ngIf="activo && controls.controls.nombreAlerta.invalid" class="error-message">
+                                    Alerta es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-dropdown appendTo="body" formControlName="calculo"
+                                    [options]="valoresCalculo"></p-dropdown>
+                                <span *ngIf="activo && controls.controls.calculo.invalid" class="error-message">
+                                    Cálculo es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.calculo.value }}
+                                <span *ngIf="activo && controls.controls.calculo.invalid" class="error-message">
+                                    Cálculo es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-dropdown appendTo="body" formControlName="regla" [options]="reglass"></p-dropdown>
+                                <span *ngIf="activo && controls.controls.regla.invalid" class="error-message">
+                                    Regla es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.regla.value }}
+                                <span *ngIf="activo && controls.controls.regla.invalid" class="error-message">
+                                    Regla es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber formControlName="valorParametro" mode="decimal" locale="en-US"
+                                    [useGrouping]="false" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                    [maxlength]="18"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.valorParametro.invalid" class="error-message">
+                                    Parametro debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.valorParametro.value }}
+                                <span *ngIf="activo && controls.controls.valorParametro.invalid" class="error-message">
+                                    Parametro debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;"> 
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText style="width: 100%" [maxlength]="50" formControlName="comentario" />
+                                <span *ngIf="activo && controls.controls.comentario.invalid" class="error-message">
+                                    Comentario es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.comentario.value }}
+                                <span *ngIf="activo && controls.controls.comentario.invalid" class="error-message">
+                                    Comentario es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        {{ controls.controls.estado.value ? "Activo" : "Inactivo" }}
+                    </td>
+                    <td>
+                        <p-checkbox [binary]="true" [disabled]="!activo" formControlName="estado"></p-checkbox>
+                    </td>
+                    <td *ngIf="activo">
+                        <button type="button" pInitEditableRow
+                            (click)="onRowEditInit(controls.controls.idParametroAlerta.value)" [disabled]="editing"
+                            class="btn-table">
+                            <i class="pi pi-file-edit" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                        <button type="button" pSaveEditableRow (click)="guardarAlerta(controls.valid)"
+                            *ngIf="controls.valid" [disabled]="!editing" class="btn-table">
+                            <i class="pi pi-save" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                        <button type="button" (click)="cancelarEditar(controls.controls.idParametroAlerta.value, i)"
+                            pCancelEditableRow [disabled]="!editing" class="btn-table">
+                            <i class="pi pi-times" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td>Sin registros.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-container>
+</div>

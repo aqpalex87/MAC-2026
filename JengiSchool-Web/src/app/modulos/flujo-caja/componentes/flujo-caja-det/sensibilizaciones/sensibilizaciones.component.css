@@ -1,0 +1,55 @@
+.fsize {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.table-cell-editable {
+  background-color: #ffff80;
+}
+
+/*****************************************************/
+
+:host ::ng-deep .p-panel-content {
+  padding: 0;
+  border: none;
+}
+
+:host ::ng-deep .p-panel-content>div {
+  border: 1px solid #000;
+  margin: 20px 0px;
+  padding-left: 10px;
+}
+
+.caja-titulo {
+  font-weight: 600;
+  font-size: 1rem;
+  color: black;
+  line-height: 21px;
+  display: block;
+  margin-bottom: -15px;
+  margin-top: 1rem;
+}
+
+:host ::ng-deep .p-inputnumber {
+  margin-top: 18px !important;
+}
+
+:host ::ng-deep .p-inputtext {
+  border: 1px solid black !important;
+  margin-bottom: 0px !important;
+  line-height: 25px !important;
+  height: auto !important;
+}
+
+:host ::ng-deep .fix-div {
+  padding-bottom: 17px !important;
+}
+
+label {
+  color: black;
+}
+
+.font-blue-bold {
+  color: blue;
+  font-weight: 600;
+}

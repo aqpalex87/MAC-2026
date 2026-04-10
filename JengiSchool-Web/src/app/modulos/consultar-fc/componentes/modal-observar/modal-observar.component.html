@@ -1,0 +1,23 @@
+
+<p-card styleClass="mb-4">
+
+
+    <h1>Registrar Motivo</h1>
+    <div class="field col-12 md:col-12">
+        <label for="idFlujoCaja" class="font-semibold">Comentarios *</label>
+    </div>
+    <div class="field col-12 md:col-12">
+        <input type="text" [(ngModel)]="comment" placeholder="Escribe tu comentario" maxlength="255">
+        <span class="text-red-600" *ngIf="mostrarMensajeError">Comentario obligatorio</span>
+    </div>  
+    <div class="formgrid grid justify-center">
+      <div class="field col-12 md:col-4 text-right">
+        <button pButton (click)="save()" class="btn-fc">Aceptar</button>
+
+      </div>
+      <div class="field col-12 md:col-4 text-center">
+        <button pButton (click)="close()" class="btn-fc">Cerrar</button>
+
+      </div>          
+    </div>
+  </p-card>

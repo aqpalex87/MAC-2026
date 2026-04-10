@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col s12 m12 l9">
+        <p-panel>
+            <ng-template pTemplate="header"> <span class="title-web">{{commonData.gridTitle}}</span></ng-template>
+            <p-table [value]="data" styleClass="p-datatable-sm" [paginator]="false">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width : 5% ;text-align: center;">ID</th>
+                        <th style="width : 35% ;text-align: center;">Comentarios</th>
+                        <th style="width : 10% ;text-align: center;">Fecha Registro</th>
+                        <th style="width : 10% ;text-align: center;">Hora Registro</th>
+                        <th style="width : 10% ;text-align: center;">Usuario Registro</th>
+                        <th style="width : 10% ;text-align: center;">Archivo</th>
+                        <th style="width : 10% ;text-align: center;">Estado</th>
+                        <th style="width : 10% ;text-align: center;" *ngIf="!isEditableFC">Reemplazar</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ht let-i="rowIndex">
+                    <tr>
+                        <td style="text-align: center;">01</td>
+                        <td>{{ ht.comentario }}</td>
+                        <td style="text-align: center;">{{ ht.fechaRegistro }}</td>
+                        <td style="text-align: center;">{{ convertirHora(ht.horaRegistro)}}</td>
+                        <td style="text-align: center;">{{ ht.usuarioRegistro }}</td>
+                        <td style="text-align: center;">
+                            <i class="pi pi-file-excel" style="font-size: 1.5rem; cursor: pointer"
+                            (click)="descargarArchivo(ht.idLaserfiche)" *ngIf="descargarBool"></i>
+                        </td>
+                        <td style="text-align: center;">{{obtenerDescripcionEstado(ht.estado) }}</td>
+                        <td style="text-align: center;" *ngIf="!isEditableFC"> <i class="pi pi-pencil icon-pencil" style="font-size: 1.5rem; cursor: pointer" (click)="agregarHojaTrabajo()"></i></td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7" style="text-align: center;">No hay registros</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div>
+                <button *ngIf="mostrarAdjuntarArchivo" [disabled]="isEditableFC"  pButton type="button" style="text-align: center" class="btn-file"
+                    (click)="agregarHojaTrabajo()">
+                    {{commonData.textButton}}
+                </button>
+            </div>
+        </p-panel>
+    </div>
+</div>

@@ -1,0 +1,265 @@
+<p-panel>
+    <ng-template pTemplate="header"> <span class="title-web">EVALUACIÓN DEL SOBREENDEUDAMIENTO</span></ng-template>
+    <label class="font-semibold">Criterio 1</label>
+    <p-panel [showHeader]="false">
+        <div class="grid">
+            <div class="col-6 grid">
+                <p class="col font-semibold fsize mt-4">Número de Entidades</p>
+                <div class="col">
+                    <ng-container *ngIf="isEditableFC; else NoEditableNroEntidades">
+                        <p-inputNumber [(ngModel)]="rse.nroEntidades"
+                            (ngModelChange)="onModelChangeNroEntidades(rse.nroEntidades)" [min]="0"
+                            [disabled]="true"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditableNroEntidades>
+                        <div class="mt-4">
+                            {{rse.nroEntidades}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col-6 grid">
+                <p class="col-6 font-semibold fsize mt-4">Resultado del Criterio :</p>
+                <div class="col-1">
+                    <ng-container *ngIf="isEditableFC; else NoEditableResultadoCriterio1">
+                        <input #C1 [(ngModel)]="resultadoCriterio1"
+                            [ngClass]="{'c1_ok':C1.value=='OK', 'c1_no':C1.value=='NO'}" pInputText type="text"
+                            class="p-inputtext-sm col" [disabled]="true" />
+                    </ng-container>
+                    <ng-template #NoEditableResultadoCriterio1>
+                        <div class="mt-4" style="color: #00694f; font-weight: bold; line-height: 32px;">
+                            {{resultadoCriterio1}}
+                        </div>
+                    </ng-template>
+                </div>
+                <div class="col-5"></div>
+            </div>
+        </div>
+    </p-panel>
+    <label class="font-semibold">Criterio 2</label>
+    <p-panel [showHeader]="false">
+        <div class="grid">
+            <div class="col-6 grid">
+                <p class="col font-semibold fsize mt-4">Ratio CP</p>
+                <div class="col">
+                    <ng-container *ngIf="isEditableFC; else NoEditableRatioCP">
+                        <p-inputNumber [(ngModel)]="rse.ratioCP"
+                            (ngModelChange)="onModelChangeRatioCP(rse.ratioCP); analizarResultado();" class="col"
+                            mode="decimal" locale="en-US" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2" [disabled]="true"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditableRatioCP>
+                        <div class="mt-4">
+                            {{rse.ratioCP | number: '1.2-2'}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="col-6 grid">
+                <p class="col font-semibold fsize mt-4">Resultado del Criterio :</p>
+                <div class="col">
+                    <ng-container *ngIf="isEditableFC; else NoEditableResultadoCriterio2">
+                        <input [(ngModel)]="resultadoCriterio2" pInputText type="text" class="p-inputtext-sm col"
+                            [disabled]="true" style="color: #00694f; font-weight: bold;" />
+                    </ng-container>
+                    <ng-template #NoEditableResultadoCriterio2>
+                        <div class="mt-4" style="color: #00694f; font-weight: bold; line-height: 32px;">
+                            {{resultadoCriterio2}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-6 grid">
+                <p class="col font-semibold fsize mt-2">Total de las Cuotas de la Propuesta de <br>
+                    Crédito en Agrobanco (TCA) :</p>
+                <div class="col">
+                    <ng-container *ngIf="isEditableFC; else NoEditableTotCuotasCredito">
+                        <p-inputNumber [(ngModel)]="rse.totCuotasCredito" (ngModelChange)="onModelChangeCriterio2()"
+                            class="col" mode="decimal" locale="en-US" [min]="0"
+                            [minFractionDigits]="2" [maxFractionDigits]="2" [disabled]="true"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditableTotCuotasCredito>
+                        <div class="mt-4">
+                            {{rse.totCuotasCredito | number: '1.2-2'}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-6 grid">
+                <p class="col font-semibold fsize mt-2">Total de Cuotas de deudas directas en <br>
+                    entidades financieras (TCSF) :</p>
+                <div class="col">
+                    <ng-container *ngIf="isEditableFC; else NoEditableTotCuotasDD">
+                        <p-inputNumber [(ngModel)]="rse.totCuotasDD" (ngModelChange)="onModelChangeCriterio2()"
+                            class="col" mode="decimal" locale="en-US" [min]="0"
+                            [minFractionDigits]="2" [maxFractionDigits]="2" [disabled]="true"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditableTotCuotasDD>
+                        <div class="mt-4">
+                            {{rse.totCuotasDD | number: '1.2-2'}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-6 grid">
+                <p class="col font-semibold fsize mt-4">Total de deudas potenciales (TDP) :</p>
+                <div class="col">
+                    <ng-container *ngIf="isEditableFC; else NoEditableDeudasPotenciales">
+                        <p-inputNumber [(ngModel)]="rse.totDeudaPotenciales" (ngModelChange)="onModelChangeCriterio2()"
+                            class="col" mode="decimal" locale="en-US" [min]="0"
+                            [minFractionDigits]="2" [maxFractionDigits]="2" [disabled]="true"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditableDeudasPotenciales>
+                        <div class="mt-4">
+                            {{rse.totDeudaPotenciales | number: '1.2-2'}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-6 grid">
+                <p class="col font-semibold fsize mt-4">Total de Excedentes antes de pago a IFIS
+                    (TEXD) :</p>
+                <div class="col">
+                    <ng-container *ngIf="isEditableFC; else NoEditableTotExcedentes">
+                        <p-inputNumber [(ngModel)]="rse.totExcedentes" (ngModelChange)="onModelChangeCriterio2()"
+                            class="col" mode="decimal" locale="en-US" [min]="0"
+                            [minFractionDigits]="2" [maxFractionDigits]="2" [disabled]="true"></p-inputNumber>
+                    </ng-container>
+                    <ng-template #NoEditableTotExcedentes>
+                        <div class="mt-4">
+                            {{rse.totExcedentes | number: '1.2-2'}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+    <label class="font-semibold">Criterio 3</label>
+    <p-panel [showHeader]="false">
+        <div class="grid">
+            <div class="col-4">
+                <div class="grid">
+                    <p class="col font-semibold fsize mt-4">Tipo de Cliente :</p>
+                    <div class="col">
+                        <ng-container *ngIf="isEditableFC; else NoEditableTipoCliente">
+                            <input [(ngModel)]="rse.tipoCliente" pInputText type="text" class="p-inputtext-sm col"
+                                [disabled]="true" />
+                        </ng-container>
+                        <ng-template #NoEditableTipoCliente>
+                            <div class="mt-4">
+                                {{rse.tipoCliente}}
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="grid">
+                    <p class="col-6 font-semibold fsize mt-4">Comportamiento :</p>
+                    <div class="col-1">
+                        <ng-container *ngIf="isEditableFC; else NoEditableComportamiento">
+                            <p-dropdown [(ngModel)]="rse.comportamiento" (ngModelChange)="analizarResultado();"
+                                class="col p-inputtext-sm comportamiento" [options]="listComportamiento"
+                                placeholder="SELECCIONAR"></p-dropdown>
+                        </ng-container>
+                        <ng-template #NoEditableComportamiento>
+                            <div class="mt-4 comportamiento-read-only">
+                                {{rse.comportamiento}}
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+                <div class="grid">
+                    <p class="col font-semibold fsize mt-4">Deuda Sistema Financiero :</p>
+                    <div class="col">
+                        <ng-container *ngIf="isEditableFC; else NoEditableDeudaSisFinanciero">
+                            <p-inputNumber [(ngModel)]="rse.deudaSisFinanciero" class="col" mode="decimal"
+                                locale="en-US" [min]="0" [minFractionDigits]="2"
+                                [maxFractionDigits]="2" [disabled]="true"></p-inputNumber>
+                        </ng-container>
+                        <ng-template #NoEditableDeudaSisFinanciero>
+                            <div class="mt-4">
+                                {{rse.deudaSisFinanciero | number: '1.2-2'}}
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-7">
+                <label class="font-semibold">Comportamiento Tipo Cliente</label>
+                <p-panel [showHeader]="false">
+                    <div class="grid" *ngFor="let comportamiento of comportamiento; index as i">
+                        <div class="col-6">
+                            <label class="font-semibold">{{comportamiento.tipoCliente}}</label>
+                            <p-panel [showHeader]="false">
+                                <p class="font-semibold fsize">
+                                    {{comportamiento.descripcionComportamiento}}
+                                </p>
+                            </p-panel>
+                        </div>
+                    </div>
+                </p-panel>
+            </div>
+        </div>
+    </p-panel>
+    <label class="font-semibold">Resultado RSE</label>
+    <p-panel [showHeader]="false">
+        <div class="grid flex justify-content-center">
+            <div class="col-4">
+                <div class="grid">
+                    <p class="col font-semibold fsize mt-4">Resultado :</p>
+                    <div class="col">
+                        <ng-container *ngIf="isEditableFC; else NoEditableResultado">
+                            <input [(ngModel)]="rse.resultado" pInputText type="text" class="p-inputtext-sm col"
+                                [disabled]="true" />
+                        </ng-container>
+                        <ng-template #NoEditableResultado>
+                            <div class="mt-4">
+                                {{rse.resultado}}
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="grid">
+                    <p class="col font-semibold fsize mt-4">Condición :</p>
+                    <div class="col">
+                        <ng-container *ngIf="isEditableFC; else NoEditableCondicion">
+                            <input [(ngModel)]="rse.condicion" pInputText type="text" class="p-inputtext-sm col"
+                                [disabled]="true" />
+                        </ng-container>
+                        <ng-template #NoEditableCondicion>
+                            <div class="mt-4">
+                                {{rse.condicion}}
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-panel>
+    <br>
+    <div>
+        <label for="comentario" class="font-bold block mb-1 mt-5"> Comentarios </label>
+        <ng-container *ngIf="isEditableFC; else NoEditableComentarioRSE">
+            <textarea [(ngModel)]="comentarioRse" (change)="onModelChangeComentario()" rows="5" cols="30" minlength="2"
+                maxlength="255" pInputTextarea style="width: 100%; height: 10rem;"></textarea>
+        </ng-container>
+        <ng-template #NoEditableComentarioRSE>
+            <br>
+            {{comentarioRse}}
+            <br>
+        </ng-template>
+    </div>
+    <hr>
+    <br>
+    <div>
+        <app-alertas></app-alertas>
+    </div>
+</p-panel>

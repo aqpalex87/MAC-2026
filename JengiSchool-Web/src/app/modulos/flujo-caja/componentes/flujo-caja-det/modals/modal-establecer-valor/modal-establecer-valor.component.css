@@ -1,0 +1,16 @@
+.btn-mdl {
+    font-weight: 600;
+    font-size: 15px;
+    min-width: 200px;
+    margin-top: 10px !important;
+    width: 10rem;
+    height: 2.5rem;
+    background-color: #00694f;
+    color: #ffd204;
+    padding: 4px;
+    line-height: 0.25em;
+    margin: 0 auto;
+    position: relative;
+    display: inline-block;
+  }
+  

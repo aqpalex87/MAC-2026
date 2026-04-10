@@ -1,0 +1,96 @@
+/* :host ::ng-deep .p-panel .p-panel-content {
+  padding: 0 !important;
+} */
+
+/* td,
+th {
+  padding: 5px;
+} */
+
+.swal2-title {
+  font-size: 10px !important;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-message-content {
+  font-weight: bold;
+}
+
+.table-cell-editable {
+  background-color: #ffff80;
+}
+
+/**************************************************************/
+:host ::ng-deep .p-panel-content {
+  border: 1px solid #000 !important;
+  padding: .3rem 1rem !important;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  padding: 0px;
+  line-height: 13px;
+}
+
+/* th, td{
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.active-border-right{
+  border-right: 1px solid black;
+} */
+
+:host ::ng-deep .no-border-right {
+  border-right: 0px !important;
+}
+
+td {
+  padding: 0px !important;
+}
+
+table tr td p {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 3px;
+}
+
+:host ::ng-deep button {
+  padding: 2px !important;
+  /* width: 0px; */
+}
+
+.p-button.p-button-icon-only {
+  width: 25px;
+}
+
+.caja-titulo {
+  font-weight: 600;
+  font-size: 1rem;
+  color: black;
+  line-height: 21px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.caja-titulo-complemento {
+  color: black;
+  line-height: 21px;
+  font-weight: 600;
+  padding: 0px;
+  margin-bottom: 3px;
+}
+
+:host ::ng-deep .p-checkbox-box {
+  margin-top: 3px;
+  width: 13px;
+  height: 13px;
+}
+
+:host ::ng-deep .p-inputtext {
+  height: auto !important;
+  margin-bottom: 3px !important;
+  text-align: center;
+}

@@ -1,0 +1,25 @@
+mat-form-field {
+    width: 300px;  
+    margin: 20px; 
+  }
+  
+  input {
+    background-color: rgb(0, 255, 221);
+    padding: 10px;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    font-weight: bold; /* Texto en negrita */
+  }
+  .modern-button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+  }
+  
+  .blue {
+    background-color: #2196f3; /* Azul */
+    color: white;
+  }

@@ -1,0 +1,72 @@
+.btn-parametro {
+    font-family: "Ubuntu";
+    font-weight: 600;
+    font-size: 15px;
+    min-width: 200px;
+    width: 12rem;
+    height: 3rem;
+    background-color: green;
+    color: #ffd204;
+    padding: 4px;
+    margin-right: 2px;
+    margin-top: 25px;
+    line-height: 0.25em;
+    margin: 0 auto;
+    position: relative;
+    display: inline-block;
+}
+
+::ng-deep .customProgress .p-progressbar-label {
+    font-weight: bold;
+    font-size: 13px;
+    background: green;
+    color: #fff;
+}
+
+::ng-deep .customProgress .p-progressbar-value {
+    background: green;
+    color: #fff;
+}
+
+.nivel1 {
+    font-weight: bold;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+input[type=text] { text-align:right }

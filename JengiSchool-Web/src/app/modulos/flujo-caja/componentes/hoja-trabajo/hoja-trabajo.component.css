@@ -1,0 +1,20 @@
+#table-container-guf{
+    max-width: 500px !important;
+}
+
+.table-cell-editable{
+    background-color: #ffff80;
+}
+
+.max-w-input-number{
+    max-width: 100px;
+}
+
+.btn-file {
+    font-family: "Ubuntu";
+    margin-top: 15px;
+    font-weight: 600;
+    background-color: #00694f;
+    color: #ffd204;
+  }
+  

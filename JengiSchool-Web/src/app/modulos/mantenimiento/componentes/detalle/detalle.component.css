@@ -1,0 +1,44 @@
+.btn-parametro {
+  font-weight: 600;
+  font-size: 15px;
+  min-width: 200px;
+  margin-top: 20px !important;
+  width: 10rem;
+  height: 2.5rem;
+  background-color: #00694f;
+  color: #ffd204;
+  padding: 4px;
+  line-height: 0.25em;
+  margin: 0 auto;
+  position: relative;
+  display: inline-block;
+}
+
+.p-button:enabled:hover {
+  background: #1d7d74;
+  color: #ffffff;
+  border-color: #1d7d74;
+}
+
+.error-message {
+
+  font-size: 13px;
+  font-weight: bold;
+  color: red;
+}
+
+:host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background: #00694f;
+  color: #ffd204;
+  min-width: 170px;
+  height: 45px !important;
+  margin-right: 10px !important;
+  padding: 1rem;
+}
+
+:host ::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: #ffd204;
+  margin-right: 5px !important;
+  color: #00694f;
+  padding: 1rem;
+}

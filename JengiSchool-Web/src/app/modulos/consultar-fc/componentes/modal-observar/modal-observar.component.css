@@ -1,0 +1,50 @@
+#btnBuscar {
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+#btnObservar {
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    background-color: green;
+}
+
+#btnBuscar {
+    color: yellow;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.btn-fc {
+    font-weight: 500;
+    font-size: 12px;
+    /* min-width: 150px;
+    min-height: 45px; */
+    width: 110px;
+    height: 50px;
+    margin-left: 20px;
+    text-align: center;
+    background-color: #00694f !important;
+    color: #ffd204;
+    display: inline-block;
+}
+
+.btn-fc:hover {
+    font-weight: 500;
+    font-size: 12px;
+    /* min-width: 150px;
+    min-height: 45px; */
+    margin-left: 20px;
+    text-align: center;
+    background-color: #ffd204;
+    color: #ffd204;
+    display: inline-block;
+}

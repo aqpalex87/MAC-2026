@@ -1,0 +1,64 @@
+<div class="section no-padding">
+  <div class="row col s12 no-mar-bot">
+    <div class="section no-mar-bot">
+      <div class="col s12 m12 l12">
+        <h1 class="title">Mantenimiento de Parametros</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div [formGroup]="list">
+  <ng-container formArrayName="data">
+    <p-table #dt1 dataKey="codigoVersion" [value]="dataArray.controls" [globalFilterFields]="[
+      'controls.codigoVersion.value',
+      'controls.descripcionVersion.value',
+      'controls.fechaRegistro.value',
+      'controls.usuarioRegistro.value',
+      'controls.fechaUltimaActivacion.value',
+      'controls.usuarioUltimaActivacion.value',
+      'controls.fechaInactivacion.value'
+    ]" styleClass="p-datatable-sm" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <span class="p-input-icon-right mr-auto" style="width: 20%;">
+            <i style="font-weight: bold;" class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+              placeholder="Buscar" />
+          </span>
+          <div class="ml-auto">
+            <button pButton label="Nuevo" class="btn-nuevo" (click)="nuevoRegistro()"></button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">Versión <br> Parametro FC</th>
+          <th class="text-center">Descripción </th>
+          <th class="text-center">Fecha <br> Registro </th>
+          <th class="text-center">Usuario <br> Registro </th>
+          <th class="text-center">Fecha Ultima <br> Activación </th>
+          <th class="text-center">Usuario Ultima <br> Activación </th>
+          <th class="text-center">Fecha <br> Inactivación </th>
+          <th class="text-center">Activar </th>
+          <th class="text-center">Ver <br> Detalle </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-controls let-i="rowIndex">
+        <tr [formGroupName]="i">
+          <td class="text-center">{{controls.get('codigoVersion').value}}</td>
+          <td class="text-center">{{controls.get('descripcionVersion').value}}</td>
+          <td class="text-center">{{controls.get('fechaRegistro').value}}</td>
+          <td class="text-center">{{controls.get('usuarioRegistro').value}}</td>
+          <td class="text-center">{{controls.get('fechaUltimaActivacion').value}}</td>
+          <td class="text-center">{{controls.get('usuarioUltimaActivacion').value}}</td>
+          <td class="text-center">{{controls.get('fechaInactivacion').value}}</td>
+          <td class="text-center"><p-checkbox (click)="activarVersion(i, controls.get('codigoVersion').value)"
+              [binary]="true" formControlName="estado"></p-checkbox></td>
+          <td class="text-center"><i class="pi pi-eye" style="font-size: 1.5rem; cursor: pointer"
+              (click)="verDetalle(controls.value)"></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+</div>

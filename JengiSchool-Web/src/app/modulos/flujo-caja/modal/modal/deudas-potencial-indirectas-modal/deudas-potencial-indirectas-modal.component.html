@@ -1,0 +1,56 @@
+<mat-card class="mat-elevation-z4 m-4">
+  <h1>Deuda Potencial Indirecta</h1>
+  <div class="d-flex">
+    <mat-card class="flex-grow-1 m-2">
+      <form class="d-flex">
+        <div class="column">
+          <mat-form-field>
+            <mat-label>Aval MYPE</mat-label>
+            <mat-select (selectionChange)="onAvalMYPEChange($event)">
+              <mat-option *ngFor="let opcion of opcionesAvalMYPE" [value]="opcion.valor">{{ opcion.texto }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Aval Consumo</mat-label>
+            <mat-select (selectionChange)="onAvalConsumoChange($event)">
+              <mat-option *ngFor="let opcion of opcionesAvalConsumo" [value]="opcion.valor">{{ opcion.texto }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Carta Fianza</mat-label>
+            <mat-select (selectionChange)="onCartaFianzaChange($event)">
+              <mat-option *ngFor="let opcion of opcionesCartaFianza" [value]="opcion.valor">{{ opcion.texto }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field>
+            <p-inputNumber  [ngModelOptions]="{ standalone: true }" [(ngModel)]="deudaInEditado.avalMYPE" mode="decimal" locale="en-US" [min]="0"
+            [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+              (keydown.enter)="realizarCalculoavalMYPE()" (change)="realizarCalculoavalMYPE()" ></p-inputNumber>
+          </mat-form-field>
+          <mat-form-field>
+            <p-inputNumber  [ngModelOptions]="{ standalone: true }" [(ngModel)]="deudaInEditado.avalConsumo" mode="decimal" locale="en-US" [min]="0"
+            [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+              (keydown.enter)="realizarCalculoConsumo()" (change)="realizarCalculoConsumo()"></p-inputNumber>
+          </mat-form-field>
+          <mat-form-field>
+            <p-inputNumber  [ngModelOptions]="{ standalone: true }" [(ngModel)]="deudaInEditado.CartaFianza" mode="decimal" locale="en-US" [min]="0"
+            [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+              (keydown.enter)="realizarCalculoCarta()" (change)="realizarCalculoCarta()"></p-inputNumber>
+          </mat-form-field>
+        </div>        
+      </form>
+    </mat-card>
+  </div>
+   <!-- Campo Cuota Potencial Indirecta -->
+   <mat-form-field class="cuota-potencial-indirecta">
+    <mat-label>Cuota Potencial Indirecta</mat-label>
+    <input  class="colorcalculo" matInput [ngModelOptions]="{ standalone: true }" [(ngModel)]="deudaInEditado.cuotaPotencialIndirecta" [ngStyle]="{ 'border-color': borderColor }"
+      name="cuotaPotencialIndirecta" type="number" disabled />
+  </mat-form-field>
+  <div class="d-flex justify-content-center mt-4">
+    <button mat-raised-button class="modern-button blue" (click)="guardarEdicion()">Agregar</button>
+    <button mat-button mat-dialog-close class="modern-button gray">Cancelar</button>
+  </div>
+</mat-card>

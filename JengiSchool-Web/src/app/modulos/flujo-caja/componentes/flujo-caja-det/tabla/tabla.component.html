@@ -1,0 +1,427 @@
+<br>
+<br>
+<hr>
+<p-treeTable [value]="data" [scrollable]="true" [columns]="scrollableCols" [frozenColumns]="frozenCols"
+    styleClass="p-treetable-sm" frozenWidth="400px" [tableStyle]="{'min-width':'110rem'}">
+    <ng-template pTemplate="frozenheader" let-columns>
+        <tr style="height: 55px">
+            <th colspan="2" style="width: 25% !important;">Items de Flujo de Caja</th>
+            <th colspan="1" style="text-align:center; color:black;">Valor Inicial</th>
+            <ng-container *ngIf="(periodos_tabla&&periodos_tabla.length>0)">
+                <th style="text-align: center;" *ngFor="let item of periodos_tabla">
+                    {{ item|titlecase }}
+                </th>
+            </ng-container>
+            <th colspan="1" style="text-align:center; color:black;">Valor Restante</th>
+            <th colspan="1" style="text-align:center; color:black;">TOTAL</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr style="height: 56px">
+            <th colspan="1" style="text-align:center; color:black;">Valor Inicial</th>
+            <ng-container *ngIf="(periodos_tabla&&periodos_tabla.length>0)">
+                <th style="text-align: center;" *ngFor="let item of periodos_tabla">
+                    {{ item|titlecase }}
+                </th>
+            </ng-container>
+            <th colspan="1" style="text-align:center; color:black;">Valor Restante</th>
+            <th colspan="1" style="text-align:center; color:black;">TOTAL</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-rowIndex="rowIndex">
+        <tr [ttRow]="rowNode" style="height: 50px"
+            [ngClass]="{'active-borders': rowNode.level === 0,'class-entidades': rowData.codItem === 'FCD009'}">
+            <td ttEditableColumn style="text-align:center;width: 60px; border-right: 1px dashed black;"
+                [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0, 'active-dashed-border': rowNode.level > 1}">
+                <ng-container *ngIf="isEditableFC; else NoEditableValorInicial">
+                    <ng-container *ngIf="rowNode.level == 0">
+                        <ng-container
+                            *ngIf="!verificarCeldaEditableExcedenteMensual(rowData.codItem) && !(rowData.codItem === 'FCD004')&& !(rowData.codItem === 'FCD008')">
+                            <strong>{{ rowData.valorInicial | number: '1.2-2' }}</strong>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf=" rowNode.level== 1">
+                        <ng-container *ngIf="!verificarCeldaEditableFlujoFinanciero(rowData.codItem) && !(rowData.codItemPadre === 'FCD004') && !(rowData.codItemPadre === 'FCD008')
+                                          && !rowData.isEF">
+                            <strong>{{ rowData.valorInicial | number: '1.2-2' }}</strong>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="rowNode.level == 2 && !(rowData.codItemPadre==='FCD005') && !(rowData.codItemPadre==='FCD006') && !(rowData.codItemPadre === 'FCD008')">
+                        <ng-container
+                            *ngIf="rowData.codItemPadre==='FCD002'||rowData.codItemPadre==='FCD003'   ; else NoDecimal">
+                            <p-inputNumber class="p-inputtext-sm text-right"
+                                [ngClass]="{'table-cell-editable':rowData.total<101, 'table-cell-editable-exceded':rowData.total>100}"
+                                [(ngModel)]="rowData.valorInicial" [min]="0" [max]="100" suffix="%"
+                                (ngModelChange)="onModelChange()" placeholder="0"></p-inputNumber>
+                        </ng-container>
+                        <ng-template #NoDecimal>
+                            <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                                [(ngModel)]="rowData.valorInicial" mode="decimal" locale="en-US" [min]="0"
+                                [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+                <ng-template #NoEditableValorInicial>
+                    <strong>{{ rowData.valorInicial | number: '1.2-2' }}</strong>
+                </ng-template>
+            </td>
+            <ng-container *ngIf="(periodos_tabla&&periodos_tabla.length>0)">
+                <td *ngFor="let item of rowData.montosPlazo" ttEditableColumn
+                    style="text-align:center; width: 60px; border-right: 1px dashed black;"
+                    [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0, 'active-dashed-border': rowNode.level > 1}">
+                    <ng-container *ngIf="isEditableFC; else NoEditableMonto">
+                        <ng-container *ngIf="rowNode.level == 0">
+                            <p>{{ item.monto | number: '1.2-2' }}</p>
+                        </ng-container>
+                        <ng-container *ngIf=" rowNode.level== 1">
+                            <ng-container *ngIf="!verificarCeldaEditableFlujoFinancieroMonto(rowData.codItem)">
+                                <ng-container *ngIf="rowData.codItem==='FCD015' || rowData.isEF ;else CeldaNoEditable">
+                                    <ng-container *ngIf="rowData.codItem==='FCD015'; else Negativo">
+                                        <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                                            [(ngModel)]="item.monto" mode="decimal" locale="en-US" [min]="0"
+                                            [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                            (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+                                    </ng-container>
+                                    <ng-template #Negativo>
+                                        <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                                            [(ngModel)]="item.monto" mode="decimal" locale="en-US"
+                                            [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                            (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+                                    </ng-template>
+                                </ng-container>
+
+                                <ng-template #CeldaNoEditable>
+                                    <p>{{ item.monto | number: '1.2-2' }}</p>
+                                </ng-template>
+                            </ng-container>
+                            <ng-template #celdaEditable>
+                                <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                                    [(ngModel)]="item.monto" mode="decimal" locale="en-US" [min]="0"
+                                    [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                    (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+                            </ng-template>
+                        </ng-container>
+                        <ng-container *ngIf="rowNode.level == 2">
+                            <ng-container
+                                *ngIf="rowData.codItemPadre==='FCD002'|| rowData.codItemPadre==='FCD003'; else NoDecimal">
+                                <p-inputNumber [(ngModel)]="item.monto" class="p-inputtext-sm text-right" mode="decimal"
+                                    locale="en-US"
+                                    [ngClass]="{'table-cell-editable':rowData.total<101, 'table-cell-editable-exceded':rowData.total>100}"
+                                    [min]="0" [max]="100" suffix="%" (ngModelChange)="onModelChange()"
+                                    placeholder="0"></p-inputNumber>
+                            </ng-container>
+                            <ng-template #NoDecimal>
+                                <ng-container *ngIf="rowData.codItemPadre==='FCD005'; else Negativo">
+                                    <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                                        [(ngModel)]="item.monto" mode="decimal" locale="en-US" [min]="0"
+                                        [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                        (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+                                </ng-container>
+                                <ng-template #Negativo>
+                                    <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                                        [(ngModel)]="item.monto" mode="decimal" locale="en-US" [max]="999999999999.99"
+                                        [minFractionDigits]="2" [maxFractionDigits]="2"
+                                        (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+                                </ng-template>
+                            </ng-template>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #NoEditableMonto>
+                        <p>{{ item.monto | number: '1.2-2' }}</p>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <td ttEditableColumn style="text-align:center; width: 60px; border-right: 1px dashed black;"
+                [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0, 'active-dashed-border': rowNode.level > 1}">
+                <ng-container *ngIf="isEditableFC; else NoEditableValorRestante">
+                    <ng-container *ngIf="rowNode.level == 0">
+                        <ng-container *ngIf="!verificarCeldaEditableExcedenteMensual(rowData.codItem)
+                                         && !verificarCeldaEditableExcedenteFinal(rowData.codItem)
+                                         && !(rowData.codItem === 'FCD008')
+                                         && !(rowData.codItem === 'FCD004')">
+                            <strong>{{ rowData.valorRestante | number: '1.2-2' }}</strong>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf=" rowNode.level== 1">
+                        <ng-container *ngIf="!verificarCeldaEditableFlujoFinanciero(rowData.codItem) 
+                                && !verificarCeldaEditableFlujoFinancieroMontoValorRestante(rowData.codItem)
+                                && !(rowData.codItemPadre === 'FCD008')
+                                && !(rowData.codItemPadre === 'FCD004')
+                                && !verificarCeldaEditableFlujoFinancieroMonto(rowData.codItem)
+                                && !rowData.isEF">
+                            <strong>{{ rowData.valorRestante | number: '1.2-2' }}</strong>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container
+                        *ngIf="rowNode.level == 2 && !(rowData.codItemPadre==='FCD005') && !(rowData.codItemPadre==='FCD006') && !(rowData.codItemPadre === 'FCD008')">
+                        <ng-container
+                            *ngIf="rowData.codItemPadre==='FCD002'||rowData.codItemPadre==='FCD003'; else NoDecimal">
+                            <p-inputNumber class="p-inputtext-sm text-right"
+                                [ngClass]="{'table-cell-editable':rowData.total<101, 'table-cell-editable-exceded':rowData.total>100}"
+                                [(ngModel)]="rowData.valorRestante" [min]="0" [max]="100" suffix="%"
+                                (ngModelChange)="onModelChange()" placeholder="0"></p-inputNumber>
+                        </ng-container>
+                        <ng-template #NoDecimal>
+                            <p-inputNumber class="p-inputtext-sm text-right table-cell-editable"
+                                [(ngModel)]="rowData.valorRestante" mode="decimal" locale="en-US" [min]="0"
+                                [max]="999999999999.99" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                (ngModelChange)="onModelChange()" placeholder="0.00"></p-inputNumber>
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+                <ng-template #NoEditableValorRestante>
+                    <strong>{{ rowData.valorRestante | number: '1.2-2' }}</strong>
+                </ng-template>
+            </td>
+            <td ttEditableColumn style="text-align:center;width: 60px;"
+                [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0, 'active-dashed-border': rowNode.level > 1}">
+                <ng-container *ngIf="isEditableFC; else NoEditableTotal">
+                    <ng-container *ngIf="rowNode.level == 0 || rowNode.level == 1">
+                        <ng-container *ngIf="!verificarCeldaEditableFlujoFinancieroMonto(rowData.codItem)">
+                            <strong>{{ rowData.total | number: '1.2-2' }}</strong>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="rowNode.level == 2">
+                        <ng-container
+                            *ngIf="rowData.codItemPadre==='FCD002'||rowData.codItemPadre==='FCD003'; else NoDecimal">
+                            <div
+                                [ngClass]="{'bg-low':rowData.total<100, 'bg-normal':rowData.total==100, 'bg-high':rowData.total>100}">
+                                {{ rowData.total | number: '1.0-0' }} %</div>
+                        </ng-container>
+                        <ng-template #NoDecimal>
+                            {{ rowData.total | number: '1.2-2' }}
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+                <ng-template #NoEditableTotal>
+                    <strong>{{ rowData.total | number: '1.2-2' }}</strong>
+                </ng-template>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="frozenbody" let-rowNode let-rowData="rowData" let-rowIndex="rowIndex">
+        <tr [ttRow]="rowNode" style="height: 50px"
+            [ngClass]="{'active-borders': rowNode.level === 0,'class-entidades': rowData.codItem === 'FCD009'}">
+            <td ttEditableColumn style="width: 25% !important; border-right: 1px dashed black;"
+                [ngClass]="{'disabled-number': rowData.montoActual === 0, 'active-solid-border': rowNode.level === 0, 'active-dashed-border': rowNode.level > 1}">
+                <div class="grid" style="margin-bottom: -15px !important;">
+                    <div class="col-2" style="text-align: left;">
+                        <div *ngIf="rowNode.level == 0">
+                            <div class="grid">
+                                <div class="col-2"><p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                </div>
+                                <div class="col-10 mt-1">
+                                    <div style="font-weight: bold !important;" (click)="mostrarMdl(rowData.codItem)">
+                                        {{ rowData.descripcion }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="rowNode.level == 1">
+                            <div class="grid">
+                                <div class="col-2"><p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                </div>
+                                <div class="col-10 mt-1">
+                                    <ng-container *ngIf="verificarNodosFlujoProyecto(rowData.codItem)">
+                                        <div class="grid">
+                                            <div class="col-10" style="text-align: center;font-size: 14px !important;">
+                                                <div style="font-weight: bold !important;"
+                                                    (click)="mostrarMdl(rowData.codItem)">
+                                                    {{ rowData.descripcion }}
+                                                </div>
+                                            </div>
+                                            <!--<div class="col-2" style="text-align: center;font-size: 14px !important;">
+                                                {{rowData.cantidadUP | number: '1.2-2'}}
+                                            </div>-->
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="!verificarNodosFlujoProyecto(rowData.codItem) ">
+                                        <!-- <div style="font-weight: bold !important;"
+                                            (click)="mostrarMdl(rowData.codItem)">
+                                            <ng-container *ngIf="!verificarCeldaEditableEntidadesBancarias(rowData)">
+                                                {{ rowData.descripcion }}
+                                            </ng-container>
+                                            <ng-container *ngIf="verificarCeldaEditableEntidadesBancarias(rowData)">
+                                                <input class="p-inputtext-sm" style="background-color: #ffff80;" maxlength="90"
+                                                            type="text" placeholder="Descripción" [(ngModel)]="rowData.descripcion"
+                                                            (change)="editarElemento(rowData)" (keydown.enter)="editarElemento(rowData)"/>
+                                            </ng-container>
+                                        </div> -->
+                                        <!--<div style="font-weight: bold !important;"
+                                            (click)="mostrarMdl(rowData.codItem)">
+                                            {{ rowData.descripcion }}
+                                            
+                                        </div>-->
+                                        <ng-container *ngIf="rowData.isEF == true; else NoEntidadFinanciera">
+                                            {{ rowData.descripcionTemp }}
+                                        </ng-container>
+                                        <ng-template #NoEntidadFinanciera>
+                                            {{ rowData.descripcion }}
+                                        </ng-template>
+                                        <i *ngIf="(rowData.codItem == 'FCD009' || rowData.codItem == 'FCD010') && isEditableFC"
+                                            class="pi pi-money-bill icon-money"
+                                            (click)="mostrarMdl(rowData.codItem)"></i>
+                                        <i *ngIf="rowData.isEF == true && isEditableFC" class="pi pi-pencil icon-pencil"
+                                            (click)="abrirMdlEstablecerValor(rowData)"></i>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="rowNode.level == 2">
+                            <ng-container *ngIf="verificarNodosFlujoProyecto(rowData.codItemPadre)">
+                                <ng-container *ngIf="!verificarCeldaItemSC(rowData.codItem)">
+                                    <ng-container *ngIf="(rowData.codItemPadre==='FCD002')">
+                                        <div class="grid">
+                                            <div class="col-1">
+                                                <i class="pi pi-tag" pTooltip="Datos Adicionales
+                                                        Cant. Unidad a Financiar: {{ mdl_cantidadUP }}
+                                                        Precio: {{ mdl_precio }}
+                                                        Rendimiento: {{ mdl_rendimiento }}" tooltipPosition="top"
+                                                    [escape]="false" (mouseenter)="verData(rowData)"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <ng-container *ngIf="isEditableFC; else NoEditableHojaProducto">
+                                                    <p-dropdown [options]="hojaProducto"
+                                                        [(ngModel)]="rowData.descripcion" optionLabel="producto"
+                                                        optionValue="codigoHP" [filter]="true" filterBy="producto"
+                                                        [showClear]="true" placeholder="Selecciona Producto"
+                                                        (ngModelChange)="editarElemento(rowData)">
+
+                                                        <ng-template let-item pTemplate="item">
+                                                            <div>{{item.producto}}</div>
+                                                        </ng-template>
+
+                                                    </p-dropdown>
+                                                </ng-container>
+                                                <ng-template #NoEditableHojaProducto>
+                                                    {{rowData.descripcionTemp}}
+                                                </ng-template>
+                                            </div>
+
+                                            <div class="col-2 pt-2">
+                                                <ng-container *ngIf="isEditableFC; else NoEditableCantHojaProducto">
+                                                    <p-inputNumber class="table-cell-editable"
+                                                        [(ngModel)]="rowData.cantidadUP" locale="en-US" mode="decimal"
+                                                        [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                                        (ngModelChange)="onModelChange()"
+                                                        placeholder="0.00"></p-inputNumber>
+                                                </ng-container>
+                                                <ng-template #NoEditableCantHojaProducto>
+                                                    {{rowData.cantidadUP}}
+                                                </ng-template>
+
+                                            </div>
+                                            <!--<div *ngIf="isEditableFC" class="col-2 pt-2"
+                                                style="text-align: center;font-size: 14px !important;">
+                                                {{rowData.cantidadUP}}
+                                            </div>-->
+                                        </div>
+                                    </ng-container>
+                                    <ng-container *ngIf="(rowData.codItemPadre==='FCD003')">
+                                        <div class="grid">
+                                            <div class="col-1">
+                                                <i class="pi pi-tag" pTooltip="Datos Adicionales
+                                                        Cant. Unidad a Financiar: {{ mdl_cantidadUP }}
+                                                        Precio: {{ mdl_precio }}
+                                                        Rendimiento: {{ mdl_rendimiento }}" tooltipPosition="top"
+                                                    [escape]="false" (mouseenter)="verData(rowData)"></i>
+                                            </div>
+                                            <div class="col-9" style="text-align: center;font-size: 14px !important;">
+                                                <ng-container *ngIf="isEditableFC; else NoEditableHojaProductoCopy">
+                                                    <p-dropdown class="none" [disabled]="true" [options]="hojaProducto"
+                                                        [(ngModel)]="rowData.descripcion" optionLabel="producto"
+                                                        optionValue="codigoHP" placeholder="Selecciona Producto"
+                                                        dropdownIcon="none">
+                                                    </p-dropdown>
+                                                </ng-container>
+                                                <ng-template #NoEditableHojaProductoCopy>
+                                                    {{rowData.descripcionTemp}}
+                                                </ng-template>
+                                            </div>
+                                            <!--<div *ngIf="isEditableFC" class="col-9"
+                                                style="text-align: center;font-size: 14px !important;">
+                                                {{rowData.descripcion}}
+                                            </div>-->
+                                            <div class="col-2" style="font-size: 14px !important;">
+                                                <ng-container *ngIf="isEditableFC; else NoEditableCantHojaProductoCopy">
+                                                    <p-inputNumber class="table-cell-editable"
+                                                        [(ngModel)]="rowData.cantidadUP" locale="en-US" mode="decimal"
+                                                        [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                                        [disabled]="true" placeholder="0.00"></p-inputNumber>
+                                                </ng-container>
+                                                <ng-template #NoEditableCantHojaProductoCopy>
+                                                    {{rowData.cantidadUP}}
+                                                </ng-template>
+                                            </div>
+                                            <!--<div *ngIf="isEditableFC" class="col-2" style="font-size: 14px !important;">
+                                                {{rowData.cantidadUP}}
+                                            </div>-->
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
+                                <ng-container *ngIf="verificarCeldaItemSC(rowData.codItem)">
+                                    <div class="grid">
+                                        <div class="col-1">
+                                            <i class="pi pi-tag" pTooltip="Datos HP
+                                                    Cant. Unidad a Financiar: {{ solicitud?.cantidadFinanciar }}
+                                                    Precio: {{ solicitud?.hpPrecio }}
+                                                    Rendimiento: {{ solicitud?.hpRendimiento }}" tooltipPosition="top"
+                                                [escape]="false" (mouseenter)="verData(rowData)"></i>
+                                        </div>
+                                        <div class="col-9" style="text-align: center;font-size: 14px !important;">
+                                            {{rowData.descripcion}}
+                                        </div>
+                                        <div class="col-2" style="text-align: center;font-size: 14px !important;">
+                                            {{rowData.cantidadUP | number: '1.2-2'}}
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="!verificarNodosFlujoProyecto(rowData.codItemPadre)">
+                                <ng-container *ngIf="isEditableFC; else NoEditableDescripcion">
+                                    <input class="p-inputtext-sm" style="background-color: #ffff80;" maxlength="90"
+                                        type="text" placeholder="Descripción" [(ngModel)]="rowData.descripcion"
+                                        (change)="editarElemento(rowData)" (keydown.enter)="editarElemento(rowData)" />
+                                </ng-container>
+                                <ng-template #NoEditableDescripcion>
+                                    {{rowData.descripcion}}
+                                </ng-template>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                    <div class="col-1">
+                        <ng-container *ngIf="isEditableFC">
+                            <ng-container *ngIf="verificarCeldaDinamica(rowData.codItem)">
+                                <ng-container class="col-4"
+                                    *ngIf="rowNode.level===1 && rowNode.node['children'].length < 5">
+                                    <i class="pi pi-plus icon-add" (click)="agregarFila(rowData)"></i>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="rowNode.level===2">
+                                <ng-container
+                                    *ngIf="!(rowData.codItemPadre==='FCD003'||rowData.codItemPadre==='FCD006')">
+                                    <ng-container class="col-4" *ngIf="!verificarCeldaItemSC(rowData.codItem)">
+                                        <i class="pi pi-times icon-remove" (click)="quitarFila(rowData)"></i>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container
+                                *ngIf="rowNode.level===2 && !verificarNodoMdlEstablecerPorPadre(rowData.codItemPadre)">
+                                <ng-container class="col-4">
+                                    <i class="pi pi-pencil icon-pencil" (click)="abrirMdlEstablecerValor(rowData)"></i>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="rowNode.level===1 && verificarNodoMdlEstablecer(rowData.codItem)">
+                                <ng-container class="col-4">
+                                    <i class="pi pi-pencil icon-pencil" (click)="abrirMdlEstablecerValor(rowData)"></i>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-treeTable>

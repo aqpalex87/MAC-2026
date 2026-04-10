@@ -1,0 +1,8 @@
+<label class="font-semibold">Alertas</label>
+<p-panel [showHeader]="false">
+    <div *ngFor="let i of alertas; let index = index">
+        <p class="font-red" *ngIf="i.estado==1 &&  i.regla ==='=' && condicionRSE ">{{i.nombreAlerta}}</p>
+        <p class="font-red" *ngIf="i.estado==1 &&  i.regla ==='>' && efectivoESFA > i.valorParametro">{{i.nombreAlerta }}</p>
+        <p class="font-red" *ngIf="i.estado==1 &&   i.regla ==='<' && efectivoESFA < i.valorParametro">{{i.nombreAlerta }}</p>
+    </div>
+</p-panel>

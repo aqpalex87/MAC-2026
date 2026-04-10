@@ -1,0 +1,83 @@
+.fsize {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+::ng-deep .customProgress .p-progressbar-label {
+  font-weight: bold;
+  font-size: 13px;
+  background: #00694f;
+  color: #ffd204;
+}
+
+::ng-deep .p-progressbar {
+  position: relative;
+  overflow: hidden;
+  height: 30px;
+}
+
+::ng-deep .customProgress .p-progressbar-value {
+  background: #00694f;
+  color: #ffd204;
+}
+
+:host ::ng-deep .p-tabview li .p-tabview-nav-link {
+  background: #00694f;
+  padding-left: 80px;
+  padding-right: 80px;
+  color: #ffd204;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 5px;
+}
+
+:host ::ng-deep .p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  background: #ffd204;
+  color: #00694f;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 5px;
+}
+
+:host ::ng-deep .p-tabview li.p-highlight .p-tabview-nav-link {
+  background: #ffd204;
+  padding-left: 80px;
+  padding-right: 80px;
+  color: #00694f;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.p-tabview:hover {
+  background: #00694f;
+  padding-left: 50px;
+  padding-right: 50px;
+  color: #ffd204;
+  text-align: center;
+}
+
+.btn-fc {
+  font-weight: 500;
+  font-size: 12px;
+  /* min-width: 150px;
+  min-height: 45px; */
+  width: 110px;
+  height: 50px;
+  margin-left: 20px;
+  text-align: center;
+  background-color: #00694f;
+  color: #ffd204;
+  display: inline-block;
+}
+
+.btn-fc:hover {
+  font-weight: 500;
+  font-size: 12px;
+  /* min-width: 150px;
+  min-height: 45px; */
+  margin-left: 20px;
+  text-align: center;
+  background-color: #ffd204;
+  color: #00694f;
+  display: inline-block;
+}

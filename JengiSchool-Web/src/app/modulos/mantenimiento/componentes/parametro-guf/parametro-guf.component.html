@@ -1,0 +1,72 @@
+<div [formGroup]="parametroVersion">
+    <div class="grid">
+        <div class="col-6 mt-4">
+            <h4>Parametria Gastos Unidad Familiar</h4>
+        </div>
+        <div *ngIf="activo" class="col-6" style="text-align: right;">
+            <button pButton type="button" style="text-align: center" class="btn-nuevo" (click)="addParametrosGUF()">
+                Nuevo
+            </button>
+        </div>
+    </div>
+    <ng-container formArrayName="parametrosGUF">
+        <p-table #tableGUF [value]="parametrosGUF.controls" styleClass="p-datatable-sm" dataKey="value.idParametroGUF"
+            [paginator]="false" editMode="row">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 10%;">ID</th>
+                    <th style="width: 45%;">Descripción Unidad Familiar</th>
+                    <th style="width: 10%;">Estado</th>
+                    <th style="width: 10%;">Activar</th>
+                    <th style="width: 20%;" *ngIf="activo">Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-controls let-editing="editing" let-i="rowIndex">
+                <tr [pEditableRow]="controls" [formGroupName]="i">
+                    <td>{{ controls.controls.idParametroGUF.value }}</td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="text" pInputText formControlName="nombreGUF" maxlength="35" />
+                                <span *ngIf="activo && controls.controls.nombreGUF.invalid" class="error-message">
+                                    Descripción Unidad Familiar es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.nombreGUF.value }}
+                                <span *ngIf="activo && controls.controls.nombreGUF.invalid" class="error-message">
+                                    Descripción Unidad Familiar es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        {{ controls.controls.estado.value ? "Activo" : "Inactivo" }}
+                    </td>
+                    <td><p-checkbox [disabled]="!activo" [binary]="true" formControlName="estado"></p-checkbox></td>
+                    <td *ngIf="activo">
+                        <button type="button" pInitEditableRow
+                            (click)="onRowEditInit(controls.controls.idParametroGUF.value)" [disabled]="editing"
+                            class="btn-table">
+                            <i class="pi pi-file-edit" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                        <button type="button" pSaveEditableRow (click)="guardarGUF(controls.valid)"
+                            *ngIf="controls.valid" [disabled]="!editing" class="btn-table">
+                            <i class="pi pi-save" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                        <button type="button" pCancelEditableRow
+                            (click)="cancelarEditar(controls.controls.idParametroGUF.value, i)" [disabled]="!editing"
+                            class="btn-table">
+                            <i class="pi pi-times" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td>Sin registros.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-container>
+</div>

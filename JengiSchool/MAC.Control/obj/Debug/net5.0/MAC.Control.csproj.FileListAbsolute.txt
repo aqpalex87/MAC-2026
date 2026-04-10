@@ -1,0 +1,12 @@
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\bin\Debug\net5.0\MAC.Control.deps.json
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\bin\Debug\net5.0\MAC.Control.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\bin\Debug\net5.0\MAC.Control.pdb
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\MAC.Control.GeneratedMSBuildEditorConfig.editorconfig
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\MAC.Control.AssemblyInfoInputs.cache
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\MAC.Control.AssemblyInfo.cs
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\MAC.Control.csproj.CoreCompileInputs.cache
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\MAC.Control.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\ref\MAC.Control.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\MAC.Control.pdb
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\bin\Debug\net5.0\ref\MAC.Control.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Control\obj\Debug\net5.0\MAC.Control.csprojAssemblyReference.cache

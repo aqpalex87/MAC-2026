@@ -1,0 +1,50 @@
+<label class="caja-titulo">Otros Cargos</label>
+<p-panel [showHeader]="false">
+    <table aria-describedby="otros-cargos">
+        <thead>
+            <tr>
+                <th class="text-center text-xs" style="width: 35%;"></th>
+                <th class="text-center text-xs active-border-right" style="width: 10%;" *ngIf="isEditableFC"></th>
+                <th class="text-center text-xs active-border-right" style="width: 25%;">Tasa</th>
+                <th class="text-center text-xs active-border-right" style="width: 25%;">Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let i of oc; let index = index">
+                <td>
+                    <p class="col font-semibold fsize">{{i.descripcion}}</p>
+                </td>
+                <td *ngIf="isEditableFC" class="text-center active-border-right">
+                    <p-checkbox name="group_oc" [(ngModel)]="selected" [value]="i.codItem"
+                        (ngModelChange)="calcularMonto(i)"></p-checkbox>
+                </td>
+                <td class="text-center active-border-right">
+                    <p class="font-size" *ngIf="i.codItem !== 'OTCAST'">{{i.tasa}} %</p>
+                </td>
+                <td class="text-right active-border-right">
+                    <ng-container *ngIf="selected.includes(i.codItem); else NoSeleccinado">
+                        <div *ngIf="i.codItem !== 'OTCAST'" class="text-right">
+                            <p-inputNumber class="table-cell-editable text-right" [(ngModel)]="i.monto" mode="decimal"
+                                locale="en-US" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                [disabled]="true" (ngModelChange)="onModelChange(i)"></p-inputNumber>
+                        </div>
+                        <div *ngIf="i.codItem === 'OTCAST'" class="text-right">
+                            <p-inputNumber class="table-cell-editable text-right" [(ngModel)]="i.monto" mode="decimal"
+                                locale="en-US" [min]="0" [minFractionDigits]="2" [maxFractionDigits]="2"
+                                (ngModelChange)="onModelChange(i)" placeholder="0.00"></p-inputNumber>
+                        </div>
+                    </ng-container>
+                    <ng-template #NoSeleccinado>
+                        {{i.monto|number: '.2'}}
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="grid mt-1 ml-1 mr-1">
+        <label class="col-6 caja-titulo-complemento">Monto Estimado a Financiar:</label>
+        <div class="col-6 p-0 text-right">
+            <span class="fsize">S/. {{ montoEstimadoFinanciar |number:'1.2-2'}}</span>
+        </div>
+    </div>
+</p-panel>

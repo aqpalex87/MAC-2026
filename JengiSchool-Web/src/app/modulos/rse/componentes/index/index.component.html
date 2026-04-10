@@ -1,0 +1,188 @@
+<div class="section no-padding">
+    <div class="row col s12 no-mar-bot">
+        <div class="section no-mar-bot">
+            <div class="col s12 m12 l12">
+                <h1 class="title">EVALUACIÓN DEL SOBREENDEUDAMIENTO</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form [formGroup]="form">
+    <p-card class="container">
+        <p-card>
+            <ng-template pTemplate="header">
+                <div class="pl-3 pt-3">
+                    <strong>Criterio 1</strong>
+                </div>
+            </ng-template>
+            <div class="grid m-0 p-0">
+                <div class="col">
+                    <div class="grid">
+                        <div class="col">Número de Entidades :</div>
+                        <div class="col">
+                            <input type="text" class="p-inputtext-sm" formControlName="nroEntidades" pInputText />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="grid">
+                        <div class="col">Resultado del Criterio :</div>
+                        <div class="col">
+                            <input type="text" class="p-inputtext-sm" formControlName="resultadoCriterio1" pInputText />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+
+        <p-card>
+            <ng-template pTemplate="header">
+                <div class="pl-3 pt-3">
+                    <strong>Criterio 2</strong>
+                </div>
+            </ng-template>
+            <div class="grid m-0 p-0">
+                <div class="col">
+                    <div class="grid">
+                        <div class="col">Ratio CP :</div>
+                        <div class="col">
+                            <input type="number" min="0" class="p-inputtext-sm" formControlName="ratioCP" pInputText />
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="grid">
+                        <div class="col">Resultado del Criterio :</div>
+                        <div class="col">
+                            <input type="text" class="p-inputtext-sm" formControlName="resultadoCriterio2" pInputText />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="field grid">
+                <label for="propuesta" class="col-fixed" style="width:500px">Total de las Cuotas de la Propuesta de
+                    Crédito en Agrobanco (TCA) :</label>
+                <div class="col">
+                    <input id="propuesta" type="number" min="0" formControlName="totalCuotasPropuesta"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                </div>
+            </div>
+            <div class="field grid">
+                <label for="directa" class="col-fixed" style="width:500px">Total de Cuotas de deudas directas en
+                    entidades
+                    financieras (TCSF) :</label>
+                <div class="col">
+                    <input id="directa" type="number" min="0" formControlName="totalCuotasDeudas"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                </div>
+            </div>
+            <div class="field grid">
+                <label for="potencial" class="col-fixed" style="width:500px">Total de deudas potenciales (TDP) :</label>
+                <div class="col">
+                    <input id="potencial" type="number" min="0" formControlName="totalDeudasPotenciales"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                </div>
+            </div>
+            <div class="field grid">
+                <label for="excedente" class="col-fixed" style="width:500px">Total de Excedentes antes de pago a IFIS
+                    (TEXD)
+                    :</label>
+                <div class="col">
+                    <input id="excedente" type="number" min="0" formControlName="totalExcedentes"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                </div>
+            </div>
+        </p-card>
+
+        <p-card>
+            <ng-template pTemplate="header">
+                <div class="pl-3 pt-3">
+                    <strong>Criterio 3</strong>
+                </div>
+            </ng-template>
+            <div class="grid">
+                <div class="col">
+                    <div class="field grid">
+                        <label for="tipo" class="col-fixed" style="width:500px">Tipo Cliente :</label>
+                        <div class="col">
+                            <input id="tipo" type="text" formControlName="tipoCliente"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                        </div>
+                    </div>
+                    <div class="field grid">
+                        <label for="comportamiento" class="col-fixed" style="width:500px">Comportamiento :</label>
+                        <p-dropdown class="col" [options]="listComportamiento" formControlName="comportamiento"
+                            [editable]="true"
+                            class="text-base text-color surface-overlay appearance-none outline-none focus:border-primary"></p-dropdown>
+                    </div>
+                    <div class="field grid">
+                        <label for="deuda" class="col-fixed" style="width:500px">Deuda Sistema Financiero :</label>
+                        <div class="col">
+                            <input id="deuda" type="text" formControlName="deudaSistemaFinanciero"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <h4>Comportamiento Tipo de Cliente</h4>
+                    <div class="grid">
+                        <div class="col">
+                            <h4>Nuevo</h4>
+                            {{ form.controls['parametroNuevo'].value }}
+                        </div>
+                        <div class="col">
+                            <h4>Recurrente</h4>
+                            {{ form.controls['parametroRecurrente'].value }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+
+        <p-card>
+            <ng-template pTemplate="header">
+                <div class="pl-3 pt-3">
+                    <strong>RESULTADO RSE</strong>
+                </div>
+            </ng-template>
+            <div class="container">
+                <div class="field grid">
+                    <label for="resultado" class="col-fixed" style="width:250px">
+                        <strong>RESULTADO :</strong>
+                    </label>
+                    <div class="col">
+                        <input id="resultado" type="text" formControlName="resultadoRse"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                    </div>
+                </div>
+                <div class="field grid">
+                    <label for="condicion" class="col-fixed" style="width:250px">
+                        <strong>CONDICIÓN :</strong>
+                    </label>
+                    <div class="col">
+                        <input id="condicion" type="text" formControlName="condicion"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary">
+                    </div>
+                </div>
+            </div>
+        </p-card>
+
+        <p-card>
+            <ng-template pTemplate="header">
+                <div class="pl-3 pt-3">
+                    <strong>Comentario</strong>
+                </div>
+            </ng-template>
+            <textarea rows="5" cols="30" minlength="2" maxlength="255" pInputTextarea style="width: 70%;"
+                formControlName="comentario">
+
+        </textarea>
+        </p-card>
+    </p-card>
+</form>
+
+<button pButton type="button" style="text-align: center" (click)="validarForm()">
+    Finalizar
+</button>

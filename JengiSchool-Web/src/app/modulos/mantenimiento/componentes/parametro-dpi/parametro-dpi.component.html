@@ -1,0 +1,223 @@
+<div class="mt-4">
+    <h4>Parametria Deuda Potencial Indirecta</h4>
+</div>
+<div [formGroup]="parametroVersion">
+    <ng-container formArrayName="parametrosDPI">
+        <p-table #tableDPI [value]="parametrosDPI.controls" styleClass="p-datatable-sm" dataKey="value.idParametroDPI"
+            [paginator]="false" editMode="row" border="1">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width : 20% ;" rowspan="2">Tipo Aval</th>
+                    <th colspan="5" style="text-align: center;">Factor de Conversión por Calificación</th>
+                    <th style="width : 5% ;" rowspan="2">% TEA</th>
+                    <th style="width : 5% ;" rowspan="2">% TEM</th>
+                    <th style="width : 5% ;" rowspan="2">Plazo</th>
+                    <th style="width : 20% ;" rowspan="2">Comentario</th>
+                    <th style="width : 20% ;" rowspan="2" *ngIf="activo">Acciones</th>
+                </tr>
+                <tr>
+                    <th style="width : 5% ;">% Normal</th>
+                    <th style="width : 5% ;">% CPP</th>
+                    <th style="width : 5% ;">% Deficiente</th>
+                    <th style="width : 5% ;">% Dudoso</th>
+                    <th style="width : 5% ;">% Perdida</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-controls let-editing="editing" let-i="rowIndex">
+                <tr [pEditableRow]="controls" [formGroupName]="i">
+                    <td>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input type="text" pInputText formControlName="tipoAval" style="width: 100%">
+                                <span *ngIf="activo && controls.controls.tipoAval.invalid" class="error-message">
+                                    Tipo aval es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.tipoAval.value }}
+                                <span *ngIf="activo && controls.controls.tipoAval.invalid" class="error-message">
+                                    Tipo aval es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber mode="decimal" locale="en-US" [useGrouping]="false" [min]="1"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [maxlength]="18"
+                                    formControlName="factorCalificacionNormal"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.factorCalificacionNormal.invalid"
+                                    class="error-message">
+                                    % Normal debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.factorCalificacionNormal.value | number: '1.2-2' }}
+                                <span *ngIf="activo && controls.controls.factorCalificacionNormal.invalid"
+                                    class="error-message">
+                                    % Normal debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber mode="decimal" locale="en-US" [useGrouping]="false" [min]="1"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [maxlength]="18"
+                                    formControlName="factorCalificacionCPP"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.factorCalificacionCPP.invalid"
+                                    class="error-message">
+                                    % CPP debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.factorCalificacionCPP.value | number: '1.2-2' }}
+                                <span *ngIf="activo && controls.controls.factorCalificacionCPP.invalid"
+                                    class="error-message">
+                                    % CPP debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber mode="decimal" locale="en-US" [useGrouping]="false" [min]="1"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [maxlength]="18"
+                                    formControlName="factorCalificacionDeficiente"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.factorCalificacionDeficiente.invalid"
+                                    class="error-message">
+                                    % Deficiente debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.factorCalificacionDeficiente.value | number: '1.2-2' }}
+                                <span *ngIf="activo && controls.controls.factorCalificacionDeficiente.invalid"
+                                    class="error-message">
+                                    % Deficiente debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber mode="decimal" locale="en-US" [useGrouping]="false" [min]="1"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [maxlength]="18"
+                                    formControlName="factorCalificacionDudoso"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.factorCalificacionDudoso.invalid"
+                                    class="error-message">
+                                    % Dudoso debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.factorCalificacionDudoso.value | number: '1.2-2' }}
+                                <span *ngIf="activo && controls.controls.factorCalificacionDudoso.invalid"
+                                    class="error-message">
+                                    % Dudoso debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber mode="decimal" locale="en-US" [useGrouping]="false" [min]="1"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2" [maxlength]="18"
+                                    formControlName="factorCalificacionPerdida"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.factorCalificacionPerdida.invalid"
+                                    class="error-message">
+                                    % Perdida debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.factorCalificacionPerdida.value | number: '1.2-2' }}
+                                <span *ngIf="activo && controls.controls.factorCalificacionPerdida.invalid"
+                                    class="error-message">
+                                    % Perdida debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber formControlName="tea" (onInput)="calcularTEM_DPI($event.value, i)"
+                                    mode="decimal" locale="en-US" [useGrouping]="false" [min]="1"
+                                    [minFractionDigits]="2" [maxFractionDigits]="2"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.tea.invalid" class="error-message">
+                                    TEA debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.tea.value }}
+                                <span *ngIf="activo && controls.controls.tea.invalid" class="error-message">
+                                    TEA debe ser mayor a 0
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td>
+                        {{ controls.controls.tem.value | number: '1.2-2' }}
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <p-inputNumber formControlName="plazo" mode="decimal" locale="en-US"
+                                    [useGrouping]="false" [min]="1" [minFractionDigits]="0" [maxFractionDigits]="0"
+                                    [maxlength]="5"></p-inputNumber>
+                                <span *ngIf="activo && controls.controls.plazo.invalid" class="error-message">
+                                    Plazo es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.plazo.value }}
+                                <span *ngIf="activo && controls.controls.plazo.invalid" class="error-message">
+                                    Plazo es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td style="background-color:#ffff80;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText style="width: 100%" maxlength="50" formControlName="comentario" />
+                                <span *ngIf="activo && controls.controls.comentario.invalid" class="error-message">
+                                    Comentario es requerido
+                                </span>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{ controls.controls.comentario.value }}
+                                <span *ngIf="activo && controls.controls.comentario.invalid" class="error-message">
+                                    Comentario es requerido
+                                </span>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td *ngIf="activo">
+                        <button type="button" pInitEditableRow
+                            (click)="onRowEditInit(controls.controls.idParametroDPI.value)" [disabled]="editing"
+                            class="btn-table">
+                            <i class="pi pi-file-edit" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                        <button type="button" pSaveEditableRow (click)="guardarDPI(controls.valid)"
+                            *ngIf="controls.valid" [disabled]="!editing" class="btn-table">
+                            <i class="pi pi-save" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                        <button type="button" (click)="cancelarEditar(controls.controls.idParametroDPI.value, i)"
+                            pCancelEditableRow [disabled]="!editing" class="btn-table">
+                            <i class="pi pi-times" style="font-size: 1.5rem; cursor: pointer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td>Sin registros.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-container>
+</div>

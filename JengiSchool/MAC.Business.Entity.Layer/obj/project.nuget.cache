@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "POqdqCptnupAM745kHYAxn1HRD4phIpIc3N1agwHo5lkZOqZIbtId+u6w8XEfVbNg/pIF/icgjLVN35Xe818WQ==",
+  "success": true,
+  "projectFilePath": "C:\\Alex\\Alex\\Colegio\\JengiSchool\\MAC.Business.Entity.Layer\\MAC.Business.Entity.Layer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alex\\.nuget\\packages\\sonaranalyzer.csharp\\9.4.0.72892\\sonaranalyzer.csharp.9.4.0.72892.nupkg.sha512"
+  ],
+  "logs": []
+}

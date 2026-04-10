@@ -1,0 +1,107 @@
+<div class="section no-padding">
+  <div class="row col s12 no-mar-bot">
+    <div class="section no-mar-bot">
+      <div class="col s12 m12 l12">
+        <h1 class="title">Mantenimiento de Parametros</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<form [formGroup]="parametroVersion">
+  <div class="grid">
+    <div class="col-6">
+      <p-panel header="Datos Generales PFC">
+        <div class="grid">
+          <label class="col-4 p-0">
+            <p>Versión PFC :</p>
+          </label>
+          <div class="col-8 p-0">
+            <p class="fsize">{{ parametroVersion.get('codigoVersion').value }}</p>
+          </div>
+          <label class="col-4 p-0 mt-3">
+            <p>Descripción :</p>
+          </label>
+          <div class="col-8 p-0">
+              <input type="text" class="p-inputtext-sm" pInputText style="width: 100%;" class="p-inputtext-sm"
+                formControlName="descripcionVersion">
+              <span *ngIf="activo && parametroVersion.controls['descripcionVersion'].invalid" class="error-message">
+                Descripción es requerida
+              </span>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+    <div class="col-4">
+      <div class="flex md:align-items-center flex-wrap">
+        <button *ngIf="activo" pButton type="button" style="text-align: center" class="btn-parametro"
+          (click)="guardarForm()">
+          Grabar
+        </button>
+        <button pButton type="button" style="text-align: center" class="btn-parametro"
+          [routerLink]="['/mantenimiento-parametros']">
+          {{ activo ? 'Cancelar':'Regresar' }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <p-tabView styleClass="tabview-custom">
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>Gastos Unidad Familiar</span>
+      </ng-template>
+      <app-parametro-guf [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-guf>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>Deuda Potencial Directa</span>
+      </ng-template>
+      <app-parametro-dpd [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-dpd>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>Deuda Potencial Indirecta</span>
+      </ng-template>
+      <app-parametro-dpi [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-dpi>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>Ratios</span>
+      </ng-template>
+      <app-parametro-ratio [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-ratio>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>Tipo Cliente</span>
+      </ng-template>
+      <app-parametro-tipo-cliente [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-tipo-cliente>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>RSE Condiciones</span>
+      </ng-template>
+      <app-parametro-rse [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-rse>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>Comportamiento</span>
+      </ng-template>
+      <app-parametro-comportamiento [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-comportamiento>
+    </p-tabPanel>
+    <p-tabPanel>
+      <ng-template pTemplate="header">
+        <span>Alertas</span>
+      </ng-template>
+      <app-parametro-alerta [activo]="activo" [parametroVersion]="parametroVersion"
+        [parametro_BK]="parametro_BK"></app-parametro-alerta>
+    </p-tabPanel>
+  </p-tabView>
+</form>

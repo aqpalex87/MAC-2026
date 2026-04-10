@@ -1,0 +1,26 @@
+
+<div styleClass="mb-4">
+  <h1>{{data}}</h1>
+
+    <div style="display: flex; flex-direction: column;">
+        <div >
+          <input type="text" [(ngModel)]="comment" placeholder="Escribe tu comentario" maxlength="200">
+          <span class="text-red-600" *ngIf="mostrarMensajeError">El comentario es requerido</span>
+        </div>
+        <div >
+          <p-fileUpload mode="basic" 
+          chooseLabel="Subir Archivo" 
+          name="demo[]"
+          accept=".xlsx, .xls" 
+          (onSelect)="onSelect($event)"
+          invalidFileTypeMessageSummary= "Tipo de archivo inválido"
+          invalidFileTypeMessageDetail="Sólo se permite archivos .xlsx y .xls"
+          >
+          </p-fileUpload>
+          <span class="text-red-600" *ngIf="mostrarMensajeErrorArchivo">El archivo es requerido</span>
+        </div>
+    </div>
+      <div class="mt-4">
+        <button pButton type="button" style="text-align: center" (click)="save()" class="btn-file">Aceptar</button>
+      </div>       
+  </div>

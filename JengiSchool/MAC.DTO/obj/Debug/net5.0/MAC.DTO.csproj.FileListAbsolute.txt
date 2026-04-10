@@ -1,0 +1,12 @@
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\bin\Debug\net5.0\MAC.DTO.deps.json
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\bin\Debug\net5.0\MAC.DTO.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\bin\Debug\net5.0\MAC.DTO.pdb
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\MAC.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\MAC.DTO.AssemblyInfoInputs.cache
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\MAC.DTO.AssemblyInfo.cs
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\MAC.DTO.csproj.CoreCompileInputs.cache
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\MAC.DTO.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\ref\MAC.DTO.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\MAC.DTO.pdb
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\bin\Debug\net5.0\ref\MAC.DTO.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.DTO\obj\Debug\net5.0\MAC.DTO.csprojAssemblyReference.cache

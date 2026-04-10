@@ -1,0 +1,19 @@
+<label class="caja-titulo">Datos a Financiar</label>
+<p-panel [showHeader]="false">
+    <div class="grid mt-1">
+        <label class="col-6 label-columns-rows">
+            CANTIDAD DE UNIDADES A FINANCIAR:
+        </label>
+        <div class="col-6 p-0 text-center cell-border">
+            <span class="fsize">{{solicitud?.cantidadFinanciar}}</span>
+        </div>
+        <label class="col-6 label-columns">PLAZO:</label>
+        <div class="col-6 p-0 text-center cell-border">
+            <span class="fsize">{{solicitud?.plazo}}</span>
+        </div>
+        <label class="col-6 label-columns">MONTO SOLICITADO:</label>
+        <div class="col-6 p-0 text-right cell-border">
+            <span class="fsize">S/. {{solicitud?.montoSolicitado | number: '.2'}}</span>
+        </div>
+    </div>
+</p-panel>

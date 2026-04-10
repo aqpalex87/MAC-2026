@@ -1,0 +1,119 @@
+<div class="section no-padding">
+  <div class="row col s12 no-mar-bot">
+    <div class="section no-mar-bot">
+      <div class="col s12 m12 l12">
+        <h3 class="title">Registro - Flujo de Caja</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="grid">
+  <div class="col-3">
+    <app-datos-cliente></app-datos-cliente>
+  </div>
+  <div class="col-3">
+    <app-solicitud-credito></app-solicitud-credito>
+  </div>
+  <div class="col-6">
+    <div class="flex md:align-items-center flex-wrap">
+
+      <!-- CUANDO ES EDITAR Y ESTA PENDIENTE -->
+      <ng-container *ngIf="(modo == ModoFC.EDITAR) && (fc?.codEstado == EstadoFC.PENDIENTE) ">
+        <button pButton type="button" class="btn-fc" (click)="guardarAvance()"> Guardar Avance </button>
+        <button pButton type="button" class="btn-fc" (click)="continuarMasTarde()"> Continuar más tarde </button>
+        <button pButton type="button" class="btn-fc" (click)="finalizar()"
+          [disabled]=" (porcentajeProgreso<100) ? true : false" *ngIf="solicitud?.codDestino === destinoCredito.SOSTENIMIENTO"> Finalizar</button>
+          <button pButton type="button" class="btn-fc" (click)="finalizarHojaTrabajo()"
+           *ngIf="solicitud?.codDestino != destinoCredito.SOSTENIMIENTO"> Finalizar</button>
+      </ng-container>
+      <!-- CUANDO ES EDITAR Y ESTA OBSERVADO -->
+      <ng-container *ngIf="(modo == ModoFC.EDITAR) && (fc?.codEstado == EstadoFC.OBSERVADO) ">
+        <button pButton type="button" class="btn-fc" (click)="guardarAvance()"
+          [disabled]=" (porcentajeProgreso<100) ? true : false" *ngIf="solicitud?.codDestino === destinoCredito.SOSTENIMIENTO"> Finalizar</button>
+          <button pButton type="button" class="btn-fc" (click)="guardarAvanceHojaTrabajo()"
+          *ngIf="solicitud?.codDestino != destinoCredito.SOSTENIMIENTO"> Finalizar</button>
+      </ng-container>
+      <!-- CUANDO ES NUEVO -->
+      <ng-container *ngIf="(modo == ModoFC.NUEVO)">
+        <button pButton type="button" class="btn-fc" (click)="guardarAvance()"> Guardar Avance </button>
+        <!-- <button pButton type="button" class="btn-fc" (click)="finalizar()" [disabled]=" (porcentajeProgreso<100) ? true : false"> Finalizar </button> -->
+      </ng-container>
+
+      <div *ngIf="FlujoCajaView">
+        <!-- SOSTENIMIENTO -->
+        <div *ngIf="solicitud.codDestino == '0001'"> 
+          <button pButton type="button" class="btn-fc" (click)="cerrarSinGuardar()"> Cerrar sin guardar </button>
+          <button pButton type="button" class="btn-fc" (click)="ExportarExcel()" *ngIf="btnExportar"> Exportar Excel </button>
+        </div>
+        <!-- INVERSION -->
+        <div *ngIf="solicitud.codDestino != '0001'"> 
+          <button pButton type="button" class="btn-fc" (click)="descargarArchivo(fc.hojaTrabajo[0].idLaserfiche)" *ngIf="btnExportar"> Exportar Excel </button>
+          <button pButton type="button" class="btn-fc" (click)="cerrarSinGuardar()"> Cerrar sin guardar </button>
+        </div>
+
+      </div>
+
+      <div *ngIf="ConsultarFCView">
+        <!-- SOSTENIMIENTO -->
+        <div *ngIf="solicitud.codDestino == '0001'">
+          <button pButton type="button" class="btn-fc" (click)="ExportarExcel()" *ngIf="btnExportar"> Exportar Excel </button>
+          <button pButton type="button" class="btn-fc" (click)="cerrarSinGuardar()"> Cerrar</button>
+        </div>
+        <!-- INVERSION -->
+        <div *ngIf="solicitud.codDestino != '0001'">
+          <button pButton type="button" class="btn-fc" (click)="descargarArchivo(fc.hojaTrabajo[0].idLaserfiche)" *ngIf="btnExportar"> Exportar Excel </button>
+          <button pButton type="button" class="btn-fc" (click)="cerrarSinGuardar()"> Cerrar</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="solicitud?.codDestino === destinoCredito.SOSTENIMIENTO">
+  <div class="grid">
+    <div class="col-6">
+      <app-ratios></app-ratios>
+    </div>
+  </div>
+  <br>
+  <br>
+  <p-progressBar value="{{porcentajeProgreso}}" class="customProgress"></p-progressBar>
+  <br>
+  <br>
+  <p-tabView>
+    <p-tabPanel header="GUF">
+      <app-guf></app-guf>
+    </p-tabPanel>
+    <p-tabPanel header="ESFA">
+      <app-esfa></app-esfa>
+    </p-tabPanel>
+    <p-tabPanel header="ERA">
+      <app-era></app-era>
+    </p-tabPanel>
+    <p-tabPanel header="FLUJO CAJA">
+      <app-flujo-caja-det></app-flujo-caja-det>
+    </p-tabPanel>
+    <p-tabPanel header="RSE">
+      <app-rse></app-rse>
+    </p-tabPanel>
+    <p-tabPanel header="HOJA DE TRABAJO">
+      <app-hoja-trabajo [commonData]="commonData"></app-hoja-trabajo>
+    </p-tabPanel>
+  </p-tabView>
+
+</ng-container>
+
+<p-toast position="top-center"></p-toast>
+
+<ng-container *ngIf="solicitud?.codDestino != destinoCredito.SOSTENIMIENTO">
+  <div>
+    <app-hoja-trabajo [commonData]="commonData"></app-hoja-trabajo>
+    <div class="row">
+      <div class="col s12 m12 l9">
+        <label class="font-bold block mb-1 mt-5" for="comentario"> Comentario </label>
+        <textarea style="width: 100%; height: 10rem;" [(ngModel)]="fc.comentarioDestinoInversion" rows="5" cols="30"
+          minlength="2" maxlength="255" pInputTextarea></textarea>
+      </div>
+    </div>
+  </div>
+</ng-container>

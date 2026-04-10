@@ -1,0 +1,24 @@
+<p-panel header="Datos de la Solicitud de Crédito">
+  <div class="grid">
+    <label class="col-6 p-0 font-semibold">Nombre del Producto:</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.producto | titlecase}}</span>
+    </div>
+    <label class="col-6 p-0 font-semibold">Nro. Solicitud Crédito</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.numeroSolicitud}}</span>
+    </div>
+    <label class="col-6 p-0 font-semibold">Agencia:</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.agencia | titlecase}}</span>
+    </div>
+    <label class="col-6 p-0 font-semibold">Oficial Negocio:</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.funcionario | titlecase}}</span>
+    </div>
+    <label class="col-6 p-0 font-semibold">Destino del Crédito:</label>
+    <div class="col-6 p-0">
+      <span class="fsize">{{solicitud?.destino | titlecase}}</span>
+    </div>
+  </div>
+</p-panel>

@@ -1,0 +1,127 @@
+.fsize {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+input[type=text] {
+    text-align: right
+}
+
+.table-cell-editable {
+    background-color: #ffff80;
+    text-align: right !important;
+}
+
+.max-w-input-number {
+    max-width: 100px;
+}
+
+/* :host ::ng-deep .p-treetable.p-treetable-sm .p-treetable-tbody>tr>td {
+    padding: 5px 0px 0px 10px;
+} */
+
+:host ::ng-deep .p-dropdown {
+    width: 100% !important;
+    margin-top: -5px;
+    padding: 0px !important;
+    width: 24px;
+    height: 35px;
+    background-color: #ffff80;
+    border: 1px solid #00694f;
+    color: #00694f;
+}
+
+:host ::ng-deep input {
+    height: 20px !important;
+}
+
+.icon-add {
+    margin-right: 12px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #00694f;
+    font-weight: bold;
+    border: 2px solid #00694f;
+    border-radius: 4px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.icon-remove {
+    margin-right: 12px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #a11d1d;
+    font-weight: bold;
+    border: 2px solid #00694f;
+    border-radius: 4px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.icon-pencil {
+    margin-right: 6px;
+    margin-left: 3px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #868608;
+    font-weight: bold;
+    border: 2px solid #00694f;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+/*==============================================*/
+.ng-star-inserted tr{
+  border: none;
+}
+
+.ng-star-inserted th{
+  border: none;
+}
+
+:host ::ng-deep .ng-star-inserted .p-treetable-tbody tr > td{
+  border-bottom: none;
+}
+
+:host ::ng-deep .ng-star-inserted .p-treetable-tbody tr > td p{
+  margin: 5px 0px 0px 0px!important;
+}
+
+:host ::ng-deep .active-borders{
+  border: 1px solid #000!important;
+  font-weight: bold!important;
+  padding-bottom: none;
+}
+
+:host ::ng-deep .active-solid-border{
+  border-right: 1px solid #000!important;
+}
+:host ::ng-deep .active-dashed-border{
+  border-right: 1px dashed #000!important;
+}
+
+.first-column{
+  width: 450px;
+}
+
+:host ::ng-deep .disabled-number{
+  color: rgb(200, 200, 200)!important;
+}
+
+.cell-monto {
+  width: 120px;
+}
+
+:host ::ng-deep .p-panel-content{
+  width: auto!important;
+}
+
+:host ::ng-deep .p-treetable table {
+  width: auto!important;;
+}
+
+td{
+  padding: 0px!important;
+}

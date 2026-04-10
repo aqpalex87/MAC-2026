@@ -1,0 +1,52 @@
+<div class="p-4">
+  <div class="title-web mb-4">Parámetro de búsqueda</div>
+  <p-card styleClass="mb-4 w-content">
+    <p-messages [(value)]="mensajes"></p-messages>
+
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-1 flex align-items-center">
+        <label for="idFlujoCaja" class="font-semibold">Año:</label>
+      </div>
+      <div class="field col-12 md:col-11 flex align-items-center">
+          <p-dropdown [options]="anios"
+                      [(ngModel)]="selectedAnio"
+                      optionLabel="code"
+                      name="code"
+                      (onChange)="selectedYear($event)"
+                      >
+          </p-dropdown>
+      </div>
+
+      <div class="field col-12 md:col-1 flex align-items-center">
+        <label for="idFlujoCaja" class="font-semibold">Inicio:</label>
+      </div>
+      <div class="field col-12 md:col-11 flex align-items-center">
+        <p-calendar dateFormat="dd/mm/yy"
+                    [minDate]="minFechaInicio"
+                    [maxDate]="maxFechaInicio"
+                    [readonlyInput]="true"
+                    [(ngModel)]="filtro.fechaInicio"
+                    (onSelect)="inicioSelectedDate($event)">
+      </p-calendar>
+        <i class="pi pi-calendar text-green-500 icon-calendar ml-2"></i>
+      </div>
+      <div class="field col-12 md:col-1 flex align-items-center">
+        <label for="numeroDocumento" class="font-semibold">Fin:</label>
+      </div>
+      <div class="field col-12 md:col-11 flex align-items-center">
+        <p-calendar dateFormat="dd/mm/yy"
+                    [minDate]="minFechaFin"
+                    [maxDate]="maxFechaFin"
+                    [readonlyInput]="true"
+                    [(ngModel)]="filtro.fechaFin"
+                    (onSelect)="finSelectedDate($event)">
+      </p-calendar>
+      <i class="pi pi-calendar text-green-500 icon-calendar ml-2"></i>
+      </div>
+      <div class="field col-12 md:col-11 flex align-items-center">
+        <button pButton (click)="exportar()" class="mr-4">Buscar y Exportar</button>
+        <button pButton (click)="limpiar()">Limpiar</button>
+      </div>
+    </div>
+  </p-card>
+</div>

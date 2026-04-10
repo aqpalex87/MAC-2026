@@ -1,0 +1,46 @@
+
+<h2>FLUJO DE CAJA - Parametros ACTIVO</h2>
+ <ul *ngFor="let item of miObjeto">
+  <li>
+    <strong>Código de Versión:</strong> {{ item.codigoVersion }}<br>
+    <strong>Descripción de Versión:</strong> {{ item.descripcionVersion }}<br>
+    <strong>Fecha de Última Activación:</strong> {{ item.fechaUltimaActivacion }}<br>
+    
+    <h3>Deuda Potencial Direta </h3>
+    <ul>
+      <li *ngFor="let parametroDPD of item.parametrosDPD">
+        <strong>Código de Versión:</strong> {{ parametroDPD.codigoVersion }}<br>     
+        <strong>Tipo de Tarjeta:</strong> {{ parametroDPD.tipoTarjeta }}<br>
+        <strong>Factor de Conversión:</strong> {{ parametroDPD.factorConversion }}<br>
+        <strong>Tasa Efectiva Mensual:</strong> {{ parametroDPD.tEM }}<br>
+        <strong>Número de plazo   :</strong> {{ parametroDPD.plazo }}<br>
+        <button class="modern-button blue"  (click)="editarDeudaDirecta(parametroDPD)">[+]</button>   
+      </li>
+    </ul>
+    <h3>Deuda Potencial Indirecta </h3>
+    <ul>
+      <li *ngFor="let parametroDPI of item.parametrosDPI">
+        <strong>Código de Versión:</strong> {{ parametroDPI.codigoVersion }}<br>      
+        <strong>Tipo de Aval:</strong> {{ parametroDPI.tipoAval }}<br>             
+        <strong>Tasa Efectiva Mensual:</strong> {{ parametroDPI.tEM }}<br>        
+        <strong>Tasa Efectiva A:</strong> {{ parametroDPI.tEA }}<br>  
+        <strong>Número de plazo :</strong> {{ parametroDPI.plazo }}<br>
+        <button class="modern-button blue" (click)="editarDeudaIndirecta(parametroDPI)">[+]</button>   
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="row">
+  <h2>Valor Calculado</h2>
+  <mat-form-field>
+    <mat-label>Cuota Potencial Directa:</mat-label>
+    <input matInput [value]="valorDPD" [ngStyle]="{ 'border-color': borderColor }" type="number" disabled/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cuota Potencial Indirecta:</mat-label>
+    <input matInput [value]="valorDPI" [ngStyle]="{ 'border-color': borderColor }" type="number" disabled/>
+  </mat-form-field>
+ 
+</div>
+ 

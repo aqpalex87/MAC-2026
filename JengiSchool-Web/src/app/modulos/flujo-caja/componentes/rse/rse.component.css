@@ -1,0 +1,32 @@
+.fsize {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.font-red {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.comportamiento-read-only {
+  background-color: yellow !important;
+}
+
+:host ::ng-deep .comportamiento .p-dropdown>span {
+  background-color: yellow !important;
+}
+
+:host ::ng-deep .comportamiento .p-dropdown-trigger {
+  background-color: yellow !important;
+}
+
+.c1_ok {
+  color: #00694f !important;
+  font-weight: bold !important;
+}
+
+.c1_no {
+  color: rgb(145, 16, 16) !important;
+  font-weight: bold !important;
+}

@@ -1,0 +1,111 @@
+<form [formGroup]="main">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th rowspan="2" style="min-width: 450px; background-color: white; color: black;">ESTADO</th>
+                <th colspan="1" style="background-color: white; text-align: right; color: black;">Maíz</th>
+                <th colspan="1" style="background-color: white; text-align: right; color: black;">Papa</th>
+                <th colspan="2" style="background-color: white; text-align: right; color: black;"></th>
+            </tr>
+            <tr>
+                <th colspan="1" style="background-color: white; text-align: right; color: black;">Ene - 23</th>
+                <th colspan="1" style="background-color: white; text-align: right; color: black;">Dic - 22</th>
+                <th colspan="1" style="background-color: white; text-align: right; color: black;">A. Vertical</th>
+                <th colspan="1" style="background-color: white; text-align: right; color: black;">A. Horizontal</th>
+            </tr>
+        </thead>
+        <tbody formArrayName="roots">
+            <ng-container [formGroupName]="i" *ngFor="let root of getroots(main); let i = index">
+                <tr>
+                    <td>
+                        <strong>{{root.value.estado}}</strong>
+                    </td>
+                    <td style="text-align: right;">
+                        {{ CalculoSegundaColumna(root.value, main.value) | number: '1.2-2' }}
+                    </td>
+                    <td style="text-align: right;">
+                        {{ CalculoTerceraColumna(root.value, main.value) | number: '1.2-2' }}
+                    </td>
+                    <td style="text-align: right;">
+                        {{ CalculoCuartaColumna(root.value, main.value) | number: '1.1-1' }} %
+                    </td>
+                    <td style="text-align: right;">
+                        {{ CalculoQuintaColumna(root.value, main.value) | number: '1.1-1' }} %
+                    </td>
+                </tr>
+                <ng-container formArrayName="trunks">
+                    <ng-container [formGroupName]="j" *ngFor="let trunk of gettrunks(root); let j = index">
+                        <tr>
+                            <td>
+                                <div class="grid">
+                                    <div class="col"></div>
+                                    <div class="col">
+                                        <div class="grid">
+                                            <div class="col">
+                                                <p style="font-weight: bold; font-style: italic;">
+                                                    {{trunk.value.estado}}</p>
+                                            </div>
+                                            <div class="col">
+                                                <i class="pi pi-plus"
+                                                    style="color: black; border: 1px solid black;padding: 2px; cursor: pointer;"
+                                                    (click)="add(i,j)" *ngIf="getbranchs(trunk).length < 5"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col"></div>
+                                </div>
+                            </td>
+                            <td style="text-align: right;">
+                                {{ trunk.value.fc_actual | number: '1.2-2' }}
+                            </td>
+                            <td style="text-align: right;">
+                                {{ trunk.value.fc_anterior | number: '1.2-2' }}
+                            </td>
+                            <td style="text-align: right;">
+                                {{ trunk.value.vertical | number: '1.1-1' }} %
+                            </td>
+                            <td style="text-align: right;">
+                                {{ trunk.value.horizontal | number: '1.1-1' }} %
+                            </td>
+                        </tr>
+                        <ng-container formArrayName="branchs">
+                            <ng-container [formGroupName]="k" *ngFor="let option of getbranchs(trunk); let k=index">
+                                <tr>
+                                    <td style="min-width: 600px;">
+                                        <div class="grid">
+                                            <div class="col"></div>
+                                            <div class="col">
+                                                <div class="grid">
+                                                    <div class="formgroup-inline">
+                                                        <div class="col">
+                                                            <input pInputText class="p-inputtext-sm"
+                                                                class="p-inputtext-sm" type="text"
+                                                                formControlName="estado">
+                                                        </div>
+                                                        <div class="col">
+                                                            <i class="pi pi-times"
+                                                                style="color: black; border: 1px solid black;padding: 2px; cursor: pointer;"
+                                                                (click)="removeOption(i,j,k)"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align: right;"><input pInputText class="p-inputtext-sm" type="text"
+                                            formControlName="fc_actual"></td>
+                                    <td style="text-align: right;"><input pInputText class="p-inputtext-sm" type="text"
+                                            formControlName="fc_anterior"></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</form>
+
+<button type="button" (click)="verData()"> VER DATA</button>
