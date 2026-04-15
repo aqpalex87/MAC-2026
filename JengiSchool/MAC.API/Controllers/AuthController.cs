@@ -36,7 +36,33 @@ namespace MAC.API.Controllers
         [HttpGet("menus")]
         public IActionResult Menus()
         {
-            var result = _authService.ObtenerMenusPorUsuario(UserJwt.CodUsuario);
+            var result = _authService.ObtenerMenusPorUsuario(UserJwt.CodUsuario, UserJwt.IdEmpresa, UserJwt.IdSede);
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+
+            return Ok(result.Resultado);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("empresas")]
+        public IActionResult Empresas()
+        {
+            var result = _authService.ObtenerEmpresas();
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+
+            return Ok(result.Resultado);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("sedes/{idEmpresa}")]
+        public IActionResult Sedes(int idEmpresa)
+        {
+            var result = _authService.ObtenerSedesPorEmpresa(idEmpresa);
             if (result.Errors.Any())
             {
                 return GetObjectResult(result);

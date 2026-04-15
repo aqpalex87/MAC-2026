@@ -9,6 +9,6 @@ namespace MAC.Business.Logic.Layer.Interfaces
 {
     public interface ISedesService
     {
-        List<SedesDto> ObtenerSedes(int idCliente);
+        List<SedesDto> ObtenerSedesPorEmpresa(int idEmpresa);
     }
 }

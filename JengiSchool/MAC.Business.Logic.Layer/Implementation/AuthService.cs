@@ -56,7 +56,10 @@ namespace MAC.Business.Logic.Layer.Implementation
                 CorreoElectronico = $"{usuario.Usuario}@local",
                 NombreUsuario = usuario.Usuario,
                 NumeroDocumento = usuario.Usuario,
-                Perfil = usuario.RolNombre
+                Perfil = usuario.RolNombre,
+                IdRol = usuario.IdRol,
+                IdEmpresa = usuario.IdEmpresa,
+                IdSede = usuario.IdSede
             };
 
             var (tokenResponse, token) = _accessControl.GenerateToken(accessDto);
@@ -66,6 +69,10 @@ namespace MAC.Business.Logic.Layer.Implementation
             {
                 IdUsuario = usuario.IdUsuario,
                 Usuario = usuario.Usuario,
+                IdEmpresa = usuario.IdEmpresa,
+                Empresa = usuario.EmpresaNombre,
+                IdSede = usuario.IdSede,
+                Sede = usuario.SedeNombre,
                 IdRol = usuario.IdRol,
                 Rol = usuario.RolNombre,
                 Token = $"Bearer {token}",
@@ -75,7 +82,7 @@ namespace MAC.Business.Logic.Layer.Implementation
             return result;
         }
 
-        public Result<List<MenuDto>> ObtenerMenusPorUsuario(string usuario)
+        public Result<List<MenuDto>> ObtenerMenusPorUsuario(string usuario, int? idEmpresa, int? idSede)
         {
             Result<List<MenuDto>> result = new();
             if (string.IsNullOrWhiteSpace(usuario))
@@ -83,11 +90,47 @@ namespace MAC.Business.Logic.Layer.Implementation
                 return result.BadRequest("Usuario no identificado.");
             }
 
-            List<MenuRol> menusFlat = _authRepository.ObtenerMenusPorUsuario(usuario.Trim());
+            List<MenuRol> menusFlat = _authRepository.ObtenerMenusPorUsuario(usuario.Trim(), idEmpresa, idSede);
             List<MenuDto> menuTree = ConstruirArbol(menusFlat);
 
             result.Status = HttpStatusCode.OK;
             result.Resultado = menuTree;
+            return result;
+        }
+
+        public Result<List<EmpresaAuthDto>> ObtenerEmpresas()
+        {
+            Result<List<EmpresaAuthDto>> result = new();
+            var empresas = _authRepository.ObtenerEmpresas()
+                .Select(x => new EmpresaAuthDto
+                {
+                    IdEmpresa = x.IdEmpresa,
+                    Nombre = x.Nombre
+                })
+                .ToList();
+            result.Status = HttpStatusCode.OK;
+            result.Resultado = empresas;
+            return result;
+        }
+
+        public Result<List<SedeAuthDto>> ObtenerSedesPorEmpresa(int idEmpresa)
+        {
+            Result<List<SedeAuthDto>> result = new();
+            if (idEmpresa <= 0)
+            {
+                return result.BadRequest("Empresa inválida.");
+            }
+
+            var sedes = _authRepository.ObtenerSedesPorEmpresa(idEmpresa)
+                .Select(x => new SedeAuthDto
+                {
+                    IdSede = x.IdSede,
+                    IdEmpresa = x.IdEmpresa,
+                    Nombre = x.Nombre
+                })
+                .ToList();
+            result.Status = HttpStatusCode.OK;
+            result.Resultado = sedes;
             return result;
         }
 

@@ -2,7 +2,6 @@
 using MAC.Data.Access.Layer.DB2;
 using MAC.Data.Access.Layer.Extensions;
 using MAC.Data.Access.Layer.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.Data.SqlClient;
@@ -19,17 +18,16 @@ namespace MAC.Data.Access.Layer.Implementation
             cadenaConexion = db2Access.ObtConnectionStringSql();
             esquemaDB2 = db2Access.EsquemaDB2;
         }
-        public List<Sedes> ObtenerSedes(int CodCliente)
+        public List<Sedes> ObtenerSedesPorEmpresa(int idEmpresa)
         {
             using SqlConnection sqlConnection = new(cadenaConexion);
-            using SqlCommand command = new($"{esquemaDB2}.MAC_SELECT_SEDES_POR_CLIENTE", sqlConnection);
+            using SqlCommand command = new($"{esquemaDB2}.MAC_SELECT_SEDES_POR_EMPRESA", sqlConnection);
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add(new SqlParameter("@IDCLIENTE", CodCliente));
+            command.Parameters.Add(new SqlParameter("@IdEmpresa", idEmpresa));
             sqlConnection.Open();
 
             using SqlDataReader dataReader = command.ExecuteReader();
-            var sedes = dataReader.GetEntities<Sedes>();
-            return sedes;
+            return dataReader.GetEntities<Sedes>();
         }
     }
 }

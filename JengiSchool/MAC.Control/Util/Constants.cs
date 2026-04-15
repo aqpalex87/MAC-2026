@@ -121,6 +121,9 @@
             public const string AppKey = "AppKey";
             public const string AppCode = "AppCode";
             public const string Perfil = "Perfil";
+            public const string IdRol = "IdRol";
+            public const string IdEmpresa = "IdEmpresa";
+            public const string IdSede = "IdSede";
         }
         public static class ConstantesGenerico
         {

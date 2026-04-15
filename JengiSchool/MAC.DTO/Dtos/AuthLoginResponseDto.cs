@@ -6,6 +6,10 @@ namespace MAC.DTO.Dtos
     {
         public int IdUsuario { get; set; }
         public string Usuario { get; set; }
+        public int IdEmpresa { get; set; }
+        public string Empresa { get; set; }
+        public int? IdSede { get; set; }
+        public string Sede { get; set; }
         public int IdRol { get; set; }
         public string Rol { get; set; }
         public string Token { get; set; }

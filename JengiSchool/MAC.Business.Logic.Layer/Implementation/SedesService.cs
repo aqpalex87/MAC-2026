@@ -20,9 +20,9 @@ namespace MAC.Business.Logic.Layer.Implementation
             _sedesRepository = sedesRepository;
             _mapper = mapper;
         }
-        public List<SedesDto> ObtenerSedes(int CodCliente)
+        public List<SedesDto> ObtenerSedesPorEmpresa(int idEmpresa)
         {
-            var sedes = _sedesRepository.ObtenerSedes(CodCliente);
+            var sedes = _sedesRepository.ObtenerSedesPorEmpresa(idEmpresa);
             return _mapper.Map<List<SedesDto>>(sedes);
         }
     }

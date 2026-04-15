@@ -9,6 +9,6 @@ namespace MAC.Data.Access.Layer.Interfaces
 {
     public interface ISedesRepository
     {
-        public List<Sedes> ObtenerSedes(int CodCliente);
+        public List<Sedes> ObtenerSedesPorEmpresa(int idEmpresa);
     }
 }

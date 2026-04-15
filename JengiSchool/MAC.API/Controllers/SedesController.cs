@@ -21,10 +21,15 @@ namespace MAC.API.Controllers
         {
             _sedesService = sedesService;
         }
-        [HttpGet]
-        public IActionResult ObtenerSedes()
+        [HttpGet("{idEmpresa}")]
+        public IActionResult ObtenerSedesPorEmpresa(int idEmpresa)
         {
-            var response = _sedesService.ObtenerSedes(1);
+            if (idEmpresa <= 0)
+            {
+                return BadRequest("idEmpresa es requerido.");
+            }
+
+            var response = _sedesService.ObtenerSedesPorEmpresa(idEmpresa);
             return Ok(response);
         }
     }

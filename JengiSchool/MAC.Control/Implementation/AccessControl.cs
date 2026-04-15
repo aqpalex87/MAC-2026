@@ -47,6 +47,9 @@ namespace MAC.Control.Implementation
                 { ConstantesUsuario.NombreUsuario, oaccessdto.NombreUsuario },
                 { ConstantesGenerico.IdentificadorUnico, Guid.NewGuid().ToString() },
                 { ConstantesUsuario.Perfil, oaccessdto.Perfil },
+                { ConstantesUsuario.IdRol, oaccessdto.IdRol?.ToString() ?? string.Empty },
+                { ConstantesUsuario.IdEmpresa, oaccessdto.IdEmpresa?.ToString() ?? string.Empty },
+                { ConstantesUsuario.IdSede, oaccessdto.IdSede?.ToString() ?? string.Empty },
             };
 
             var responseToken = _tokencontrol.GenerateJwtToken(dicttokenparam, dictclaims);

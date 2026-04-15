@@ -43,7 +43,7 @@ namespace MAC.API.Controllers
         [HttpPost]
         public IActionResult Crear([FromBody] MenuCrudDto request)
         {
-            var result = _menuService.CrearMenu(request, UserJwt.CodUsuario);
+            var result = _menuService.CrearMenu(request, UserJwt.IdRol);
             if (result.Errors.Any())
             {
                 return GetObjectResult(result);

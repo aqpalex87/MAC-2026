@@ -42,6 +42,8 @@
 
 .search-wrap input {
   width: 100%;
+  flex: 1 1 auto;
+  min-width: 220px;
 }
 
 .menu-table {
@@ -63,7 +65,7 @@
 }
 
 .btn-action.edit {
-  background: #2563eb !important;
+  background: #f59e0b !important;
 }
 
 .btn-action.delete {
@@ -188,25 +190,62 @@
 :host ::ng-deep .menu-swal-confirm,
 :host ::ng-deep .menu-swal-cancel {
   border-radius: 8px !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
+  color: #ffffff !important;
   padding: 0.55rem 1rem !important;
 }
 
-.btn-plantilla-primary {
+.btn-add {
   background: #00694f !important;
-  color: #ffd204 !important;
+  color: #ffffff !important;
   border: 0 !important;
+  font-weight: 400 !important;
 }
 
-.btn-plantilla-secondary {
-  background: #263649 !important;
+.btn-search {
+  background: #0ea5e9 !important;
+  color: #ffffff !important;
   border: 0 !important;
+  min-height: 36px !important;
+  min-width: 96px !important;
+  padding: 0 14px !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+
+:host ::ng-deep .btn-search .p-button-icon {
+  font-size: 14px !important;
+  margin-right: 6px !important;
+}
+
+:host ::ng-deep .btn-search .p-button-label {
+  font-weight: 400 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+.btn-save {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  font-weight: 400 !important;
 }
 
 .btn-plantilla-clear {
-  background: #f8fafc !important;
+  background: #64748b !important;
   border: 1px solid #cbd5e1 !important;
-  color: #334155 !important;
+  color: #ffffff !important;
+  font-weight: 400 !important;
+}
+
+:host ::ng-deep .btn-add .p-button-label,
+:host ::ng-deep .btn-save .p-button-label,
+:host ::ng-deep .btn-plantilla-clear .p-button-label {
+  color: #ffffff !important;
+  font-weight: 400 !important;
 }
 
 @media (max-width: 768px) {

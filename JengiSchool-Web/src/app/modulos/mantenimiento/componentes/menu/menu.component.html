@@ -18,10 +18,17 @@
       placeholder="Buscar por nombre"
       (keyup.enter)="buscar()"
     />
-    <button pButton type="button" label="Buscar" class="btn-plantilla-secondary" (click)="buscar()"></button>
+    <button
+      pButton
+      type="button"
+      icon="pi pi-search"
+      label="Buscar"
+    class="btn-search"
+      (click)="buscar()"
+    ></button>
     <button pButton type="button" icon="pi pi-times" class="btn-plantilla-clear" (click)="limpiarBusqueda()"></button>
   </div>
-  <button pButton type="button" label="Agregar" icon="pi pi-plus" class="btn-plantilla-primary" (click)="abrirNuevo()"></button>
+  <button pButton type="button" label="Agregar" icon="pi pi-plus" class="btn-add" (click)="abrirNuevo()"></button>
 </div>
 
 <p-table
@@ -132,7 +139,7 @@
   </form>
 
   <ng-template pTemplate="footer">
-    <button pButton type="button" label="Cancelar" class="btn-plantilla-clear" (click)="modalVisible = false"></button>
-    <button pButton type="button" label="Guardar" class="btn-plantilla-primary" (click)="guardar()"></button>
+    <button pButton type="button" label="Cancelar" icon="pi pi-times" class="btn-plantilla-clear" (click)="modalVisible = false"></button>
+    <button pButton type="button" label="Guardar" icon="pi pi-save" class="btn-save" (click)="guardar()"></button>
   </ng-template>
 </p-dialog>

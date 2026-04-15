@@ -8,6 +8,7 @@ import { DataSeguridad, DatosFC } from '../models/dataseguridad.interface';
 import { Modulo } from '../models/modulo.interface';
 import { DataLoginTokenExternal, LoginDto, ResponseLoginTokenExternal } from "../models/dataLoginTokenExternal";
 import { MenuApi } from '../models/menu-api.interface';
+import { EmpresaAuth, SedeAuth } from '../models/empresa-sede.interface';
 
 const UrlBase_SGSAPI = environment.UrlBase_SGSAPI;
 const UrlBase_MACAPI = environment.UrlBase_MACAPI;
@@ -345,6 +346,18 @@ export class SecurityService {
 
   public loginApi(usuario: string, password: string) {
     return ajax.post(`${UrlBase_MACAPI}/auth/login`, { usuario, password }, {
+      'Content-Type': 'application/json'
+    });
+  }
+
+  public obtenerEmpresasApi() {
+    return ajax.get<EmpresaAuth[]>(`${UrlBase_MACAPI}/auth/empresas`, {
+      'Content-Type': 'application/json'
+    });
+  }
+
+  public obtenerSedesPorEmpresaApi(idEmpresa: number) {
+    return ajax.get<SedeAuth[]>(`${UrlBase_MACAPI}/sedes/${idEmpresa}`, {
       'Content-Type': 'application/json'
     });
   }

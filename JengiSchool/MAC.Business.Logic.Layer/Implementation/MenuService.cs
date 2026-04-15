@@ -46,7 +46,7 @@ namespace MAC.Business.Logic.Layer.Implementation
             return result;
         }
 
-        public Result<MenuCrudDto> CrearMenu(MenuCrudDto request, string usuario)
+        public Result<MenuCrudDto> CrearMenu(MenuCrudDto request, int? idRol)
         {
             Result<MenuCrudDto> result = new();
             if (!ValidarMenu(request, out string mensaje))
@@ -57,13 +57,9 @@ namespace MAC.Business.Logic.Layer.Implementation
             MenuRol entity = MapToEntity(request);
             MenuRol creado = _menuRepository.CrearMenu(entity);
 
-            if (!string.IsNullOrWhiteSpace(usuario))
+            if (idRol.HasValue && idRol.Value > 0)
             {
-                int? idRol = _menuRepository.ObtenerRolPorUsuario(usuario.Trim());
-                if (idRol.HasValue)
-                {
-                    _menuRepository.AsignarMenuARol(idRol.Value, creado.IdMenu);
-                }
+                _menuRepository.AsignarMenuARol(idRol.Value, creado.IdMenu);
             }
 
             result.Status = HttpStatusCode.OK;

@@ -7,6 +7,8 @@ namespace MAC.Business.Logic.Layer.Interfaces
     public interface IAuthService
     {
         Result<AuthLoginResponseDto> Login(AuthLoginRequestDto request);
-        Result<List<MenuDto>> ObtenerMenusPorUsuario(string usuario);
+        Result<List<MenuDto>> ObtenerMenusPorUsuario(string usuario, int? idEmpresa, int? idSede);
+        Result<List<EmpresaAuthDto>> ObtenerEmpresas();
+        Result<List<SedeAuthDto>> ObtenerSedesPorEmpresa(int idEmpresa);
     }
 }

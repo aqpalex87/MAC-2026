@@ -32,33 +32,33 @@
           placeholder="Ingrese su contraseña"
         />
       </div>
-      <div class="field row-2">
-        <div>
-          <label for="empresa">Empresa</label>
-          <input
-            id="empresa"
-            type="text"
-            class="control"
-            [(ngModel)]="empresa"
-            name="empresa"
-            placeholder="Empresa"
-          />
-        </div>
-        <div>
-          <label for="sede">Sede</label>
-          <input
-            id="sede"
-            type="text"
-            class="control"
-            [(ngModel)]="sede"
-            name="sede"
-            placeholder="Sede"
-          />
-        </div>
-      </div>
       <button type="submit" class="btn-primary" [disabled]="loading">
         {{ loading ? 'Validando…' : 'Ingresar' }}
       </button>
     </form>
   </div>
 </div>
+
+<p-dialog
+  [(visible)]="sedeModalVisible"
+  [modal]="true"
+  [closable]="false"
+  [draggable]="false"
+  [resizable]="false"
+  [dismissableMask]="false"
+  [style]="{ width: '28rem' }"
+  header="Seleccione sede"
+  styleClass="sede-login-dialog"
+>
+  <div class="sede-modal-content">
+    <p class="sede-modal-subtitle">Empresa: <strong>{{ empresaLogin?.nombre || '-' }}</strong></p>
+    <label for="idSedeSelect">Sede</label>
+    <select id="idSedeSelect" class="control browser-default" [(ngModel)]="idSede" name="idSedeSelect">
+      <option [ngValue]="null">Seleccione sede</option>
+      <option *ngFor="let s of sedes" [ngValue]="s.idSede">{{ s.nombre }}</option>
+    </select>
+  </div>
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn-primary sede-confirm-btn" (click)="confirmarSede()">Continuar</button>
+  </ng-template>
+</p-dialog>

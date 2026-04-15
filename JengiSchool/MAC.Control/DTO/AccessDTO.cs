@@ -11,5 +11,8 @@ namespace MAC.Control.DTO
         public DateTime FechaInicioVigencia { get; set; }
         public DateTime FechaFinVigencia { get; set; }
         public string Perfil { get; set; }
+        public int? IdRol { get; set; }
+        public int? IdEmpresa { get; set; }
+        public int? IdSede { get; set; }
     }
 }
