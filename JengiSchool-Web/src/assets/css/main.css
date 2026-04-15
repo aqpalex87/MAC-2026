@@ -390,7 +390,7 @@
     font-family: "Ubuntu";
   }
   body .sidenav {
-    width: 255px;
+    width: 290px;
     /* -webkit-transform: translateX(0%); */
             transform: translateX(0%);
   }
@@ -412,8 +412,8 @@
   }
   body .container-body {
     position: relative;
-    width: calc( 100% - 255px);
-    left: 255px;
+    width: calc( 100% - 290px);
+    left: 290px;
   }
   /* body.menu-open {
     overflow: hidden;
@@ -421,7 +421,7 @@
   body.menu-open .sidenav {
     /* -webkit-transform: translateX(0%); */
             transform: translateX(0%);
-    width: 255px;
+    width: 290px;
   }
   body.menu-open .sidenav .logo-mini {
     display: none;
@@ -441,8 +441,19 @@
   }
   body.menu-open .container-body {
     position: relative;
-    width: calc( 100% - 255px);
-    left: 255px;
+    width: calc( 100% - 290px);
+    left: 290px;
+  }
+
+  /* Escritorio: ocultar barra y expandir contenido cuando no hay menu-open en body */
+  @media only screen and (min-width: 601px) {
+    body:not(.menu-open) .sidenav {
+      transform: translateX(-100%);
+    }
+    body:not(.menu-open) .container-body {
+      left: 0;
+      width: 100%;
+    }
   }
 
   .sidenav {
@@ -505,7 +516,7 @@
 
   @media only screen and (max-width: 600px) {
     body .sidenav.collapsible {
-      left: -255px;
+      left: -290px;
     }
     body .container-body {
       width: 100%;

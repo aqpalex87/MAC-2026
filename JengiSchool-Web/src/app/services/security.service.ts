@@ -8,6 +8,7 @@ import { DataSeguridad, DatosFC } from '../models/dataseguridad.interface';
 import { Modulo } from '../models/modulo.interface';
 import { DataLoginTokenExternal, LoginDto, ResponseLoginTokenExternal } from "../models/dataLoginTokenExternal";
 import { MenuApi } from '../models/menu-api.interface';
+import { normalizeMenuApiList } from 'src/app/shared/utils/menu-tree.util';
 import { EmpresaAuth, SedeAuth } from '../models/empresa-sede.interface';
 
 const UrlBase_SGSAPI = environment.UrlBase_SGSAPI;
@@ -389,7 +390,15 @@ export class SecurityService {
 
   public leerMenusApi(): MenuApi[] {
     const item = localStorage.getItem('menusApi');
-    return item ? (JSON.parse(item) as MenuApi[]) : [];
+    if (!item) {
+      return [];
+    }
+    try {
+      const raw = JSON.parse(item) as unknown;
+      return normalizeMenuApiList(Array.isArray(raw) ? raw : []);
+    } catch {
+      return [];
+    }
   }
 
   public loginTokenExternal(dataLoginExternal: DataLoginTokenExternal) {

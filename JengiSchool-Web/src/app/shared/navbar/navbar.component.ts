@@ -5,8 +5,6 @@ import { SecurityService } from 'src/app/services/security.service';
 import { AuthSubjectService } from 'src/app/services/subjects/auth-subject.service';
 import $ from 'jquery';
 
-declare var $: any;
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

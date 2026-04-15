@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import $ from 'jquery';
 
-declare var $:any;
-declare var M:any;
+declare var M: any;
 @Injectable({
   providedIn: 'root'
 })

@@ -22,7 +22,7 @@
         </div>
 
         <div class="collapsible-body" *ngIf="tieneHijos(item)">
-            <ul class="nested-menu">
+            <ul class="collapsible nested-menu">
                 <ng-container *ngTemplateOutlet="menuRecursivo; context: { $implicit: item.hijos, nivel: nivel + 1 }"></ng-container>
             </ul>
         </div>

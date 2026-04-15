@@ -41,19 +41,17 @@ export class SidebarComponent implements OnInit {
   }
 
   public modulos() {
-    this.inicializarControles();
     this.inicializarEventos();
     this.SecurityModulos = this._securityService.leerMenusApi() ?? [];
     this._securityService.descripcionPerfil$.emit(this._securityService.leerPerfil());
+    setTimeout(() => this.inicializarControles(), 0);
   }
 
 
 
   inicializarControles(): void {
-    // $('.sidenav').sidenav();
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, {});
-    // $('.collapsible').collapsible();
+    const elems = document.querySelectorAll('#slide-out.sidenav.collapsible, #slide-out .nested-menu.collapsible');
+    M.Collapsible.init(elems, {});
   }
 
   sideNavOverlayClick(): void {
