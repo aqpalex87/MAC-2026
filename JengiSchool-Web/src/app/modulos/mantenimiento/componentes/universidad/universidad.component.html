@@ -1,0 +1,151 @@
+<div class="section no-padding">
+  <div class="row col s12 no-mar-bot">
+    <div class="section no-mar-bot">
+      <div class="col s12 m12 l12 universidad-header">
+        <h1 class="title">Mantenimiento de Universidades</h1>
+        <p class="subtitle">Empresa sesión: {{ empresaNombre }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="universidad-toolbar">
+  <div class="search-wrap">
+    <i class="pi pi-search"></i>
+    <select class="empresa-filter-select browser-default" [(ngModel)]="idEmpresaFiltro" (change)="buscar()">
+      <option [ngValue]="null">Todas las empresas</option>
+      <option *ngFor="let e of empresas" [ngValue]="e.idEmpresa">{{ e.nombre }}</option>
+    </select>
+    <input pInputText type="text" [(ngModel)]="busqueda" placeholder="Buscar universidad" (keyup.enter)="buscar()" />
+    <button pButton type="button" icon="pi pi-search" label="Buscar" class="btn-search" (click)="buscar()"></button>
+    <button pButton type="button" icon="pi pi-times" class="btn-clear" (click)="limpiarBusqueda()"></button>
+  </div>
+  <button pButton type="button" label="Agregar" icon="pi pi-plus" class="btn-add" (click)="abrirNuevo()"></button>
+</div>
+
+<p-table
+  [value]="universidades"
+  dataKey="idUniversidad"
+  [expandedRowKeys]="expandedRows"
+  styleClass="p-datatable-sm p-datatable-gridlines universidad-table"
+  [paginator]="true"
+  [rows]="rows"
+  [totalRecords]="totalRows"
+  [lazy]="true"
+  [loading]="loading"
+  [rowsPerPageOptions]="[10, 20, 50]"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
+  (onLazyLoad)="onLazyLoad($event)"
+  (onRowExpand)="onRowExpand($event)"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 3rem"></th>
+      <th>ID</th>
+      <th>Universidad</th>
+      <th>Empresa</th>
+      <th class="text-center">Opciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item let-expanded="expanded">
+    <tr>
+      <td>
+        <button type="button" pButton pRipple [pRowToggler]="item" class="p-button-text p-button-rounded p-button-plain"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+        </button>
+      </td>
+      <td>{{ item.idUniversidad }}</td>
+      <td>{{ item.nombre }}</td>
+      <td>{{ item.nombreEmpresa || '-' }}</td>
+      <td class="text-center actions">
+        <button pButton type="button" icon="pi pi-pencil" class="btn-action edit" (click)="editar(item)"></button>
+        <button pButton type="button" icon="pi pi-trash" class="btn-action delete" (click)="eliminar(item)"></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-item>
+    <tr>
+      <td colspan="5">
+        <div class="detail-wrapper">
+          <h4 class="detail-title">Carreras y puntajes de ingreso</h4>
+          <p-table [value]="detallesPorUniversidad[item.idUniversidad] || []" styleClass="p-datatable-sm p-datatable-gridlines">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Carrera</th>
+                <th>Puntaje mínimo</th>
+                <th>Puntaje máximo</th>
+                <th>Año</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-d>
+              <tr>
+                <td>{{ d.carreraNombre }}</td>
+                <td>{{ d.puntajeMinimo ?? '-' }}</td>
+                <td>{{ d.puntajeMaximo ?? '-' }}</td>
+                <td>{{ d.anio ?? '-' }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="4">No hay carreras registradas.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="5">No hay registros para mostrar.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="modalVisible"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{ width: '62rem' }"
+  [header]="editando ? 'Editar universidad' : 'Agregar universidad'"
+>
+  <form [formGroup]="form" class="universidad-form">
+    <div class="field-row">
+      <div class="field">
+        <label>Empresa *</label>
+        <select class="empresa-filter-select browser-default empresa-modal-select" formControlName="idEmpresa">
+          <option [ngValue]="null">Seleccione empresa</option>
+          <option *ngFor="let e of empresas" [ngValue]="e.idEmpresa">{{ e.nombre }}</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Universidad *</label>
+        <input pInputText type="text" formControlName="nombre" />
+      </div>
+    </div>
+
+    <div class="detail-editor">
+      <div class="detail-editor-header">
+        <span>Detalle de carreras</span>
+        <button pButton type="button" icon="pi pi-plus" label="Agregar carrera" class="btn-add" (click)="agregarDetalle()"></button>
+      </div>
+      <div formArrayName="detalles">
+        <div class="detail-row" *ngFor="let detalle of detallesFormArray.controls; let i = index" [formGroupName]="i">
+          <input pInputText type="text" formControlName="carreraNombre" placeholder="Carrera" />
+          <p-inputNumber formControlName="puntajeMinimo" [useGrouping]="false" [minFractionDigits]="0" [maxFractionDigits]="2" placeholder="Mínimo"></p-inputNumber>
+          <p-inputNumber formControlName="puntajeMaximo" [useGrouping]="false" [minFractionDigits]="0" [maxFractionDigits]="2" placeholder="Máximo"></p-inputNumber>
+          <p-inputNumber formControlName="anio" [useGrouping]="false" placeholder="Año"></p-inputNumber>
+          <button pButton type="button" icon="pi pi-trash" class="btn-action delete" (click)="quitarDetalle(i)"></button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button pButton type="button" label="Cancelar" icon="pi pi-times" class="btn-clear" (click)="modalVisible = false"></button>
+    <button pButton type="button" label="Guardar" icon="pi pi-save" class="btn-save" (click)="guardar()"></button>
+  </ng-template>
+</p-dialog>

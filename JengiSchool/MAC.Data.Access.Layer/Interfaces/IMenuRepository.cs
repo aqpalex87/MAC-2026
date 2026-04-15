@@ -10,6 +10,8 @@ namespace MAC.Data.Access.Layer.Interfaces
         MenuRol CrearMenu(MenuRol menu);
         int? ObtenerRolPorUsuario(string usuario);
         bool AsignarMenuARol(int idRol, int idMenu);
+        List<MenuRol> ObtenerMenusPorRol(int idRol);
+        bool GuardarMenusPorRol(int idRol, string idsMenuCsv);
         bool ActualizarMenu(MenuRol menu);
         bool EliminarMenu(int idMenu);
     }

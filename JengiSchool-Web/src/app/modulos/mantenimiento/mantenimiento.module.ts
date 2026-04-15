@@ -33,6 +33,13 @@ import { ParametroRseComponent } from './componentes/parametro-rse/parametro-rse
 import { ParametroComportamientoComponent } from './componentes/parametro-comportamiento/parametro-comportamiento.component';
 import { ParametroAlertaComponent } from './componentes/parametro-alerta/parametro-alerta.component';
 import { MenuComponent } from './componentes/menu/menu.component';
+import { SedeComponent } from './componentes/sede/sede.component';
+import { EmpresaComponent } from './componentes/empresa/empresa.component';
+import { RolComponent } from './componentes/rol/rol.component';
+import { MenuRolComponent } from './componentes/menu-rol/menu-rol.component';
+import { TreeModule } from 'primeng/tree';
+import { UsuarioComponent } from './componentes/usuario/usuario.component';
+import { UniversidadComponent } from './componentes/universidad/universidad.component';
 
 import { MatSelectModule } from '@angular/material/select';   
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -48,7 +55,13 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ParametroRseComponent,
     ParametroComportamientoComponent,
     ParametroAlertaComponent,
-    MenuComponent
+    MenuComponent,
+    SedeComponent,
+    EmpresaComponent,
+    RolComponent,
+    MenuRolComponent,
+    UsuarioComponent,
+    UniversidadComponent
   ],
   imports: [
     CommonModule,
@@ -75,6 +88,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     TooltipModule,
     TabViewModule,
     PanelModule,
+    TreeModule,
     SharedModule
   ]
 })

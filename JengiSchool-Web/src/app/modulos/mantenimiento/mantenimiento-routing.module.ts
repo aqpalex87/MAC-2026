@@ -3,6 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './componentes/index/index.component';
 import { DetalleComponent } from './componentes/detalle/detalle.component';
 import { MenuComponent } from './componentes/menu/menu.component';
+import { SedeComponent } from './componentes/sede/sede.component';
+import { EmpresaComponent } from './componentes/empresa/empresa.component';
+import { RolComponent } from './componentes/rol/rol.component';
+import { MenuRolComponent } from './componentes/menu-rol/menu-rol.component';
+import { UsuarioComponent } from './componentes/usuario/usuario.component';
+import { UniversidadComponent } from './componentes/universidad/universidad.component';
 
 const routes: Routes = [
   {
@@ -16,6 +22,30 @@ const routes: Routes = [
   {
     path: 'menus',
     component: MenuComponent
+  },
+  {
+    path: 'sedes',
+    component: SedeComponent
+  },
+  {
+    path: 'empresas',
+    component: EmpresaComponent
+  },
+  {
+    path: 'roles',
+    component: RolComponent
+  },
+  {
+    path: 'menu-roles',
+    component: MenuRolComponent
+  },
+  {
+    path: 'usuarios',
+    component: UsuarioComponent
+  },
+  {
+    path: 'universidades',
+    component: UniversidadComponent
   },
   {
     path: '**',

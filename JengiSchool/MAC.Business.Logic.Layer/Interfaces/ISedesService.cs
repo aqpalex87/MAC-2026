@@ -1,14 +1,15 @@
-﻿using MAC.DTO.Dtos;
-using System;
+﻿using MAC.DTO;
+using MAC.DTO.Dtos;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MAC.Business.Logic.Layer.Interfaces
 {
     public interface ISedesService
     {
-        List<SedesDto> ObtenerSedesPorEmpresa(int idEmpresa);
+        Result<List<SedesDto>> ObtenerSedesPorEmpresa(int idEmpresa);
+        Result<SedesPaginadoDto> ObtenerSedesPaginado(int? idEmpresa, string nombre, int pageNumber, int pageSize);
+        Result<SedesDto> CrearSede(SedesDto request);
+        Result<SedesDto> ActualizarSede(int idSede, SedesDto request);
+        Result<bool> EliminarSede(int idSede);
     }
 }

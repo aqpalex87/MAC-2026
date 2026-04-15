@@ -94,6 +94,41 @@ namespace MAC.Data.Access.Layer.Implementation
             return command.ExecuteNonQuery() > 0;
         }
 
+        public List<MenuRol> ObtenerMenusPorRol(int idRol)
+        {
+            using SqlConnection sqlConnection = new(cadenaConexion);
+            using SqlCommand command = new($"{esquemaDB2}.MAC_SELECT_MENUS_POR_ROL", sqlConnection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@IdRol", SqlDbType.Int) { Value = idRol });
+            sqlConnection.Open();
+            using SqlDataReader dataReader = command.ExecuteReader();
+            return dataReader.GetEntities<MenuRol>();
+        }
+
+        public bool GuardarMenusPorRol(int idRol, string idsMenuCsv)
+        {
+            try
+            {
+                using SqlConnection sqlConnection = new(cadenaConexion);
+                using SqlCommand command = new($"{esquemaDB2}.MAC_SAVE_ROLMENU", sqlConnection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@IdRol", SqlDbType.Int) { Value = idRol });
+                command.Parameters.Add(new SqlParameter("@IdsMenu", SqlDbType.VarChar, -1) { Value = (object)(idsMenuCsv ?? string.Empty) });
+                sqlConnection.Open();
+                object result = command.ExecuteScalar();
+                if (result == null || result == DBNull.Value)
+                {
+                    return false;
+                }
+                return Convert.ToInt32(result) == 1;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public bool ActualizarMenu(MenuRol menu)
         {
             using SqlConnection sqlConnection = new(cadenaConexion);

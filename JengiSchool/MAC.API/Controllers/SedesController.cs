@@ -1,10 +1,8 @@
 ﻿using MAC.Business.Logic.Layer.Interfaces;
+using MAC.DTO.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MAC.API.Controllers
 {
@@ -21,16 +19,59 @@ namespace MAC.API.Controllers
         {
             _sedesService = sedesService;
         }
-        [HttpGet("{idEmpresa}")]
+        [HttpGet("empresa/{idEmpresa}")]
         public IActionResult ObtenerSedesPorEmpresa(int idEmpresa)
         {
-            if (idEmpresa <= 0)
+            var result = _sedesService.ObtenerSedesPorEmpresa(idEmpresa);
+            if (result.Errors.Any())
             {
-                return BadRequest("idEmpresa es requerido.");
+                return GetObjectResult(result);
             }
+            return Ok(result.Resultado);
+        }
 
-            var response = _sedesService.ObtenerSedesPorEmpresa(idEmpresa);
-            return Ok(response);
+        [HttpGet]
+        public IActionResult ObtenerSedesPaginado([FromQuery] int? idEmpresa, [FromQuery] string nombre = "", [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var result = _sedesService.ObtenerSedesPaginado(idEmpresa, nombre, pageNumber, pageSize);
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+            return Ok(result.Resultado);
+        }
+
+        [HttpPost]
+        public IActionResult Crear([FromBody] SedesDto request)
+        {
+            var result = _sedesService.CrearSede(request);
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+            return Ok(result.Resultado);
+        }
+
+        [HttpPut("{idSede}")]
+        public IActionResult Actualizar(int idSede, [FromBody] SedesDto request)
+        {
+            var result = _sedesService.ActualizarSede(idSede, request);
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+            return Ok(result.Resultado);
+        }
+
+        [HttpDelete("{idSede}")]
+        public IActionResult Eliminar(int idSede)
+        {
+            var result = _sedesService.EliminarSede(idSede);
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+            return Ok(new { eliminado = result.Resultado });
         }
     }
 }

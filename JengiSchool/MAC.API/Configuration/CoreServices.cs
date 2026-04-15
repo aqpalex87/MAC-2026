@@ -24,6 +24,15 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IMenuRolService, MenuRolService>();
+            services.AddScoped<IEmpresaRepository, EmpresaRepository>();
+            services.AddScoped<IEmpresaService, EmpresaService>();
+            services.AddScoped<IRolRepository, RolRepository>();
+            services.AddScoped<IRolService, RolService>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IUniversidadRepository, UniversidadRepository>();
+            services.AddScoped<IUniversidadService, UniversidadService>();
 
             services.AddScoped<ISedesService, SedesService>();
             services.AddScoped<ISedesRepository, SedesRepository>();

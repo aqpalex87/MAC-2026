@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
 
         this.securityService.guardarTokenMAC(token);
         this.securityService.guardaridPerfil(String(response?.idRol ?? response?.IdRol ?? '1'));
+        this.securityService.guardarIdEmpresa(String(idEmpresaLogin));
         this.securityService.guardarPerfil(response?.rol ?? response?.Rol ?? 'Usuario');
         this.loginResponse = response;
         this.empresaLogin = {

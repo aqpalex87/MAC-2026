@@ -9,14 +9,11 @@ namespace MAC.DTO.Dtos
     public class SedesDto
     {
         public int IdSede { get; set; }
-        public int IdCliente { get; set; }
         public int IdEmpresa { get; set; }
-
+        public string NombreEmpresa { get; set; }
         public string Nombre { get; set; }
+        public string Codigo { get; set; }
         public string Direccion { get; set; }
-        public string Telefono { get; set; }
-        public string IdEncargado1 { get; set; }
-        public string IdEncargado2 { get; set; }
-
+        public bool Activo { get; set; }
     }
 }

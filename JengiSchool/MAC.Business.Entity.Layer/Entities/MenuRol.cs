@@ -10,5 +10,6 @@ namespace MAC.Business.Entity.Layer.Entities
         public string NombrePadre { get; set; }
         public int? Orden { get; set; }
         public bool Activo { get; set; }
+        public bool Seleccionado { get; set; }
     }
 }

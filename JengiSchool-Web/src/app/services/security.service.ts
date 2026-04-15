@@ -39,6 +39,10 @@ export class SecurityService {
     localStorage.setItem('idperfil', idPerfil.toString());
   }
 
+  public guardarIdEmpresa(idEmpresa: string): void {
+    localStorage.setItem('idempresa', idEmpresa.toString());
+  }
+
   public guardarDataSeguridad(data: DataSeguridad) {
     localStorage.setItem('vEmail', data.vEmail.toString());
     localStorage.setItem('vNombre', data.vNombre.toString());
@@ -83,6 +87,14 @@ export class SecurityService {
   public leeridPerfil() {
     if (localStorage.getItem('idperfil')) {
       return localStorage.getItem('idperfil');
+    } else {
+      return '';
+    }
+  }
+
+  public leerIdEmpresa() {
+    if (localStorage.getItem('idempresa')) {
+      return localStorage.getItem('idempresa');
     } else {
       return '';
     }
@@ -320,6 +332,7 @@ export class SecurityService {
   public cerrarSesion() {
     localStorage.removeItem('vNombre');
     localStorage.removeItem('idperfil');
+    localStorage.removeItem('idempresa');
     localStorage.removeItem('UsuarioWeb');
     localStorage.removeItem('tokenMAC');
     localStorage.removeItem('tokenSGS');
@@ -357,7 +370,7 @@ export class SecurityService {
   }
 
   public obtenerSedesPorEmpresaApi(idEmpresa: number) {
-    return ajax.get<SedeAuth[]>(`${UrlBase_MACAPI}/sedes/${idEmpresa}`, {
+    return ajax.get<SedeAuth[]>(`${UrlBase_MACAPI}/sedes/empresa/${idEmpresa}`, {
       'Content-Type': 'application/json'
     });
   }

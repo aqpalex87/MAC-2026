@@ -9,6 +9,7 @@ namespace MAC.Business.Logic.Layer.Profiles
         public SedesProfile()
         {
             CreateMap<Sedes, SedesDto>();
+            CreateMap<SedesDto, Sedes>();
         }
     }
 }
