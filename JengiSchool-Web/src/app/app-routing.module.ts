@@ -7,9 +7,11 @@ import { TableComponent } from './modulos/flujo-caja/table/table.component';
 import {FlujoCajaRedirectComponent} from "./components/flujo-caja-redirect/flujo-caja-redirect.component";
 import {ErrorLoginComponent} from "./components/flujo-caja-redirect/error-login/error-login.component";
 import { IndexComponent } from './components/index/redirect/index/index.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   {
     path:'flujocaja', component:FlujoCajaComponent,
 
@@ -67,7 +69,7 @@ const routes: Routes = [
   { path: 'Redirect/Index', component: IndexComponent },
   { path: 'error-token', component: ErrorLoginComponent },
   { path: ':token', component: FlujoCajaRedirectComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'home' },
+  { path: '**', pathMatch: 'full', redirectTo: 'login' },
   /*{
     path: '',
     pathMatch: 'full',

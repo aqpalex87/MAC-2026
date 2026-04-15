@@ -6,8 +6,13 @@
 * {
   padding: 0px;
   margin: 0px;
-  font-family: 'Ubuntu';
+  font-family: 'Roboto', 'Ubuntu', Arial, sans-serif;
   font-size: 14px;
+}
+
+html, body {
+  background: #f5f6fa;
+  color: #1f2937;
 }
 
 

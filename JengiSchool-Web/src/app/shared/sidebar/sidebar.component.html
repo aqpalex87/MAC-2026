@@ -1,8 +1,8 @@
 <ul (click)="clickSlideOut()" id="slide-out" class="sidenav collapsible">
     <li>
-        <div class="user-view center-align">
+        <div class="user-view center-align sidebar-brand">
             <div class="background">
-                <img src="assets/img/logo-interna.png" alt="login" class="responsive-img logo-mini">                
+                <img src="assets/img/logo-interna.png" alt="login" class="responsive-img logo-mini">
                 <img src="assets/img/logo-home.png" alt="login" class="responsive-img logo">
             </div>
         </div>
@@ -10,18 +10,26 @@
     <li>
         <div class="divider"></div>
     </li>
-    <li class="" *ngFor="let modulo of SecurityModulos" routerLinkActive="active">
-        <div class="collapsible-header" tabindex="0" *ngIf="filtrarTieneOpciones(modulo.IdOpcion) > 0">
-            <i class="material-icons">{{ modulo.TipoIconoDescripcion }}</i>
-            <div>
-                {{ modulo.NombreOpcion | uppercase }}
-            </div>
+    <ng-container *ngTemplateOutlet="menuRecursivo; context: { $implicit: SecurityModulos, nivel: 0 }"></ng-container>
+</ul>
+
+<ng-template #menuRecursivo let-items let-nivel="nivel">
+    <li *ngFor="let item of items" routerLinkActive="active">
+        <div class="collapsible-header" tabindex="0" *ngIf="tieneHijos(item)">
+            <i class="material-icons">{{ item.icono || 'menu' }}</i>
+            <div>{{ item.nombre | uppercase }}</div>
             <i class="material-icons keyboard_arrow_down">keyboard_arrow_down</i>
         </div>
-        <div class="collapsible-body" *ngFor="let opc of filtrarOpcionesPorModulo(modulo.IdOpcion)">
-            <span class="cssurl">
-                <a [routerLink]="obtenerRutaOpcion(opc)">{{ opc.DescripcionAplicacion | uppercase}}</a>
-            </span>
+
+        <div class="collapsible-body" *ngIf="tieneHijos(item)">
+            <ul class="nested-menu">
+                <ng-container *ngTemplateOutlet="menuRecursivo; context: { $implicit: item.hijos, nivel: nivel + 1 }"></ng-container>
+            </ul>
         </div>
-    </li>    
-  </ul>
+
+        <a *ngIf="!tieneHijos(item)" [routerLink]="obtenerRutaOpcion(item)" class="single-menu-link">
+            <i class="material-icons">{{ item.icono || 'chevron_right' }}</i>
+            <span>{{ item.nombre | uppercase }}</span>
+        </a>
+    </li>
+</ng-template>

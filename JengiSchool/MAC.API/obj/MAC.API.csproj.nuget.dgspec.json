@@ -221,6 +221,9 @@
           "net5.0-windows7.0": {
             "targetAlias": "net5.0-windows",
             "projectReferences": {
+              "C:\\Alex\\Alex\\Colegio\\JengiSchool\\MAC.Control\\MAC.Control.csproj": {
+                "projectPath": "C:\\Alex\\Alex\\Colegio\\JengiSchool\\MAC.Control\\MAC.Control.csproj"
+              },
               "C:\\Alex\\Alex\\Colegio\\JengiSchool\\MAC.Data.Access.Layer\\MAC.Data.Access.Layer.csproj": {
                 "projectPath": "C:\\Alex\\Alex\\Colegio\\JengiSchool\\MAC.Data.Access.Layer\\MAC.Data.Access.Layer.csproj"
               },

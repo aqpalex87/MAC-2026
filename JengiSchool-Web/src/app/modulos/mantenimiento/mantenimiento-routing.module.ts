@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './componentes/index/index.component';
 import { DetalleComponent } from './componentes/detalle/detalle.component';
+import { MenuComponent } from './componentes/menu/menu.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'detalle',
     component: DetalleComponent
+  },
+  {
+    path: 'menus',
+    component: MenuComponent
   },
   {
     path: '**',

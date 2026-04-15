@@ -34,6 +34,7 @@ import { ErrorLoginComponent } from "./components/flujo-caja-redirect/error-logi
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './shared/shared.module';
 import { LoadingComponent } from './shared/loading/loading.component';
+import { LoginComponent } from './components/login/login.component';
 
  @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { LoadingComponent } from './shared/loading/loading.component';
     ModalComponent,
     FlujoCajaRedirectComponent,
     ErrorLoginComponent,
-    LoadingComponent
+    LoadingComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

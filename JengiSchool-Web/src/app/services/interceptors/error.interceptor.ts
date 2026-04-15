@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.dialogService.openMsgErrorDialog("El servidor no se encuentra disponible.");
       }
       else if(httpError.status == statusCode.Unauthorized){
-        this.dialogService.openMsgErrorDialog("No autorizado: Vuelva a iniciar sesión desde el SSA.");
+        this.dialogService.openMsgErrorDialog("No autorizado: vuelva a iniciar sesion.");
         this.securityService.redirectLogin();
       }
       else if(httpError.status == statusCode.Forbidden){

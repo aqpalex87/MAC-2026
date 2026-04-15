@@ -17,3 +17,5 @@ C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Logic.Layer\obj\Debug\net5.0-windo
 C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Logic.Layer\bin\Debug\net5.0-windows\ref\MAC.Business.Logic.Layer.dll
 C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Logic.Layer\obj\Debug\net5.0-windows\MAC.Business.Logic.Layer.csprojAssemblyReference.cache
 C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Logic.Layer\obj\Debug\net5.0-windows\MAC.Business.Logic.Layer.csproj.CopyComplete
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Logic.Layer\bin\Debug\net5.0-windows\MAC.Control.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Logic.Layer\bin\Debug\net5.0-windows\MAC.Control.pdb

@@ -1,0 +1,64 @@
+<div class="login-page">
+  <div class="login-backdrop"></div>
+  <div class="login-card auth-form-dark">
+    <div class="brand-logo">
+      <span class="brand-text">JengiSchool</span>
+      <p class="brand-sub">Análisis Cuantitativo MAC</p>
+    </div>
+    <h4>Hola</h4>
+    <h6 class="subtitle">Inicia sesión para continuar</h6>
+    <form class="login-form" (ngSubmit)="iniciarSesion()">
+      <div class="field">
+        <label for="codigoUsuario">Usuario</label>
+        <input
+          id="codigoUsuario"
+          type="text"
+          class="control"
+          [(ngModel)]="codigoUsuario"
+          name="codigoUsuario"
+          autocomplete="username"
+          placeholder="Ingrese su usuario"
+        />
+      </div>
+      <div class="field">
+        <label for="password">Contraseña</label>
+        <input
+          id="password"
+          type="password"
+          class="control"
+          [(ngModel)]="password"
+          name="password"
+          autocomplete="current-password"
+          placeholder="Ingrese su contraseña"
+        />
+      </div>
+      <div class="field row-2">
+        <div>
+          <label for="empresa">Empresa</label>
+          <input
+            id="empresa"
+            type="text"
+            class="control"
+            [(ngModel)]="empresa"
+            name="empresa"
+            placeholder="Empresa"
+          />
+        </div>
+        <div>
+          <label for="sede">Sede</label>
+          <input
+            id="sede"
+            type="text"
+            class="control"
+            [(ngModel)]="sede"
+            name="sede"
+            placeholder="Sede"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        {{ loading ? 'Validando…' : 'Ingresar' }}
+      </button>
+    </form>
+  </div>
+</div>

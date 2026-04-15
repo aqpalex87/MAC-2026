@@ -9,3 +9,4 @@ C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Entity.Layer\obj\Debug\net5.0\MAC.
 C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Entity.Layer\obj\Debug\net5.0\ref\MAC.Business.Entity.Layer.dll
 C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Entity.Layer\obj\Debug\net5.0\MAC.Business.Entity.Layer.pdb
 C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Entity.Layer\bin\Debug\net5.0\ref\MAC.Business.Entity.Layer.dll
+C:\Alex\Alex\Colegio\JengiSchool\MAC.Business.Entity.Layer\obj\Debug\net5.0\MAC.Business.Entity.Layer.csprojAssemblyReference.cache

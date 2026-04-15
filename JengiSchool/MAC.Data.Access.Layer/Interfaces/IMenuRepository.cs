@@ -1,0 +1,16 @@
+using MAC.Business.Entity.Layer.Entities;
+using System.Collections.Generic;
+
+namespace MAC.Data.Access.Layer.Interfaces
+{
+    public interface IMenuRepository
+    {
+        (List<MenuRol> Menus, int TotalRows) ObtenerMenusPaginado(string nombre, int pageNumber, int pageSize);
+        List<MenuRol> ObtenerMenusPadre();
+        MenuRol CrearMenu(MenuRol menu);
+        int? ObtenerRolPorUsuario(string usuario);
+        bool AsignarMenuARol(int idRol, int idMenu);
+        bool ActualizarMenu(MenuRol menu);
+        bool EliminarMenu(int idMenu);
+    }
+}

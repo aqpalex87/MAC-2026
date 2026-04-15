@@ -2,13 +2,14 @@ import { environment } from 'src/environments/environment';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AjaxResponse, ajax } from 'rxjs/ajax';
+import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.interface';
 import { DataSeguridad, DatosFC } from '../models/dataseguridad.interface';
 import { Modulo } from '../models/modulo.interface';
 import { DataLoginTokenExternal, LoginDto, ResponseLoginTokenExternal } from "../models/dataLoginTokenExternal";
+import { MenuApi } from '../models/menu-api.interface';
 
 const UrlBase_SGSAPI = environment.UrlBase_SGSAPI;
-const UrlBase_SSA = environment.UrlBase_SSA;
 const UrlBase_MACAPI = environment.UrlBase_MACAPI;
 const APP_CODE = environment.AppCode;
 const APP_KEY = environment.AppKey;
@@ -23,7 +24,7 @@ export class SecurityService {
   public activarLoading: boolean = false;
   public descripcionPerfil$ = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public guardarToken(token: string): void {
     localStorage.setItem('tokenSGS', token);
@@ -42,6 +43,8 @@ export class SecurityService {
     localStorage.setItem('vNombre', data.vNombre.toString());
     localStorage.setItem('UsuarioWeb', data.vUsuarioWeb.toString());
     localStorage.setItem('vDescripcionAgencia', data.vDescripcionAgencia.toString());
+    localStorage.setItem('vEmpresa', (data.vEmpresa ?? '-').toString());
+    localStorage.setItem('vSede', (data.vSede ?? '-').toString());
   }
 
   public guardarDatosFC(data: DatosFC) {
@@ -125,6 +128,26 @@ export class SecurityService {
     }
 
     return agencia;
+  }
+
+  public leerEmpresa(): any {
+    let empresa: any;
+    if (localStorage.getItem('vEmpresa')) {
+      empresa = localStorage.getItem('vEmpresa');
+    } else {
+      empresa = '';
+    }
+    return empresa;
+  }
+
+  public leerSede(): any {
+    let sede: any;
+    if (localStorage.getItem('vSede')) {
+      sede = localStorage.getItem('vSede');
+    } else {
+      sede = '';
+    }
+    return sede;
   }
 
   public leerNombreUsuario(): any {
@@ -271,7 +294,7 @@ export class SecurityService {
   }
 
   public redirectLogin(): void {
-    window.location.href = `${UrlBase_SSA}`;
+    void this.router.navigate(['/login'], { replaceUrl: true });
   }
 
   public obtenerUsuario(filtro: Usuario): Observable<any> {
@@ -301,7 +324,10 @@ export class SecurityService {
     localStorage.removeItem('tokenSGS');
     localStorage.removeItem('vEmail');
     localStorage.removeItem('vDescripcionAgencia');
+    localStorage.removeItem('vEmpresa');
+    localStorage.removeItem('vSede');
     localStorage.removeItem('modulos');
+    localStorage.removeItem('menusApi');
   }
 
   public leerPerfil() {
@@ -315,6 +341,29 @@ export class SecurityService {
 
   public getTokenMAC() {
     return <string>localStorage.getItem("tokenMAC");
+  }
+
+  public loginApi(usuario: string, password: string) {
+    return ajax.post(`${UrlBase_MACAPI}/auth/login`, { usuario, password }, {
+      'Content-Type': 'application/json'
+    });
+  }
+
+  public obtenerMenusApi() {
+    const token = this.leerTokenMAC();
+    return ajax.get<MenuApi[]>(`${UrlBase_MACAPI}/auth/menus`, {
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    });
+  }
+
+  public guardarMenusApi(data: MenuApi[]) {
+    localStorage.setItem('menusApi', JSON.stringify(data ?? []));
+  }
+
+  public leerMenusApi(): MenuApi[] {
+    const item = localStorage.getItem('menusApi');
+    return item ? (JSON.parse(item) as MenuApi[]) : [];
   }
 
   public loginTokenExternal(dataLoginExternal: DataLoginTokenExternal) {

@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { DomService } from 'src/app/services/dom.service';
 import { SecurityService } from 'src/app/services/security.service';
 import { AuthSubjectService } from 'src/app/services/subjects/auth-subject.service';
-import { Modulo } from '../../models/modulo.interface';
+import { MenuApi } from '../../models/menu-api.interface';
 declare var $: any;
 declare var M: any;
 @Component({
@@ -13,7 +13,7 @@ declare var M: any;
 export class SidebarComponent implements OnInit {
 
   ListaOpciones: any[] = [];
-  SecurityModulos: any[] = [];
+  SecurityModulos: MenuApi[] = [];
   isLoaded: boolean = false;
 
   constructor(
@@ -43,14 +43,8 @@ export class SidebarComponent implements OnInit {
   public modulos() {
     this.inicializarControles();
     this.inicializarEventos();
-
-    this._securityService.obtenerModulos().subscribe((result: any) => {
-      this.SecurityModulos = result.response as Modulo[];
-      this._securityService.descripcionPerfil$.emit(this.SecurityModulos[0].NombrePerfil);
-    })
-
-    // this._securityService.descripcionPerfil$.emit(this.SecurityModulos[0].NombrePerfil);  
-
+    this.SecurityModulos = this._securityService.leerMenusApi() ?? [];
+    this._securityService.descripcionPerfil$.emit(this._securityService.leerPerfil());
   }
 
 
@@ -74,22 +68,15 @@ export class SidebarComponent implements OnInit {
     this.domService.ShowSideBar();
   }
 
-  filtrarOpcionesPorModulo(IdOpcion: string) {
-    this.ListaOpciones = this.SecurityModulos.filter(
-      (x) => x.IdRelacion === IdOpcion
-    );
-    return this.ListaOpciones;
+  tieneHijos(menu: MenuApi): boolean {
+    return !!menu.hijos && menu.hijos.length > 0;
   }
 
-  filtrarTieneOpciones(IdOpcion: string) {
-    this.ListaOpciones = this.SecurityModulos.filter(
-      (x) => x.IdRelacion === IdOpcion
-    );
-    return this.ListaOpciones.length;
-  }
-
-  obtenerRutaOpcion(Opcion: any) {
-    return (Opcion.Controller != null ? Opcion.Controller : '') + (Opcion.Action != null ? '/' + Opcion.Action : '');
+  obtenerRutaOpcion(menu: MenuApi) {
+    if (!menu.ruta) {
+      return '/home';
+    }
+    return menu.ruta.startsWith('/') ? menu.ruta : `/${menu.ruta}`;
   }
 
 }

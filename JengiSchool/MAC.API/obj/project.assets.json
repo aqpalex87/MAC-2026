@@ -3129,6 +3129,7 @@
         "dependencies": {
           "AutoMapper": "11.0.1",
           "ClosedXML": "0.102.1",
+          "MAC.Control": "1.0.0",
           "MAC.DTO": "1.0.0",
           "MAC.Data.Access.Layer": "1.0.0",
           "Newtonsoft.Json": "13.0.1"

@@ -17,6 +17,29 @@ namespace Microsoft.Extensions.DependencyInjection
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MAC.API", Version = "v1" });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.CustomSchemaIds(type => (type.FullName ?? type.Name).Replace("+", ".", StringComparison.Ordinal));
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Ingrese el token JWT. Ejemplo: Bearer eyJhbGciOi..."
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
                 if (File.Exists(xmlPath))
                 {

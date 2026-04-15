@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MAC.Control\MAC.Control.csproj" />
     <ProjectReference Include="..\MAC.Data.Access.Layer\MAC.Data.Access.Layer.csproj" />
     <ProjectReference Include="..\MAC.DTO\MAC.DTO.csproj" />
   </ItemGroup>

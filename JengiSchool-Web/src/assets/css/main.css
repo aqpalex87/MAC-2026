@@ -390,21 +390,21 @@
     font-family: "Ubuntu";
   }
   body .sidenav {
-    width: 81px;
+    width: 255px;
     /* -webkit-transform: translateX(0%); */
             transform: translateX(0%);
   }
   body .sidenav .logo-mini {
-    display: initial;
+    display: none;
   }
   body .sidenav .logo {
-    display: none;
+    display: initial;
   }
   body .sidenav .collapsible-header div, body .sidenav .collapsible-header .keyboard_arrow_down {
-    display: none;
+    display: block;
   }
   body .sidenav .collapsible-header i {
-    margin-left: 1rem;
+    margin-left: 0;
   }
   body .menu-open {
     float: left;
@@ -412,8 +412,8 @@
   }
   body .container-body {
     position: relative;
-    width: calc( 100% - 81px);
-    left: 81px;
+    width: calc( 100% - 255px);
+    left: 255px;
   }
   /* body.menu-open {
     overflow: hidden;
@@ -421,7 +421,7 @@
   body.menu-open .sidenav {
     /* -webkit-transform: translateX(0%); */
             transform: translateX(0%);
-    width: 350px;
+    width: 255px;
   }
   body.menu-open .sidenav .logo-mini {
     display: none;
@@ -441,8 +441,8 @@
   }
   body.menu-open .container-body {
     position: relative;
-    width: calc( 100% - 350px);
-    left: 350px;
+    width: calc( 100% - 255px);
+    left: 255px;
   }
 
   .sidenav {
@@ -505,7 +505,7 @@
 
   @media only screen and (max-width: 600px) {
     body .sidenav.collapsible {
-      left: -81px;
+      left: -255px;
     }
     body .container-body {
       width: 100%;

@@ -20,6 +20,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IMenuService, MenuService>();
 
             services.AddScoped<ISedesService, SedesService>();
             services.AddScoped<ISedesRepository, SedesRepository>();

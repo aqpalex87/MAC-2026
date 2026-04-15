@@ -32,6 +32,7 @@ import { ParametroTipoClienteComponent } from './componentes/parametro-tipo-clie
 import { ParametroRseComponent } from './componentes/parametro-rse/parametro-rse.component';
 import { ParametroComportamientoComponent } from './componentes/parametro-comportamiento/parametro-comportamiento.component';
 import { ParametroAlertaComponent } from './componentes/parametro-alerta/parametro-alerta.component';
+import { MenuComponent } from './componentes/menu/menu.component';
 
 import { MatSelectModule } from '@angular/material/select';   
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -46,7 +47,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ParametroTipoClienteComponent,
     ParametroRseComponent,
     ParametroComportamientoComponent,
-    ParametroAlertaComponent
+    ParametroAlertaComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,

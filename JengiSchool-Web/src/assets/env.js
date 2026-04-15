@@ -1,7 +1,6 @@
 (function(window) {
     window["env"] = window["env"] || {};
     window["env"]["UrlBase_SGSAPI"] = 'https://10.241.161.120/SGS.API/api';
-    window["env"]["UrlBase_SSA"] = 'https://10.241.161.120/SSA';
     window["env"]["UrlBase_MAC"] = 'http://localhost:4200/';
     window["env"]["UrlBase_MACAPI"] = 'https://localhost:44351/api';
     window["env"]["AppKey"] = 'QWdyb2JhbmNvX1JlY2xhbW9zX0FwbGljYWNpb24=';
