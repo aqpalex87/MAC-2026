@@ -131,16 +131,29 @@ export class LoginComponent implements OnInit {
     this.securityService.guardarDataSeguridad(data);
     this.sedeModalVisible = false;
     this.loading = true;
-    this.securityService.obtenerMenusApi().pipe(timeout(15000)).subscribe({
-      next: (menusRes: any) => {
-        this.securityService.guardarMenusApi(menusRes.response ?? []);
-        this.loading = false;
-        this.toastr.success('Bienvenido', 'Sesion iniciada');
-        void this.router.navigateByUrl(this.returnUrl || '/home');
+    this.securityService.seleccionarSedeApi(Number(this.idSede)).pipe(timeout(15000)).subscribe({
+      next: (tokenRes: any) => {
+        const response = tokenRes?.response;
+        const token = response?.token || tokenRes?.xhr?.getResponseHeader?.('authorization');
+        if (token) {
+          this.securityService.guardarTokenMAC(token);
+        }
+        this.securityService.obtenerMenusApi().pipe(timeout(15000)).subscribe({
+          next: (menusRes: any) => {
+            this.securityService.guardarMenusApi(menusRes.response ?? []);
+            this.loading = false;
+            this.toastr.success('Bienvenido', 'Sesion iniciada');
+            void this.router.navigateByUrl(this.returnUrl || '/home');
+          },
+          error: () => {
+            this.loading = false;
+            this.toastr.error('No se pudieron cargar los menus (timeout o error de red).', 'Error');
+          }
+        });
       },
       error: () => {
         this.loading = false;
-        this.toastr.error('No se pudieron cargar los menus (timeout o error de red).', 'Error');
+        this.toastr.error('No se pudo asociar sede a la sesión.', 'Error');
       }
     });
   }

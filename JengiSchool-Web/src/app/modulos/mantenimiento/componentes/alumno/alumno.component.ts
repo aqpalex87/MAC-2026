@@ -13,6 +13,8 @@ import { ParametrosCatalogoService } from 'src/app/services/parametros-catalogo.
 import { SedeAdminService } from 'src/app/services/sede-admin.service';
 import { SecurityService } from 'src/app/services/security.service';
 import { UniversidadAdminService } from 'src/app/services/universidad-admin.service';
+import { CicloAdminService } from 'src/app/services/ciclo-admin.service';
+import { CicloCrud } from 'src/app/models/ciclo-crud.interface';
 
 @Component({
   selector: 'app-alumno',
@@ -38,6 +40,7 @@ export class AlumnoComponent implements OnInit {
   idSedeFiltro: number | null = null;
 
   sedesModal: SedeCrud[] = [];
+  ciclosModal: CicloCrud[] = [];
   universidadesModal: UniversidadComboItem[] = [];
   detallesCarrera: UniversidadDetalleCrud[] = [];
   sexos: ParametroListaItem[] = [];
@@ -50,6 +53,7 @@ export class AlumnoComponent implements OnInit {
     private alumnoService: AlumnoAdminService,
     private sedeService: SedeAdminService,
     private universidadService: UniversidadAdminService,
+    private cicloAdminService: CicloAdminService,
     private parametrosCatalogo: ParametrosCatalogoService,
     private securityService: SecurityService,
     private toastr: ToastrService
@@ -68,6 +72,7 @@ export class AlumnoComponent implements OnInit {
       ieUbigeo: ['', [Validators.maxLength(20)]],
       idEmpresaModal: [null as number | null, [Validators.required]],
       idSede: [null as number | null, [Validators.required]],
+      idCiclo: [null as number | null, [Validators.required]],
       idUniversidad: [null as number | null, [Validators.required]],
       idUniversidadDetalle: [null as number | null, [Validators.required]],
       apoderados: this.fb.array([]),
@@ -119,9 +124,11 @@ export class AlumnoComponent implements OnInit {
     const emp = Number(this.form.value.idEmpresaModal);
     this.form.patchValue({
       idSede: null,
+      idCiclo: null,
       idUniversidad: null,
       idUniversidadDetalle: null,
     });
+    this.ciclosModal = [];
     this.detallesCarrera = [];
     if (emp > 0) {
       this.sedeService.obtenerPorEmpresa(emp).pipe(timeout(15000)).subscribe({
@@ -141,6 +148,23 @@ export class AlumnoComponent implements OnInit {
     } else {
       this.sedesModal = [];
       this.universidadesModal = [];
+    }
+  }
+
+  onCambioSedeModal(): void {
+    const idSede = Number(this.form.value.idSede);
+    const emp = Number(this.form.value.idEmpresaModal);
+    this.form.patchValue({ idCiclo: null });
+    if (idSede > 0 && emp > 0) {
+      this.cicloAdminService.obtenerPaginado(emp, idSede, '', 1, 500).pipe(timeout(15000)).subscribe({
+        next: (res) => (this.ciclosModal = res?.items ?? []),
+        error: () => {
+          this.ciclosModal = [];
+          this.toastr.error('No se pudo cargar ciclos de la sede.');
+        },
+      });
+    } else {
+      this.ciclosModal = [];
     }
   }
 
@@ -202,9 +226,11 @@ export class AlumnoComponent implements OnInit {
       ieUbigeo: '',
       idEmpresaModal: emp,
       idSede: null,
+      idCiclo: null,
       idUniversidad: null,
       idUniversidadDetalle: null,
     });
+    this.ciclosModal = [];
     this.detallesCarrera = [];
     this.modalVisible = true;
     if (emp && emp > 0) {
@@ -233,6 +259,7 @@ export class AlumnoComponent implements OnInit {
           ieUbigeo: a.ieUbigeo ?? '',
           idEmpresaModal: emp,
           idSede: a.idSede,
+          idCiclo: null,
           idUniversidad: a.idUniversidad,
           idUniversidadDetalle: a.idUniversidadDetalle,
         });
@@ -251,6 +278,19 @@ export class AlumnoComponent implements OnInit {
             next: (list) => (this.detallesCarrera = Array.isArray(list) ? list : []),
             error: () => (this.detallesCarrera = []),
           });
+        }
+        if (emp && emp > 0 && a.idSede > 0) {
+          this.cicloAdminService.obtenerPaginado(emp, a.idSede, '', 1, 500).pipe(timeout(15000)).subscribe({
+            next: (res) => {
+              this.ciclosModal = res?.items ?? [];
+              this.form.patchValue({ idCiclo: a.idCiclo ?? null });
+            },
+            error: () => {
+              this.ciclosModal = [];
+            },
+          });
+        } else {
+          this.ciclosModal = [];
         }
         (a.apoderados ?? []).forEach((ap) => {
           this.apoderadosFormArray.push(
@@ -290,6 +330,7 @@ export class AlumnoComponent implements OnInit {
       ieProcedencia: (v.ieProcedencia ?? '').trim() || null,
       ieUbigeo: (v.ieUbigeo ?? '').trim() || null,
       idSede: Number(v.idSede),
+      idCiclo: Number(v.idCiclo),
       idUniversidad: Number(v.idUniversidad),
       idUniversidadDetalle: Number(v.idUniversidadDetalle),
       apoderados: this.apoderadosFormArray.controls

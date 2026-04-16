@@ -44,6 +44,7 @@
       <th>Apellidos</th>
       <th>Nombres</th>
       <th>Sede</th>
+      <th>Ciclo</th>
       <th>Universidad</th>
       <th>Carrera</th>
       <th class="text-center">Opciones</th>
@@ -56,6 +57,7 @@
       <td>{{ item.apellidos }}</td>
       <td>{{ item.nombres }}</td>
       <td>{{ item.nombreSede || '-' }}</td>
+      <td>{{ item.nombreCiclo || '-' }}</td>
       <td>{{ item.nombreUniversidad || '-' }}</td>
       <td>{{ item.nombreCarreraDetalle || '-' }}</td>
       <td class="text-center actions">
@@ -66,7 +68,7 @@
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td colspan="8">No hay registros.</td>
+      <td colspan="9">No hay registros.</td>
     </tr>
   </ng-template>
 </p-table>
@@ -94,9 +96,16 @@
         </div>
         <div class="field">
           <label>Sede *</label>
-          <select class="browser-default fullw" formControlName="idSede">
+          <select class="browser-default fullw" formControlName="idSede" (change)="onCambioSedeModal()">
             <option [ngValue]="null">Seleccione sede</option>
             <option *ngFor="let s of sedesModal" [ngValue]="s.idSede">{{ s.nombre }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Ciclo *</label>
+          <select class="browser-default fullw" formControlName="idCiclo">
+            <option [ngValue]="null">Seleccione ciclo</option>
+            <option *ngFor="let c of ciclosModal" [ngValue]="c.idCiclo">{{ c.nombre }}</option>
           </select>
         </div>
         <div class="field">
@@ -106,6 +115,8 @@
             <option *ngFor="let u of universidadesModal" [ngValue]="u.idUniversidad">{{ u.nombre }}</option>
           </select>
         </div>
+      </div>
+      <div class="grid-4">
         <div class="field">
           <label>Carrera (detalle) *</label>
           <select class="browser-default fullw" formControlName="idUniversidadDetalle" (change)="onCambioDetalleCarrera()">
@@ -113,8 +124,6 @@
             <option *ngFor="let d of detallesCarrera" [ngValue]="d.idDetalle">{{ d.carreraNombre }}</option>
           </select>
         </div>
-      </div>
-      <div class="grid-4">
         <div class="field">
           <label>DNI</label>
           <input pInputText formControlName="dni" maxlength="15" />
@@ -127,6 +136,8 @@
           <label>Nombres *</label>
           <input pInputText formControlName="nombres" maxlength="100" />
         </div>
+      </div>
+      <div class="grid-4">
         <div class="field">
           <label>Sexo</label>
           <select class="browser-default fullw" formControlName="idParamSexo">
@@ -134,8 +145,6 @@
             <option *ngFor="let s of sexos" [ngValue]="s.idParametro">{{ s.nombre }}</option>
           </select>
         </div>
-      </div>
-      <div class="grid-4">
         <div class="field">
           <label>Día nac.</label>
           <p-inputNumber formControlName="dia" [useGrouping]="false" [min]="1" [max]="31" placeholder="Día" styleClass="fullw-inputnumber"></p-inputNumber>
@@ -148,13 +157,13 @@
           <label>Año nac.</label>
           <p-inputNumber formControlName="anio" [useGrouping]="false" placeholder="Año" styleClass="fullw-inputnumber"></p-inputNumber>
         </div>
+      </div>
+      <div class="grid-4">
         <div class="field">
           <label>WhatsApp alumno</label>
           <input pInputText formControlName="whatsApp" maxlength="15" />
         </div>
-      </div>
-      <div class="grid-4">
-        <div class="field span-2">
+        <div class="field">
           <label>Carrera (texto libre / respaldo)</label>
           <input pInputText formControlName="carreraPostula" maxlength="150" />
         </div>

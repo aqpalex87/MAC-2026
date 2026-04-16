@@ -13,6 +13,7 @@ ALTER PROCEDURE [dbo].[MAC_INSERT_ALUMNO]
     @IdSede INT,
     @IdUniversidad INT,
     @IdUniversidadDetalle INT,
+    @IdCiclo INT = NULL,
     @IdAlumno INT OUTPUT
 AS
 BEGIN
@@ -34,6 +35,7 @@ BEGIN
         IdSede,
         IdUniversidad,
         IdUniversidadDetalle,
+        IdCiclo,
         FechaRegistro
     )
     VALUES
@@ -52,6 +54,7 @@ BEGIN
         @IdSede,
         @IdUniversidad,
         @IdUniversidadDetalle,
+        @IdCiclo,
         SYSUTCDATETIME()
     );
 

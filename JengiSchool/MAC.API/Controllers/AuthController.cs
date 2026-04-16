@@ -45,6 +45,27 @@ namespace MAC.API.Controllers
             return Ok(result.Resultado);
         }
 
+        [Authorize]
+        [HttpPost("seleccionar-sede")]
+        public IActionResult SeleccionarSede([FromBody] AuthSeleccionarSedeRequestDto request)
+        {
+            int idEmpresa = UserJwt.IdEmpresa ?? 0;
+            int idRol = UserJwt.IdRol ?? 0;
+            string usuario = UserJwt.CodUsuario;
+            string rol = UserJwt.Perfil;
+            int idSede = request?.IdSede ?? 0;
+
+            var result = _authService.SeleccionarSede(usuario, idEmpresa, idSede, idRol, rol);
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+
+            Response.Headers.Add("Access-Control-Expose-Headers", "Authorization");
+            Response.Headers.Add("Authorization", result.Resultado.Token);
+            return Ok(result.Resultado);
+        }
+
         [AllowAnonymous]
         [HttpGet("empresas")]
         public IActionResult Empresas()

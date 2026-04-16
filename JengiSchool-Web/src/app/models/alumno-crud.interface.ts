@@ -23,6 +23,8 @@ export interface AlumnoCrud {
   idSede: number;
   idUniversidad: number;
   idUniversidadDetalle: number;
+  idCiclo?: number | null;
+  nombreCiclo?: string | null;
   nombreSede?: string;
   idEmpresa?: number;
   nombreEmpresa?: string;

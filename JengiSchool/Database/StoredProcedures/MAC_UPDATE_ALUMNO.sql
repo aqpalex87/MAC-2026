@@ -15,7 +15,8 @@ ALTER PROCEDURE [dbo].[MAC_UPDATE_ALUMNO]
     @IE_Ubigeo VARCHAR(20) = NULL,
     @IdSede INT,
     @IdUniversidad INT,
-    @IdUniversidadDetalle INT
+    @IdUniversidadDetalle INT,
+    @IdCiclo INT = NULL
 AS
 BEGIN
 
@@ -34,6 +35,7 @@ BEGIN
         IE_Ubigeo = NULLIF(LTRIM(RTRIM(ISNULL(@IE_Ubigeo, ''))), ''),
         IdSede = @IdSede,
         IdUniversidad = @IdUniversidad,
-        IdUniversidadDetalle = @IdUniversidadDetalle
+        IdUniversidadDetalle = @IdUniversidadDetalle,
+        IdCiclo = @IdCiclo
     WHERE IdAlumno = @IdAlumno;
 END

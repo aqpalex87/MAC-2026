@@ -83,6 +83,7 @@ namespace MAC.Data.Access.Layer.Implementation
             command.Parameters.Add(new SqlParameter("@IdSede", SqlDbType.Int) { Value = alumno.IdSede });
             command.Parameters.Add(new SqlParameter("@IdUniversidad", SqlDbType.Int) { Value = alumno.IdUniversidad });
             command.Parameters.Add(new SqlParameter("@IdUniversidadDetalle", SqlDbType.Int) { Value = alumno.IdUniversidadDetalle });
+            command.Parameters.Add(new SqlParameter("@IdCiclo", SqlDbType.Int) { Value = (object)alumno.IdCiclo ?? DBNull.Value });
             command.Parameters.Add(new SqlParameter("@IdAlumno", SqlDbType.Int) { Direction = ParameterDirection.Output });
             sqlConnection.Open();
             command.ExecuteNonQuery();
@@ -110,6 +111,7 @@ namespace MAC.Data.Access.Layer.Implementation
             command.Parameters.Add(new SqlParameter("@IdSede", SqlDbType.Int) { Value = alumno.IdSede });
             command.Parameters.Add(new SqlParameter("@IdUniversidad", SqlDbType.Int) { Value = alumno.IdUniversidad });
             command.Parameters.Add(new SqlParameter("@IdUniversidadDetalle", SqlDbType.Int) { Value = alumno.IdUniversidadDetalle });
+            command.Parameters.Add(new SqlParameter("@IdCiclo", SqlDbType.Int) { Value = (object)alumno.IdCiclo ?? DBNull.Value });
             sqlConnection.Open();
             return command.ExecuteNonQuery() > 0;
         }

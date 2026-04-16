@@ -20,6 +20,8 @@ BEGIN
         a.IdSede,
         a.IdUniversidad,
         a.IdUniversidadDetalle,
+        a.IdCiclo,
+        cic.Nombre AS NombreCiclo,
         s.Nombre AS NombreSede,
         s.IdEmpresa,
         e.Nombre AS NombreEmpresa,
@@ -28,6 +30,7 @@ BEGIN
     FROM dbo.Alumno AS a
     INNER JOIN dbo.Sedes AS s ON s.IdSede = a.IdSede
     INNER JOIN dbo.Empresas AS e ON e.IdEmpresa = s.IdEmpresa
+    LEFT JOIN dbo.Ciclo AS cic ON cic.IdCiclo = a.IdCiclo
     LEFT JOIN dbo.Universidad AS u ON u.IdUniversidad = a.IdUniversidad
     LEFT JOIN dbo.UniversidadDetalle AS ud ON ud.IdDetalle = a.IdUniversidadDetalle
     WHERE a.IdAlumno = @IdAlumno;

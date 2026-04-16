@@ -17,6 +17,8 @@ namespace MAC.Business.Entity.Layer.Entities
         public int IdSede { get; set; }
         public int IdUniversidad { get; set; }
         public int IdUniversidadDetalle { get; set; }
+        public int? IdCiclo { get; set; }
+        public string NombreCiclo { get; set; }
         public string NombreSede { get; set; }
         public int IdEmpresa { get; set; }
         public string NombreEmpresa { get; set; }

@@ -185,6 +185,11 @@ namespace MAC.Business.Logic.Layer.Implementation
                 mensaje = "Carrera (detalle) requerida.";
                 return false;
             }
+            if (!request.IdCiclo.HasValue || request.IdCiclo.Value <= 0)
+            {
+                mensaje = "Ciclo requerido.";
+                return false;
+            }
             return true;
         }
 
@@ -230,6 +235,8 @@ namespace MAC.Business.Logic.Layer.Implementation
                 IdSede = a.IdSede,
                 IdUniversidad = a.IdUniversidad,
                 IdUniversidadDetalle = a.IdUniversidadDetalle,
+                IdCiclo = a.IdCiclo,
+                NombreCiclo = a.NombreCiclo,
                 NombreSede = a.NombreSede,
                 IdEmpresa = a.IdEmpresa,
                 NombreEmpresa = a.NombreEmpresa,
@@ -269,7 +276,8 @@ namespace MAC.Business.Logic.Layer.Implementation
                 IeUbigeo = d.IeUbigeo?.Trim(),
                 IdSede = d.IdSede,
                 IdUniversidad = d.IdUniversidad,
-                IdUniversidadDetalle = d.IdUniversidadDetalle
+                IdUniversidadDetalle = d.IdUniversidadDetalle,
+                IdCiclo = d.IdCiclo is > 0 ? d.IdCiclo : null
             };
         }
 

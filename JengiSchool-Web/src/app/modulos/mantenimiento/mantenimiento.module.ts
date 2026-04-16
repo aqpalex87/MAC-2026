@@ -43,6 +43,7 @@ import { UniversidadComponent } from './componentes/universidad/universidad.comp
 import { CicloComponent } from './componentes/ciclo/ciclo.component';
 import { AlumnoComponent } from './componentes/alumno/alumno.component';
 import { GenerarCarnetComponent } from './componentes/generar-carnet/generar-carnet.component';
+import { AsistenciaComponent } from './componentes/asistencia/asistencia.component';
 
 import { MatSelectModule } from '@angular/material/select';   
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -67,7 +68,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     UniversidadComponent,
     CicloComponent,
     AlumnoComponent,
-    GenerarCarnetComponent
+    GenerarCarnetComponent,
+    AsistenciaComponent
   ],
   imports: [
     CommonModule,

@@ -82,6 +82,62 @@ namespace MAC.Business.Logic.Layer.Implementation
             return result;
         }
 
+        public Result<AuthLoginResponseDto> SeleccionarSede(string usuario, int idEmpresa, int idSede, int idRol, string rolNombre)
+        {
+            Result<AuthLoginResponseDto> result = new();
+            if (string.IsNullOrWhiteSpace(usuario))
+            {
+                return result.BadRequest("Usuario no identificado.");
+            }
+            if (idEmpresa <= 0)
+            {
+                return result.BadRequest("Empresa inválida.");
+            }
+            if (idSede <= 0)
+            {
+                return result.BadRequest("Sede inválida.");
+            }
+
+            // Validar que la sede pertenezca a la empresa
+            var sedes = _authRepository.ObtenerSedesPorEmpresa(idEmpresa) ?? new List<SedeAuth>();
+            var sede = sedes.FirstOrDefault(x => x.IdSede == idSede);
+            if (sede == null)
+            {
+                return result.BadRequest("La sede seleccionada no pertenece a la empresa.");
+            }
+
+            AccessDto accessDto = new()
+            {
+                CodigoUsuario = usuario.Trim(),
+                CorreoElectronico = $"{usuario.Trim()}@local",
+                NombreUsuario = usuario.Trim(),
+                NumeroDocumento = usuario.Trim(),
+                Perfil = string.IsNullOrWhiteSpace(rolNombre) ? "Usuario" : rolNombre,
+                IdRol = idRol > 0 ? idRol : null,
+                IdEmpresa = idEmpresa,
+                IdSede = idSede
+            };
+
+            var (tokenResponse, token) = _accessControl.GenerateToken(accessDto);
+
+            result.Status = HttpStatusCode.OK;
+            result.Resultado = new AuthLoginResponseDto
+            {
+                IdUsuario = 0,
+                Usuario = usuario.Trim(),
+                IdEmpresa = idEmpresa,
+                Empresa = string.Empty,
+                IdSede = idSede,
+                Sede = sede.Nombre,
+                IdRol = idRol,
+                Rol = accessDto.Perfil,
+                Token = $"Bearer {token}",
+                FechaInicioVigencia = tokenResponse.FechaInicioVigencia,
+                FechaFinVigencia = tokenResponse.FechaFinVigencia
+            };
+            return result;
+        }
+
         public Result<List<MenuDto>> ObtenerMenusPorUsuario(string usuario, int? idEmpresa, int? idSede)
         {
             Result<List<MenuDto>> result = new();

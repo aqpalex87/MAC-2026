@@ -12,6 +12,7 @@ import { UniversidadComponent } from './componentes/universidad/universidad.comp
 import { CicloComponent } from './componentes/ciclo/ciclo.component';
 import { AlumnoComponent } from './componentes/alumno/alumno.component';
 import { GenerarCarnetComponent } from './componentes/generar-carnet/generar-carnet.component';
+import { AsistenciaComponent } from './componentes/asistencia/asistencia.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'carnets',
     component: GenerarCarnetComponent
+  },
+  {
+    path: 'asistencias',
+    component: AsistenciaComponent
   },
   {
     path: '**',

@@ -384,6 +384,14 @@ export class SecurityService {
     });
   }
 
+  public seleccionarSedeApi(idSede: number) {
+    const token = this.leerTokenMAC();
+    return ajax.post(`${UrlBase_MACAPI}/auth/seleccionar-sede`, { idSede }, {
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`
+    });
+  }
+
   public guardarMenusApi(data: MenuApi[]) {
     localStorage.setItem('menusApi', JSON.stringify(data ?? []));
   }
