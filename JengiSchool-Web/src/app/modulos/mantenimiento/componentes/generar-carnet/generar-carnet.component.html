@@ -1,0 +1,115 @@
+<div class="section no-padding carnet-page noprint">
+  <div class="carnet-header">
+    <h1 class="title">Generar carnet</h1>
+    <p class="subtitle">Empresa sesión: {{ empresaNombre }}</p>
+  </div>
+</div>
+
+<div class="carnet-toolbar noprint">
+  <div class="search-wrap">
+    <select class="browser-default filter-select" [(ngModel)]="idEmpresaFiltro" (change)="onCambioEmpresaFiltro()">
+      <option [ngValue]="null">Empresa</option>
+      <option *ngFor="let e of empresas" [ngValue]="e.idEmpresa">{{ e.nombre }}</option>
+    </select>
+    <select class="browser-default filter-select" [(ngModel)]="idSedeFiltro" (change)="buscar()" [disabled]="!idEmpresaFiltro">
+      <option [ngValue]="null">Todas las sedes</option>
+      <option *ngFor="let s of sedesFiltro" [ngValue]="s.idSede">{{ s.nombre }}</option>
+    </select>
+    <input pInputText type="text" [(ngModel)]="filtro" placeholder="DNI, nombres, apellidos o carrera" (keyup.enter)="buscar()" />
+    <button pButton type="button" icon="pi pi-search" label="Buscar" class="btn-search" (click)="buscar()"></button>
+    <button pButton type="button" icon="pi pi-times" class="btn-clear" (click)="limpiarFiltro()"></button>
+  </div>
+</div>
+
+<p-table
+  class="noprint"
+  [value]="items"
+  styleClass="p-datatable-sm p-datatable-gridlines carnet-table"
+  [paginator]="true"
+  [rows]="rows"
+  [totalRecords]="totalRows"
+  [lazy]="true"
+  [loading]="loading"
+  [rowsPerPageOptions]="[10, 15, 25, 50]"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
+  (onLazyLoad)="onLazyLoad($event)"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>DNI</th>
+      <th>Apellidos</th>
+      <th>Nombres</th>
+      <th>Carrera</th>
+      <th>Ciclo</th>
+      <th>Vencimiento</th>
+      <th>Inscripción</th>
+      <th>F. registro</th>
+      <th class="text-center">Carnet</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td>{{ item.dni || '—' }}</td>
+      <td>{{ item.apellidos }}</td>
+      <td>{{ item.nombres }}</td>
+      <td>{{ item.carreraPostula || '—' }}</td>
+      <td>{{ item.nombreCiclo || '—' }}</td>
+      <td>{{ formatoFecha(item.fechaVencimiento) }}</td>
+      <td>{{ formatoFecha(item.fechaInscripcion) }}</td>
+      <td>{{ formatoFechaHora(item.fechaRegistro) }}</td>
+      <td class="text-center">
+        <button
+          pButton
+          type="button"
+          icon="pi pi-id-card"
+          class="btn-carnet"
+          pTooltip="Vista previa e imprimir"
+          (click)="abrirVistaCarnet(item)"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="9">No hay alumnos para la empresa/sede y filtros seleccionados.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog
+  [(visible)]="dialogCarnet"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: 'min(56rem, 98vw)' }"
+  styleClass="carnet-dialog p-dialog-printable"
+  header="Vista previa del carnet"
+  (onShow)="onCarnetDialogShown()"
+  (onHide)="cerrarDialogCarnet()"
+>
+  <div class="carnet-print-root carnet-print-only" *ngIf="carnetSeleccionado as c">
+    <div class="carnet-sheet">
+      <div class="carnet-face carnet-front">
+        <div class="carnet-brand">{{ marcaAcademia(c) }}</div>
+        <div class="carnet-photo"></div>
+        <div class="carnet-name">{{ nombreCompletoAlumno(c) }}</div>
+        <svg #barcodeSvg class="carnet-barcode"></svg>
+      </div>
+      <div class="carnet-face carnet-back">
+        <div class="carnet-brand sm">{{ marcaAcademia(c) }}</div>
+        <div class="carnet-qr-wrap">
+          <img #qrImg class="carnet-qr" alt="QR datos alumno" />
+        </div>
+        <div class="carnet-contact">
+          <div><i class="pi pi-map-marker"></i> {{ direccionCarnet }}</div>
+          <div><i class="pi pi-phone"></i> {{ telefonoCarnet }}</div>
+          <div class="carnet-meta">Sede: {{ c.nombreSede || '—' }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton type="button" label="Cerrar" icon="pi pi-times" class="btn-clear noprint" (click)="dialogCarnet = false"></button>
+    <button pButton type="button" label="Imprimir" icon="pi pi-print" class="btn-print noprint" (click)="imprimirCarnet()"></button>
+  </ng-template>
+</p-dialog>

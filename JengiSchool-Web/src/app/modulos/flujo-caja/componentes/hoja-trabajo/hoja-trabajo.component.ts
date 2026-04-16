@@ -9,7 +9,7 @@ import * as FlujoCajaActions from "../../../../redux/actions/flujo-caja/flujo.ca
 import { HojaProductoService } from 'src/app/services/hoja-producto.service';
 import Swal from 'sweetalert2';
 import { LoadingService } from 'src/app/services/comun/loading.service';
-import * as daysjs from 'dayjs';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'app-hoja-trabajo',
@@ -92,7 +92,7 @@ export class hojaTrabajoComponent implements OnInit {
   }
 
   ConvertirFecha(value: any) {
-    var result = daysjs(value).format('DD/MM/YYYY');
+    var result = dayjs(value).format('DD/MM/YYYY');
     return result;
   }
 

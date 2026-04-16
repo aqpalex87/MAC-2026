@@ -39,6 +39,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IParametrosMaestroService, ParametrosMaestroService>();
             services.AddScoped<IAlumnoRepository, AlumnoRepository>();
             services.AddScoped<IAlumnoService, AlumnoService>();
+            services.AddScoped<ICarnetRepository, CarnetRepository>();
+            services.AddScoped<ICarnetService, CarnetService>();
 
             services.AddScoped<ISedesService, SedesService>();
             services.AddScoped<ISedesRepository, SedesRepository>();

@@ -4,7 +4,7 @@ import { Anio, FlujoCajaReporteFiltro } from 'src/app/models/flujocaja.interface
 import { FlujoCajaService } from 'src/app/services/flujo-caja.service';
 import { GlobalConstants } from 'src/app/shared/common/globalContants';
 import Swal from 'sweetalert2';
-import * as daysjs from 'dayjs';
+import dayjs from 'dayjs';
 import { timeInterval } from 'rxjs';
 import { LoadingService } from 'src/app/services/comun/loading.service';
 
@@ -19,7 +19,7 @@ export class FlujoCajaReporteComponent implements OnInit {
   filtro: FlujoCajaReporteFiltro;
   mensajes: Message[] = [];
   loading: boolean = false;
-  anioActual: string = daysjs().format('YYYY');
+  anioActual: string = dayjs().format('YYYY');
   minFechaInicio: Date;
   maxFechaInicio: Date;
   minFechaFin: Date;
@@ -52,7 +52,7 @@ export class FlujoCajaReporteComponent implements OnInit {
     this.actualDate = this.obtenerFechaActual();
     this.filtro = {
       fechaFin: this.actualDate,
-      fechaInicio: daysjs(this.actualDate).subtract(12, 'month').add(1, 'day').toDate()
+      fechaInicio: dayjs(this.actualDate).subtract(12, 'month').add(1, 'day').toDate()
     };
 
     this.setMinMaxDate(this.filtro.fechaInicio, this.filtro.fechaFin);
@@ -70,7 +70,7 @@ export class FlujoCajaReporteComponent implements OnInit {
   }
   inicioSelectedDate(dateSelected: Date) {
     this.filtro.fechaInicio = dateSelected;
-    const fechaFinTemp = daysjs(this.filtro.fechaInicio).add(12, 'month').subtract(1, 'day').toDate();
+    const fechaFinTemp = dayjs(this.filtro.fechaInicio).add(12, 'month').subtract(1, 'day').toDate();
     this.minFechaInicio = this.filtro.fechaInicio
     this.maxFechaInicio = this.filtro.fechaFin;
 
@@ -80,7 +80,7 @@ export class FlujoCajaReporteComponent implements OnInit {
 
   finSelectedDate(dateSelected: Date) {
     this.filtro.fechaFin = dateSelected;
-    const fechaInicioTemp = daysjs(this.filtro.fechaFin).subtract(12, 'month').add(1, 'day').toDate();
+    const fechaInicioTemp = dayjs(this.filtro.fechaFin).subtract(12, 'month').add(1, 'day').toDate();
 
     this.minFechaInicio = fechaInicioTemp;
     this.maxFechaInicio = this.filtro.fechaFin;
@@ -89,7 +89,7 @@ export class FlujoCajaReporteComponent implements OnInit {
     this.maxFechaFin = this.filtro.fechaFin;
 
     this.selectedAnio = {
-      code: daysjs(dateSelected).year().toString()
+      code: dayjs(dateSelected).year().toString()
     };
   }
 
@@ -102,10 +102,10 @@ export class FlujoCajaReporteComponent implements OnInit {
 
   selectedYear({ value }: any) {
     this.filtro.fechaFin = this.actualDate;
-    this.filtro.fechaInicio = daysjs(this.filtro.fechaFin).subtract(12, 'month').add(1, 'day').toDate();
+    this.filtro.fechaInicio = dayjs(this.filtro.fechaFin).subtract(12, 'month').add(1, 'day').toDate();
     if (value.code < this.anioActual) {
-      this.filtro.fechaFin = daysjs(`${value.code}1231`).toDate();
-      this.filtro.fechaInicio = daysjs(this.filtro.fechaFin).subtract(12, 'months').add(1, 'day').toDate();
+      this.filtro.fechaFin = dayjs(`${value.code}1231`).toDate();
+      this.filtro.fechaInicio = dayjs(this.filtro.fechaFin).subtract(12, 'months').add(1, 'day').toDate();
     }
     this.setMinMaxDate(this.filtro.fechaInicio, this.filtro.fechaFin);
   }
@@ -118,8 +118,8 @@ export class FlujoCajaReporteComponent implements OnInit {
         // this.obtenerFlujosCaja();
 
         this.flujoCajaService.descargarReporteFC(
-          daysjs(this.filtro.fechaInicio).format('YYYYMMDD'),
-          daysjs(this.filtro.fechaFin).format('YYYYMMDD'),
+          dayjs(this.filtro.fechaInicio).format('YYYYMMDD'),
+          dayjs(this.filtro.fechaFin).format('YYYYMMDD'),
         ).subscribe(
           data => {
             this.loadingService.loading(false);
@@ -228,7 +228,7 @@ export class FlujoCajaReporteComponent implements OnInit {
   // }
 
   obtenerFechaActual(): Date {
-    return daysjs().toDate();
+    return dayjs().toDate();
     // const fecha = new Date;
     // const fechaSinHora = new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate());
     // return fechaSinHora;

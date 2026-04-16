@@ -11,7 +11,7 @@ import { SharedRSEService } from 'src/app/services/shared/shared.rse.service';
 import { TreeNode } from 'primeng/api';
 import { Solicitud } from 'src/app/models/solicitud.interface';
 import * as FlujoCajaRSEActions from 'src/app/redux/actions/flujo-caja/rse.actions';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/es'
 import { ConsultarfcModule } from 'src/app/modulos/consultar-fc/consulta-fc.module';
 import { HojaProducto } from 'src/app/models/hojaProducto.interface';

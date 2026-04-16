@@ -16,6 +16,11 @@
             <response code="500">Server Error - Errores no controlados</response>  
             <response code="502">Bad Gateway - Servidor remoto sin conexión o no disponible</response>  
         </member>
+        <member name="M:MAC.API.Controllers.CarnetsController.ObtenerListado(System.Int32,System.Nullable{System.Int32},System.String,System.Int32,System.Int32)">
+            <summary>
+            Listado de alumnos con carnet para la empresa (y opcionalmente sede). Filtro por DNI, nombres, apellidos o carrera.
+            </summary>
+        </member>
         <member name="M:MAC.API.Controllers.FlujoCajaController.GuardarFlujoCaja(MAC.DTO.Dtos.FlujoCajaMasterRequestDto)">
             <summary>
             Guarda un Flujo de Caja.

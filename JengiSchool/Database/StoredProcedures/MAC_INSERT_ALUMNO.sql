@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[MAC_INSERT_ALUMNO]
+ALTER PROCEDURE [dbo].[MAC_INSERT_ALUMNO]
     @DNI VARCHAR(15) = NULL,
     @Apellidos VARCHAR(100) = NULL,
     @Nombres VARCHAR(100) = NULL,
@@ -33,7 +33,8 @@ BEGIN
         IE_Ubigeo,
         IdSede,
         IdUniversidad,
-        IdUniversidadDetalle
+        IdUniversidadDetalle,
+        FechaRegistro
     )
     VALUES
     (
@@ -50,7 +51,8 @@ BEGIN
         NULLIF(LTRIM(RTRIM(ISNULL(@IE_Ubigeo, ''))), ''),
         @IdSede,
         @IdUniversidad,
-        @IdUniversidadDetalle
+        @IdUniversidadDetalle,
+        SYSUTCDATETIME()
     );
 
     SET @IdAlumno = SCOPE_IDENTITY();

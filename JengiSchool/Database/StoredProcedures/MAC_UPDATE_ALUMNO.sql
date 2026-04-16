@@ -1,6 +1,6 @@
 use academias
 go
-CREATE PROCEDURE [dbo].[MAC_UPDATE_ALUMNO]
+ALTER PROCEDURE [dbo].[MAC_UPDATE_ALUMNO]
     @IdAlumno INT,
     @DNI VARCHAR(15) = NULL,
     @Apellidos VARCHAR(100) = NULL,

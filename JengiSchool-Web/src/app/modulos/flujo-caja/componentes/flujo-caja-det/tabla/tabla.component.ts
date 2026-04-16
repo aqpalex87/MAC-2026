@@ -14,7 +14,7 @@ import { Column, Solicitud } from 'src/app/models/solicitud.interface';
 import { SolicitudService } from 'src/app/services/solicitud.service';
 import { SharedFlujoCajaService } from 'src/app/services/shared/shared.flujoCaja.service';
 import { SharedFCDetalleService } from 'src/app/services/shared/shared.fcdetalle.service';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/es'
 import { SharedService } from 'src/app/services/shared/shared.service';
 import { selectTablaFCDetalle } from 'src/app/redux/selectors/flujo-caja/fcdetalle.selectors';
