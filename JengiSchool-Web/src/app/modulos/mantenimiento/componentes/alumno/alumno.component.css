@@ -1,0 +1,136 @@
+.alumno-header {
+  background: #ffffff;
+  border: 1px solid #e6eaf0;
+  border-left: 5px solid #00694f;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+}
+.alumno-header .title { margin: 0; color: #1f2937; font-size: 22px; font-weight: 700; }
+.alumno-header .subtitle { margin: 4px 0 0; color: #475569; font-size: 12px; }
+
+.alumno-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  background: #ffffff;
+  border: 1px solid #e6eaf0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  flex-wrap: wrap;
+}
+
+.search-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 1; max-width: 900px; }
+.filter-select {
+  min-width: 160px;
+  height: 36px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+.alumno-table { border-radius: 10px; overflow: hidden; border: 1px solid #e6eaf0; }
+.actions { display: flex; justify-content: center; gap: 8px; }
+.btn-action { width: 2rem !important; height: 2rem !important; border: 0 !important; }
+.btn-action.edit { background: #f59e0b !important; }
+.btn-action.delete { background: #dc2626 !important; }
+
+.btn-add { background: #00694f !important; color: #fff !important; border: 0 !important; }
+.btn-search { background: #0ea5e9 !important; color: #fff !important; border: 0 !important; }
+.btn-save { background: #2563eb !important; color: #fff !important; border: 0 !important; }
+.btn-clear { background: #64748b !important; color: #fff !important; }
+
+.alumno-form { display: flex; flex-direction: column; gap: 16px; padding-right: 4px; }
+
+/* Modal crear/editar alumno: ancho casi total y alto hasta el viewport (sin el scroll extra de 70vh del form) */
+:host ::ng-deep .alumno-crud-dialog.p-dialog {
+  width: min(96rem, 99vw) !important;
+  max-height: calc(100vh - 1.5rem);
+}
+:host ::ng-deep .alumno-crud-dialog .p-dialog-content {
+  max-height: calc(100vh - 11rem);
+  overflow-y: auto;
+  padding-bottom: 0.75rem;
+}
+.fieldset-block {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px 14px;
+  margin: 0;
+}
+.fieldset-block legend {
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  padding: 0 6px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.field label { font-size: 11px; font-weight: 600; color: #64748b; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 12px; }
+.field.span-2 { grid-column: span 2; }
+.fullw { width: 100%; }
+
+.alumno-datos-compact .field { margin-bottom: 4px; }
+.alumno-datos-compact .grid-4 + .grid-4 { margin-top: 2px; }
+
+/* p-inputNumber a ancho completo dentro de la celda */
+:host ::ng-deep .alumno-form .fullw-inputnumber.p-inputnumber,
+:host ::ng-deep .alumno-form .fullw-inputnumber.p-inputnumber .p-inputtext {
+  width: 100%;
+}
+
+.alumno-apod-block { min-height: 0; }
+
+.apod-toolbar { margin-bottom: 8px; }
+.btn-add-sm { background: #0f766e !important; color: #fff !important; border: 0 !important; font-size: 12px !important; }
+.apod-list { display: flex; flex-direction: column; gap: 8px; }
+
+/* 4 campos por fila + columna estrecha para eliminar (alineado con cabecera) */
+.grid-4-apod {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, 1.2fr) 2.5rem;
+  gap: 8px 10px;
+  align-items: end;
+}
+.apod-head {
+  align-items: end;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.apod-head span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+}
+.apod-head-actions { min-width: 2.5rem; }
+.apod-row input,
+.apod-row select {
+  width: 100%;
+  min-width: 0;
+}
+.apod-btn-del {
+  justify-self: end;
+  margin-bottom: 1px;
+}
+
+@media (max-width: 1200px) {
+  .alumno-datos-compact .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .alumno-datos-compact .field.span-2 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .alumno-datos-compact .field.span-2 { grid-column: span 1; }
+  .apod-head { display: none; }
+  .grid-4-apod { grid-template-columns: 1fr; }
+  .apod-btn-del { justify-self: start; }
+}

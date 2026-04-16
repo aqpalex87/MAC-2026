@@ -1,0 +1,9 @@
+CREATE PROCEDURE [dbo].[MAC_DELETE_CICLO]
+    @IdCiclo INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM dbo.Ciclo
+    WHERE IdCiclo = @IdCiclo;
+END

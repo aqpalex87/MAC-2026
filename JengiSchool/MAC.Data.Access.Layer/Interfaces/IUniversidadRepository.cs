@@ -6,6 +6,7 @@ namespace MAC.Data.Access.Layer.Interfaces
     public interface IUniversidadRepository
     {
         (List<Universidad> Universidades, int TotalRows) ObtenerUniversidadesPaginado(int? idEmpresa, string nombre, int pageNumber, int pageSize);
+        List<UniversidadComboItem> ObtenerUniversidadesCombo(int? idEmpresa);
         List<UniversidadDetalle> ObtenerDetallePorUniversidad(int idUniversidad);
         Universidad CrearUniversidad(Universidad universidad);
         bool ActualizarUniversidad(Universidad universidad);

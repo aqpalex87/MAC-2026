@@ -11,6 +11,10 @@ export class SedeAdminService {
 
   constructor(private http: HttpClient, private securityService: SecurityService) {}
 
+  obtenerPorEmpresa(idEmpresa: number): Observable<SedeCrud[]> {
+    return this.http.get<SedeCrud[]>(`${this.controller}/empresa/${idEmpresa}`, { headers: this.getHeaders() });
+  }
+
   obtenerPaginado(idEmpresa: number | null, nombre: string, pageNumber: number, pageSize: number): Observable<SedePaginadoResponse> {
     let params = new HttpParams()
       .set('nombre', nombre ?? '')

@@ -33,6 +33,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<IUniversidadRepository, UniversidadRepository>();
             services.AddScoped<IUniversidadService, UniversidadService>();
+            services.AddScoped<ICiclosRepository, CiclosRepository>();
+            services.AddScoped<ICiclosService, CiclosService>();
+            services.AddScoped<IParametrosMaestroRepository, ParametrosMaestroRepository>();
+            services.AddScoped<IParametrosMaestroService, ParametrosMaestroService>();
+            services.AddScoped<IAlumnoRepository, AlumnoRepository>();
+            services.AddScoped<IAlumnoService, AlumnoService>();
 
             services.AddScoped<ISedesService, SedesService>();
             services.AddScoped<ISedesRepository, SedesRepository>();

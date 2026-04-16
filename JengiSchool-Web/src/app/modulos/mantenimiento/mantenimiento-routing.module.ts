@@ -9,6 +9,8 @@ import { RolComponent } from './componentes/rol/rol.component';
 import { MenuRolComponent } from './componentes/menu-rol/menu-rol.component';
 import { UsuarioComponent } from './componentes/usuario/usuario.component';
 import { UniversidadComponent } from './componentes/universidad/universidad.component';
+import { CicloComponent } from './componentes/ciclo/ciclo.component';
+import { AlumnoComponent } from './componentes/alumno/alumno.component';
 
 const routes: Routes = [
   {
@@ -46,6 +48,14 @@ const routes: Routes = [
   {
     path: 'universidades',
     component: UniversidadComponent
+  },
+  {
+    path: 'ciclos',
+    component: CicloComponent
+  },
+  {
+    path: 'alumnos',
+    component: AlumnoComponent
   },
   {
     path: '**',

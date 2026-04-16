@@ -38,6 +38,20 @@ namespace MAC.Business.Logic.Layer.Implementation
             return result;
         }
 
+        public Result<List<UniversidadComboDto>> ObtenerUniversidadesCombo(int? idEmpresa)
+        {
+            Result<List<UniversidadComboDto>> result = new();
+            var items = _universidadRepository.ObtenerUniversidadesCombo(idEmpresa);
+            result.Status = HttpStatusCode.OK;
+            result.Resultado = items.Select(x => new UniversidadComboDto
+            {
+                IdUniversidad = x.IdUniversidad,
+                Nombre = x.Nombre,
+                IdEmpresa = x.IdEmpresa
+            }).ToList();
+            return result;
+        }
+
         public Result<List<UniversidadDetalleDto>> ObtenerDetallePorUniversidad(int idUniversidad)
         {
             Result<List<UniversidadDetalleDto>> result = new();

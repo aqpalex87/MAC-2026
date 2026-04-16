@@ -29,6 +29,17 @@ namespace MAC.API.Controllers
             return Ok(result.Resultado);
         }
 
+        [HttpGet("combo")]
+        public IActionResult ObtenerCombo([FromQuery] int? idEmpresa)
+        {
+            var result = _universidadService.ObtenerUniversidadesCombo(idEmpresa);
+            if (result.Errors.Any())
+            {
+                return GetObjectResult(result);
+            }
+            return Ok(result.Resultado);
+        }
+
         [HttpGet("{idUniversidad}/detalle")]
         public IActionResult ObtenerDetalle(int idUniversidad)
         {

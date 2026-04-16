@@ -19,3 +19,9 @@ export interface UniversidadPaginadoResponse {
   totalRows: number;
   items: UniversidadCrud[];
 }
+
+export interface UniversidadComboItem {
+  idUniversidad: number;
+  nombre: string;
+  idEmpresa: number;
+}

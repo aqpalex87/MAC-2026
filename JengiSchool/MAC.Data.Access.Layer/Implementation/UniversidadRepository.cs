@@ -41,6 +41,17 @@ namespace MAC.Data.Access.Layer.Implementation
             return (universidades, totalRows);
         }
 
+        public List<UniversidadComboItem> ObtenerUniversidadesCombo(int? idEmpresa)
+        {
+            using SqlConnection sqlConnection = new(cadenaConexion);
+            using SqlCommand command = new($"{esquemaDB2}.MAC_SELECT_UNIVERSIDADES_COMBO", sqlConnection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@IdEmpresa", SqlDbType.Int) { Value = (object)idEmpresa ?? DBNull.Value });
+            sqlConnection.Open();
+            using SqlDataReader dataReader = command.ExecuteReader();
+            return dataReader.GetEntities<UniversidadComboItem>();
+        }
+
         public List<UniversidadDetalle> ObtenerDetallePorUniversidad(int idUniversidad)
         {
             using SqlConnection sqlConnection = new(cadenaConexion);
